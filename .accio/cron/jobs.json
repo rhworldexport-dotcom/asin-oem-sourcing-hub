@@ -1,0 +1,37 @@
+{
+  "version": 2,
+  "jobs": [
+    {
+      "id": "cron-1781196179589-2becowq4",
+      "name": "Daily ASIN Niche Scan",
+      "enabled": true,
+      "deleteAfterRun": false,
+      "createdAtMs": 1781196179589,
+      "updatedAtMs": 1781256864101,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 8 * * *"
+      },
+      "payload": {
+        "kind": "command",
+        "command": "node /Users/rachidhomm/.accio/accounts/1701143321/agents/DID-DB9653-81DB9653U1778280-2221-4A5C42/project/daily-scan.js"
+      },
+      "state": {
+        "nextRunAtMs": 1781330400000,
+        "lastRunAtMs": 1781256862918,
+        "lastStatus": "error",
+        "lastDurationMs": 9,
+        "lastError": "exit code 127"
+      },
+      "target": {
+        "type": "conversation",
+        "conversationId": "CID-44143321U1781038-32CFA4-1903-4D6432"
+      },
+      "workspacePath": "/Users/rachidhomm/.accio/accounts/1701143321/agents/DID-DB9653-81DB9653U1778280-2221-4A5C42/project",
+      "createdBy": {
+        "source": "agent",
+        "actorId": "DID-DB9653-81DB9653U1778280-2221-4A5C42"
+      }
+    }
+  ]
+}
