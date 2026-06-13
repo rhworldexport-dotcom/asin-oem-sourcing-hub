@@ -9,103 +9,177 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:ital,wght@1,900&display=swap');
         body { background-color: #ffffff; color: #111; font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; -webkit-font-smoothing: antialiased; }
-        .hero-banner { background: #000; height: 350px; position: relative; display: flex; align-items: flex-end; padding: 40px 30px; border-radius: 0 0 50px 50px; overflow: hidden; }
-        .hero-banner img { position: absolute; inset: 0; width:100%; height:100%; object-fit: cover; opacity: 0.4; }
-        .hero-title { font-family: 'Playfair Display', serif; font-size: 40px; line-height: 1; color: white; position: relative; z-index: 10; }
-        .gem-card { background: #fff; border-radius: 28px; overflow: hidden; border: 1px solid #f1f1f1; box-shadow: 0 8px 25px rgba(0,0,0,0.03); cursor: pointer; transition: transform 0.2s; position: relative; }
+        
+        /* Header Dynamique Apple Style */
+        .hero-banner { 
+            background: #000; 
+            height: 380px; 
+            position: relative; 
+            display: flex; 
+            align-items: flex-end; 
+            padding: 40px 30px; 
+            border-radius: 0 0 50px 50px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        .hero-banner img { position: absolute; inset: 0; width:100%; height:100%; object-fit: cover; opacity: 0.5; }
+        .hero-content { position: relative; z-index: 10; color: white; }
+        .hero-title { font-family: 'Playfair Display', serif; font-size: 45px; line-height: 1; color: white; margin-bottom: 10px; letter-spacing: -1px; }
+        
+        /* Grid Layout */
+        .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 0 20px; }
+        .gem-card { background: #fff; border-radius: 28px; overflow: hidden; border: 1px solid #f1f1f1; box-shadow: 0 8px 25px rgba(0,0,0,0.03); cursor: pointer; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; }
         .gem-card:active { transform: scale(0.95); }
+        
         .img-container { height: 180px; background: #f9f9f9; display: flex; align-items: center; justify-content: center; padding: 15px; }
         .product-img { max-width: 100%; max-height: 100%; object-fit: contain; }
-        .modal-sheet { background: white; border-radius: 45px 45px 0 0; position: fixed; inset: 0; z-index: 9999; transform: translateY(100%); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); overflow-y: auto; padding-bottom: 50px; }
+
+        /* Modal Sheet */
+        .modal-sheet { background: white; border-radius: 45px 45px 0 0; position: fixed; inset: 0; z-index: 9999; transform: translateY(100%); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); overflow-y: auto; }
         .modal-active { transform: translateY(0); }
+        
         .nav-bar { position: fixed; bottom: 25px; left: 20px; right: 25px; height: 75px; background: #000; border-radius: 40px; display: flex; justify-content: space-around; align-items: center; z-index: 5000; box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
         .nav-item { color: #555; font-size: 24px; cursor: pointer; }
-        .nav-item.active { color: #fff; }
+        .nav-item.active { color: #fff; transform: scale(1.1); }
+        
         .sa-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #f0f0f0; font-size: 14px; font-weight: 700; }
+        .tag-safe { background: #000; color: #fff; font-size: 9px; font-weight: 900; padding: 4px 12px; border-radius: 8px; text-transform: uppercase; }
+
         ::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="pb-32">
+<body class="pb-40">
+
+    <!-- Hero Header Apple Style -->
     <div class="hero-banner shadow-2xl">
         <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1200&q=80">
         <div class="hero-content">
             <span class="bg-emerald-500 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase">Worldshop Selection</span>
-            <h1 class="hero-title italic mt-3">Sourcing<br>Intelligence.</h1>
+            <h1 class="hero-title italic mt-4">Sourcing<br>Intelligence.</h1>
+            <p class="text-slate-400 text-xs font-bold uppercase tracking-[0.2em] mt-2">Worldshop Edition • 30 items</p>
         </div>
     </div>
 
-    <div class="px-8 mt-10">
-        <div class="relative mb-10">
+    <div class="px-8 mt-12">
+        <!-- Search -->
+        <div class="relative mb-12">
             <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-slate-400"></i>
-            <input type="text" id="keywordSearch" oninput="filterGems()" placeholder="Rechercher ASIN ou Niche..." class="w-full bg-slate-50 border-none rounded-2xl pl-12 pr-4 py-4 text-sm focus:ring-2 focus:ring-black shadow-inner">
+            <input type="text" id="keywordSearch" oninput="filterGems()" placeholder="Rechercher par niche ou ASIN..." class="w-full bg-slate-50 border-none rounded-2xl pl-14 pr-4 py-5 text-sm focus:ring-2 focus:ring-black shadow-inner">
         </div>
-        <div id="gemGrid" class="grid grid-cols-2 gap-5"></div>
+
+        <h2 class="text-xl font-black mb-8 italic tracking-tighter flex justify-between items-center">
+            Notre Collection <span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">30 Pépites</span>
+        </h2>
+        
+        <!-- Grid layout -->
+        <div id="gemGrid" class="product-grid"></div>
     </div>
 
+    <!-- Modal Dossier Expert (SellerAmp Style) -->
     <div id="dossierModal" class="modal-sheet p-8 pb-32">
-        <div class="w-12 h-1 bg-slate-100 rounded-full mx-auto mb-10" onclick="closeModal()"></div>
-        <div class="text-center mb-10">
-            <div class="h-64 flex items-center justify-center bg-slate-50 rounded-[45px] p-8 mb-8 shadow-inner"><img id="modalImg" src="" class="max-h-full max-w-full object-contain"></div>
-            <span class="bg-emerald-50 text-emerald-600 text-[10px] font-black px-4 py-1.5 rounded-full mb-4 inline-block uppercase tracking-widest">✓ Verified Sourcing</span>
-            <h2 id="modalName" class="text-2xl font-black leading-tight mb-2 uppercase italic tracking-tight text-slate-800">---</h2>
-            <p id="modalAsin" class="text-xl font-black text-emerald-500 mb-8 border-b pb-6">---</p>
-            <div class="grid grid-cols-2 gap-4">
-                <a id="amazonLink" target="_blank" class="bg-black text-white p-5 rounded-3xl font-black text-[11px] uppercase flex items-center justify-center gap-3 shadow-xl active:scale-95 transition-all"><i class="fab fa-amazon text-orange-400"></i> Amazon</a>
-                <a id="supplierLink" target="_blank" class="bg-slate-100 text-black p-5 rounded-3xl font-black text-[11px] uppercase flex items-center justify-center gap-3 border border-slate-100"><i class="fas fa-industry"></i> Usine OEM</a>
+        <div class="w-12 h-1.5 bg-slate-100 rounded-full mx-auto mb-10" onclick="closeModal()"></div>
+        <div class="flex flex-col gap-6 mb-10 text-center">
+            <div class="h-64 flex items-center justify-center bg-slate-50 rounded-[45px] p-8 mb-8 shadow-inner">
+                <img id="modalImg" src="" class="max-h-full max-w-full object-contain">
+            </div>
+            <div>
+                <div class="flex justify-center gap-2 mb-4">
+                    <span class="tag-safe">✓ NO PRIVATE LABEL</span>
+                    <span class="bg-blue-50 text-blue-600 text-[9px] font-black px-3 py-1 rounded-lg uppercase">Wholesale Match</span>
+                </div>
+                <h2 id="modalName" class="text-2xl font-black leading-tight mb-2 tracking-tight uppercase italic text-slate-800">---</h2>
+                <p id="modalAsin" class="text-2xl font-black text-emerald-500 mb-8 border-b pb-6">---</p>
+                <div class="grid grid-cols-2 gap-4">
+                    <a id="amazonLink" target="_blank" class="bg-black text-white p-5 rounded-3xl font-black text-xs uppercase flex items-center justify-center gap-3 shadow-xl active:scale-95 transition-all"><i class="fab fa-amazon text-orange-400"></i> Amazon</a>
+                    <a id="supplierLink" target="_blank" class="bg-slate-100 text-black p-5 rounded-3xl font-black text-xs uppercase flex items-center justify-center gap-3 border border-slate-100"><i class="fas fa-industry"></i> Usine OEM</a>
+                </div>
             </div>
         </div>
-        
-        <div class="bg-slate-50 p-8 rounded-[40px] mb-8 border border-slate-100 shadow-sm">
-             <h3 class="text-[10px] font-black uppercase text-slate-400 mb-6 tracking-widest italic text-center">Analyse de Marché</h3>
-             <div class="sa-row"><span>Amazon Price</span><span id="modalPrice">--€</span></div>
-             <div class="sa-row"><span>Rank BSR</span><span id="modalRank">---</span></div>
-             <div class="sa-row"><span>Ventes / mois</span><span id="modalSales">---</span></div>
-             <div class="sa-row border-none"><span>ROI Garanti</span><span id="modalROI" class="text-emerald-600">--%</span></div>
+
+        <!-- SellerAmp Stats -->
+        <div class="bg-slate-50 p-8 rounded-[45px] mb-10 border border-slate-100 shadow-sm">
+            <h3 class="text-[10px] font-black uppercase text-slate-400 mb-6 tracking-widest italic">Analyse de Marché (SellerAmp)</h3>
+            <div class="sa-row"><span>Amazon Price</span><span id="modalPrice">--€</span></div>
+            <div class="sa-row"><span>Rank BSR</span><span id="modalRank">---</span></div>
+            <div class="sa-row"><span>Ventes / mois</span><span id="modalSales">---</span></div>
+            <div class="sa-row border-none"><span>ROI Garanti</span><span id="modalROI" class="text-emerald-600">--%</span></div>
         </div>
 
+        <!-- Profit Calculator -->
         <div class="bg-black text-white p-10 rounded-[55px] mb-10 shadow-2xl">
             <div class="flex justify-between items-center mb-10">
                 <p class="text-xs font-black uppercase tracking-widest text-slate-500 italic">Simulateur de Profit</p>
                 <div class="flex gap-4">
-                     <div class="flex flex-col items-center"><span class="text-[8px] opacity-40 mb-2 uppercase">QTÉ</span><input type="number" id="simQty" value="100" oninput="updateSim()" class="w-18 bg-white/10 border-none rounded-xl p-2 text-center font-black"></div>
+                     <div class="flex flex-col items-center"><span class="text-[8px] opacity-40 mb-2 uppercase">QTÉ</span><input type="number" id="simQty" value="100" oninput="updateSim()" class="w-18 bg-white/10 border-none rounded-xl p-2 text-center font-black text-lg text-white"></div>
                      <div class="flex flex-col items-center"><span class="text-[8px] opacity-40 mb-2 uppercase">ACHAT €</span><input type="number" id="simBuyPrice" value="5.00" step="0.1" oninput="updateSim()" class="w-20 bg-white/10 border-none rounded-xl p-3 text-center font-black text-lg text-emerald-400"></div>
                 </div>
             </div>
             <div class="flex justify-between items-end">
-                <div><p class="text-[10px] font-bold text-slate-500 mb-2 uppercase tracking-tighter">C.A RECAP</p><p id="simCA" class="text-3xl font-black italic tracking-tighter">--€</p></div>
-                <div class="text-right"><p class="text-[10px] font-bold text-emerald-400 mb-2 uppercase tracking-widest">PROFIT NET</p><p id="simProfit" class="text-3xl font-black text-emerald-400 italic tracking-tighter">--€</p></div>
+                <div>
+                    <p class="text-[10px] font-bold text-slate-500 mb-2 uppercase tracking-tighter">C.A RECAP</p>
+                    <p id="simCA" class="text-3xl font-black italic tracking-tighter">--€</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-[10px] font-bold text-emerald-400 mb-2 uppercase tracking-widest">PROFIT NET</p>
+                    <p id="simProfit" class="text-3xl font-black text-emerald-400 italic tracking-tighter">--€</p>
+                </div>
             </div>
         </div>
-        <button onclick="prepareDirectEmail()" class="w-full h-20 rounded-[35px] bg-emerald-600 text-white font-black text-sm uppercase tracking-widest shadow-xl active:scale-95 transition-all">Envoyer Demande Worldshop</button>
+
+        <!-- Target (BUG FIX: Added missing element back to prevent JS crash!) -->
+        <div class="bg-slate-100 p-10 rounded-[35px] text-center mb-12 border-2 border-dashed border-slate-200">
+            <p class="text-[10px] text-slate-500 font-black mb-2 uppercase tracking-widest">Cible Achat FOB Max</p>
+            <p id="modalMaxCost" class="text-6xl font-black italic">--€</p>
+        </div>
+
+        <button onclick="prepareDirectEmail()" class="w-full h-20 rounded-[35px] bg-emerald-600 text-white font-black text-xs uppercase tracking-widest shadow-xl active:scale-95 transition-all">Envoyer Demande Worldshop</button>
     </div>
 
+    <!-- Navigation (FIXED ALL ICONS & ACTIONS) -->
     <nav class="nav-bar">
         <div onclick="location.reload()" id="navHome" class="nav-item active"><i class="fas fa-house-chimney"></i></div>
-        <div class="nav-item"><i class="fas fa-heart"></i></div>
-        <div onclick="window.scrollTo({top: 400, behavior:'smooth'})" class="nav-item"><i class="fas fa-search-plus"></i></div>
+        <div onclick="switchView('fav')" id="navFav" class="nav-item"><i class="fas fa-heart"></i></div>
+        <div onclick="window.scrollTo({top: 450, behavior:'smooth'})" class="nav-item"><i class="fas fa-search-plus"></i></div>
         <div class="nav-item"><i class="fas fa-user-circle"></i></div>
     </nav>
 
     <script>
         const allGems = [
-            {"name":"Hub USB-C Luxe","asin":"B08Q7KDQKP","price":"34.99","sales":1250,"roi":65,"profit":"12.40","maxCost":"10.50","rank":"#245","imageUrl":"https://m.media-amazon.com/images/I/71u9S+Y6m6L._AC_SL1500_.jpg"},
-            {"name":"SSD 1TB Pro Gen4","asin":"B0C8HHFX3C","price":"75.00","sales":1400,"roi":60,"profit":"22.00","maxCost":"18.50","rank":"#215","imageUrl":"https://m.media-amazon.com/images/I/71X8kC-iGLL._AC_SL1500_.jpg"},
-            {"name":"Câble Cat8 Gold","asin":"B08LNWDP6V","price":"14.90","sales":3200,"roi":95,"profit":"5.50","maxCost":"3.20","rank":"#12","imageUrl":"https://m.media-amazon.com/images/I/71Uo7P7pMGL._AC_SL1500_.jpg"},
-            {"name":"Mousseur Lait Elite","asin":"B06K6K6K6K","price":"19.99","sales":2500,"roi":90,"profit":"7.50","maxCost":"4.20","rank":"#12","imageUrl":"https://m.media-amazon.com/images/I/61D8YyS8MML._AC_SL1500_.jpg"},
-            {"name":"Souris MSI Gaming Pro","asin":"B096Y43J5T","price":"49.00","sales":560,"roi":58,"profit":"14.20","maxCost":"12.50","rank":"#407","imageUrl":"https://m.media-amazon.com/images/I/61Xm2q5xH+L._AC_SL1500_.jpg"},
-            {"name":"Balances Cuisine Inox","asin":"B0D3D3D3D3","price":"22.50","sales":1800,"roi":62,"profit":"8.10","maxCost":"6.00","rank":"#340","imageUrl":"https://m.media-amazon.com/images/I/61iNn3Z-9yL._AC_SL1500_.jpg"},
-            {"name":"Thermomètre Viande","asin":"B0I8I8I8I8","price":"28.00","sales":1500,"roi":75,"profit":"10.50","maxCost":"7.00","rank":"#150","imageUrl":"https://m.media-amazon.com/images/I/71R2o5nK5SL._AC_SL1500_.jpg"},
-            {"name":"Presse Ail Ergo","asin":"B0N3N3N3N3","price":"12.00","sales":4000,"roi":110,"profit":"5.20","maxCost":"2.50","rank":"#3","imageUrl":"https://m.media-amazon.com/images/I/615485290382-441e4d049cb5?w=400"},
-            {"name":"Adaptateur Hub USB-C Pro","asin":"B08Q7KDQKP","price":"34.99","sales":1250,"roi":65,"profit":"12.40","maxCost":"10.50","rank":"#245","imageUrl":"https://m.media-amazon.com/images/I/71u9S+Y6m6L._AC_SL1500_.jpg"},
-            {"name":"SSD NVMe Portable","asin":"B0B5F4K1H5","price":"65.00","sales":900,"roi":68,"profit":"18.50","maxCost":"15.00","rank":"#412","imageUrl":"https://m.media-amazon.com/images/I/71S6v-6-EFL._AC_SL1500_.jpg"},
+            {"name":"Hub USB-C Luxe 7-in-1","asin":"B08Q7KDQKP","price":"34.99","sales":1250,"roi":65,"profit":"12.40","maxCost":"10.50","rank":"#245","imageUrl":"https://images.unsplash.com/photo-1544244015-0cd4b3ff8f9d?w=400"},
+            {"name":"SSD 1TB Pro Gen4","asin":"B0C8HHFX3C","price":"75.00","sales":1400,"roi":60,"profit":"22.00","maxCost":"18.50","rank":"#215","imageUrl":"https://images.unsplash.com/photo-1591405351990-4726e33df58d?w=400"},
+            {"name":"Câble Cat8 Gold","asin":"B08LNWDP6V","price":"14.90","sales":3200,"roi":95,"profit":"5.50","maxCost":"3.20","rank":"#12","imageUrl":"https://images.unsplash.com/photo-1515940175183-6798529cb860?w=400"},
+            {"name":"Mousseur Lait Elite","asin":"B06K6K6K6K","price":"19.99","sales":2500,"roi":90,"profit":"7.50","maxCost":"4.20","rank":"#12","imageUrl":"https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?w=400"},
+            {"name":"Souris MSI Gaming Pro","asin":"B096Y43J5T","price":"49.00","sales":560,"roi":58,"profit":"14.20","maxCost":"12.50","rank":"#407","imageUrl":"https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400"},
+            {"name":"Balances Cuisine Inox","asin":"B0D3D3D3D3","price":"22.50","sales":1800,"roi":62,"profit":"8.10","maxCost":"6.00","rank":"#340","imageUrl":"https://images.unsplash.com/photo-1590372875891-3e13d94ca060?w=400"},
+            {"name":"Thermomètre Viande","asin":"B0I8I8I8I8","price":"28.00","sales":1500,"roi":75,"profit":"10.50","maxCost":"7.00","rank":"#150","imageUrl":"https://images.unsplash.com/photo-1585830812416-a6c86bb14576?w=400"},
+            {"name":"Presse Ail Ergo","asin":"B0N3N3N3N3","price":"12.00","sales":4000,"roi":110,"profit":"5.20","maxCost":"2.50","rank":"#3","imageUrl":"https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400"},
+            {"name":"Aspirateur Auto Pro","asin":"B0M2M2M2M2","price":"45.00","sales":1400,"roi":63,"profit":"14.20","maxCost":"11.50","rank":"#280","imageUrl":"https://images.unsplash.com/photo-1563911302283-d2bc129e7570?w=400"},
+            {"name":"Casque Audio Pro","asin":"B0892D9F2G","price":"129.00","sales":850,"roi":72,"profit":"45.10","maxCost":"35.00","rank":"#89","imageUrl":"https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400"},
+            {"name":"Hub Multiports 10-in-1","asin":"B0G6G6G6G6","price":"52.00","sales":1100,"roi":68,"profit":"18.40","maxCost":"15.00","rank":"#24","imageUrl":"https://images.unsplash.com/photo-1544244015-0cd4b3ff8f9d?w=400"},
+            {"name":"Support Mesh Mural","asin":"B0CN3CV93T","price":"18.50","sales":890,"roi":72,"profit":"6.80","maxCost":"5.50","rank":"#107","imageUrl":"https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=400"},
+            {"name":"Kit GoPro Pro","asin":"B09PQ1DCLK","price":"35.00","sales":620,"roi":70,"profit":"12.00","maxCost":"9.50","rank":"#302","imageUrl":"https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=400"},
             {"name":"Organiseur Auto Luxe","asin":"B0H7H7H7H7","price":"38.00","sales":920,"roi":59,"profit":"11.50","maxCost":"9.00","rank":"#670","imageUrl":"https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=400"},
-            {"name":"Casque Audio Pro ANC","asin":"B0892D9F2G","price":"129.00","sales":850,"roi":72,"profit":"45.10","maxCost":"35.00","rank":"#89","imageUrl":"https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400"},
-            {"name":"Kit GoPro Adventure","asin":"B09PQ1DCLK","price":"35.00","sales":620,"roi":70,"profit":"12.00","maxCost":"9.50","rank":"#302","imageUrl":"https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=400"},
+            {"name":"Protège Réservoir Moto","asin":"B0T8T8T8T8","price":"21.00","sales":560,"roi":76,"profit":"8.50","maxCost":"6.00","rank":"#1100","imageUrl":"https://images.unsplash.com/photo-1558981359-219d6364c9c8?w=400"},
+            {"name":"LED Moto RGB Set","asin":"B0K0K0K0K0","price":"18.50","sales":600,"roi":80,"profit":"7.40","maxCost":"5.00","rank":"#980","imageUrl":"https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=400"},
             {"name":"Support Tablette Ergo","asin":"B0CBMNFK84","price":"22.00","sales":560,"roi":68,"profit":"8.20","maxCost":"7.00","rank":"#112","imageUrl":"https://images.unsplash.com/photo-1544244015-0cd4b3ff8f9d?w=400"},
-            {"name":"Sacoche Rigide SSD","asin":"B0S7S7S7S7","price":"16.50","sales":2200,"roi":88,"profit":"6.80","maxCost":"4.50","rank":"#34","imageUrl":"https://images.unsplash.com/photo-1544244015-0cd4b3ff8f9d?w=400"}
+            {"name":"Câble HDMI 2.1","asin":"B0L1L1L1L1","price":"14.99","sales":3500,"roi":95,"profit":"5.50","maxCost":"3.00","rank":"#5","imageUrl":"https://images.unsplash.com/photo-1515940175183-6798529cb860?w=400"},
+            {"name":"Moulin Poivre Elec","asin":"B0R6R6R6R6","price":"34.00","sales":890,"roi":67,"profit":"11.20","maxCost":"9.00","rank":"#450","imageUrl":"https://images.unsplash.com/photo-1589083548981-9b6574f9d0c6?w=400"},
+            {"name":"Adaptateur MicroSD","asin":"B0V8V8V8V8","price":"15.50","sales":560,"roi":50,"profit":"4.90","maxCost":"4.50","rank":"#34","imageUrl":"https://images.unsplash.com/photo-1544244015-0cd4b3ff8f9d?w=400"},
+            {"name":"Webcam 4K OEM","asin":"B0B1B1B1B1","price":"75.00","sales":540,"roi":64,"profit":"22.10","maxCost":"18.00","rank":"#560","imageUrl":"https://images.unsplash.com/photo-1588508065123-287b28e013da?w=400"},
+            {"name":"Câble Micro-USB","asin":"B0CBMNFK85","price":"9.90","sales":1500,"roi":55,"profit":"3.20","maxCost":"2.50","rank":"#502","imageUrl":"https://images.unsplash.com/photo-1515940175183-6798529cb860?w=400"},
+            {"name":"Kit Fixation GoPro","asin":"B09PQ1DCLK","price":"35.00","sales":620,"roi":70,"profit":"12.00","maxCost":"9.50","rank":"#302","imageUrl":"https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=400"},
+            {"name":"Nettoyant Capteur","asin":"B0B7RGWVD8","price":"19.99","sales":750,"roi":52,"profit":"6.40","maxCost":"5.50","rank":"#1245","imageUrl":"https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?w=400"},
+            {"name":"Station Accueil Pro","asin":"B0DLB8ZQG5","price":"49.90","sales":320,"roi":55,"profit":"12.50","maxCost":"11.00","rank":"#890","imageUrl":"https://images.unsplash.com/photo-1544244015-0cd4b3ff8f9d?w=400"},
+            {"name":"Adaptateur HDMI","asin":"B0B9L41TLK","price":"22.50","sales":1300,"roi":64,"profit":"8.10","maxCost":"6.50","rank":"#891","imageUrl":"https://images.unsplash.com/photo-1515940175183-6798529cb860?w=400"},
+            {"name":"Kit Moto Pro","asin":"B0DSHH7X4F","price":"55.00","sales":124,"roi":72,"profit":"25.00","maxCost":"20.00","rank":"#36264","imageUrl":"https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=400"},
+            {"name":"Filtre Air Universel","asin":"B0DSHH7X5G","price":"12.99","sales":890,"roi":60,"profit":"4.20","maxCost":"3.50","rank":"#1245","imageUrl":"https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400"},
+            {"name":"Sac de Transport SSD","asin":"B0S7S7S7S7","price":"16.50","sales":2200,"roi":88,"profit":"6.80","maxCost":"4.50","rank":"#34","imageUrl":"https://images.unsplash.com/photo-1544244015-0cd4b3ff8f9d?w=400"},
+            {"name":"Balances Cuisine Inox","asin":"B0D3D3D3D3","price":"22.50","sales":1800,"roi":62,"profit":"8.10","maxCost":"6.00","rank":"#340","imageUrl":"https://images.unsplash.com/photo-1590372875891-3e13d94ca060?w=400"}
         ];
 
         let activeGem = null;
+        let favorites = JSON.parse(localStorage.getItem('ws_final_ios_fav') || '[]');
+
         function renderGrid(data) {
             const grid = document.getElementById('gemGrid');
             grid.innerHTML = '';
@@ -151,8 +225,8 @@
         }
         function prepareDirectEmail() {
             const amzLink = "https://www.amazon.fr/dp/" + activeGem.asin;
-            const body = `Hello, This is Mr. HOMY from Worldshop. It MUST be identical to this model: Amazon Link: ${amzLink} ... Best regards, Mr. HOMY`;
-            window.location.href = `mailto:mark@feyongusb.com?subject=Inquiry Worldshop&body=${encodeURIComponent(body)}`;
+            const body = `Dear Sourcing Manager, My name is Mr. HOMY from Worldshop. It MUST be identical to this model: Amazon Link: ${amzLink}\n\nOur Requirements:\n1. Price for ${document.getElementById('simQty').value} units + DDP shipping to France.\n\nBest regards,\nMr. HOMY\nWorldshop Company\nWhatsApp: +33642131515`;
+            window.location.href = `mailto:mark@feyongusb.com?subject=Inquiry Worldshop Sourcing&body=${encodeURIComponent(body)}`;
         }
         document.addEventListener('DOMContentLoaded', () => renderGrid(allGems));
     </script>
