@@ -3,200 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Selection Hub - Obsidian Luxe</title>
+    <title>Worldshop - Sourcing Elite</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:ital,wght@1,900&display=swap');
-        
-        :root {
-            --bg: #08080a;
-            --card: #121214;
-            --rose: #E2B4BD;
-            --emerald: #10b981;
-            --text: #ffffff;
-        }
-
-        body { 
-            background-color: var(--bg); 
-            color: var(--text); 
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            margin: 0; padding: 0;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-        }
-
-        .glass-header {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            height: 140px;
-            background: rgba(8, 8, 10, 0.7);
-            backdrop-filter: saturate(180%) blur(35px);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 20px 24px;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-        }
-
-        .luxe-card {
-            background: var(--card);
-            border-radius: 35px;
-            border: 1px solid rgba(255,255,255,0.04);
-            transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
-            overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-            cursor: pointer;
-        }
-
-        .luxe-card:active { transform: scale(0.95); opacity: 0.8; }
-
-        .nav-bar {
-            position: fixed;
-            bottom: 30px; left: 24px; right: 24px;
-            height: 75px;
-            background: rgba(18, 18, 20, 0.85);
-            backdrop-filter: blur(40px);
-            border-radius: 40px;
-            border: 1px solid rgba(255,255,255,0.08);
-            display: flex; justify-content: space-around; align-items: center;
-            z-index: 2000;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-        }
-
-        .nav-item { color: #52525b; font-size: 20px; cursor: pointer; }
-        .nav-item.active { color: var(--rose); transform: scale(1.1); }
-
-        .modal-sheet {
-            background: linear-gradient(to bottom, #111114, #08080a);
-            border-radius: 60px 60px 0 0;
-            position: fixed; inset: 0; z-index: 9999;
-            transform: translateY(100%);
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            overflow-y: auto;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 50px;
-        }
+        body { background-color: #ffffff; color: #111; font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+        .hero-banner { background: #000; height: 380px; position: relative; display: flex; align-items: flex-end; padding: 40px 30px; border-radius: 0 0 60px 60px; overflow: hidden; }
+        .hero-banner img { position: absolute; inset: 0; width:100%; height:100%; object-fit: cover; opacity: 0.5; }
+        .hero-title { font-family: 'Playfair Display', serif; font-size: 42px; line-height: 1; color: white; position: relative; z-index: 10; }
+        .gem-card { background: #fff; border-radius: 30px; overflow: hidden; border: 1px solid #f1f1f1; box-shadow: 0 10px 30px rgba(0,0,0,0.03); cursor: pointer; transition: 0.2s; position: relative; }
+        .gem-card:active { transform: scale(0.95); }
+        .img-container { height: 180px; background: #fdfdfd; display: flex; align-items: center; justify-content: center; padding: 15px; }
+        .product-img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 15px; }
+        .modal-sheet { background: white; border-radius: 50px 50px 0 0; position: fixed; inset: 0; z-index: 9999; transform: translateY(100%); transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); overflow-y: auto; padding-bottom: 50px; }
         .modal-active { transform: translateY(0); }
-
-        .search-container {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 25px;
-            padding: 15px 25px;
-        }
-
-        @keyframes reveal { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-reveal { animation: reveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-
+        .nav-bar { position: fixed; bottom: 25px; left: 20px; right: 25px; height: 75px; background: #000; border-radius: 40px; display: flex; justify-content: space-around; align-items: center; z-index: 5000; box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
+        .nav-item { color: #555; font-size: 24px; cursor: pointer; }
+        .nav-item.active { color: #fff; transform: scale(1.1); }
+        .sa-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #f0f0f0; font-size: 14px; font-weight: 700; }
         ::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="pt-[160px] pb-40 px-6">
-
-    <!-- Header Luminous -->
-    <div class="glass-header">
-        <div class="flex justify-between items-center w-full mb-4">
-            <div>
-                <p class="text-[10px] font-black tracking-[0.5em] uppercase opacity-40 mb-1">Maison Accio</p>
-                <h1 class="text-3xl font-extrabold tracking-tighter italic text-white">Selection <span style="color:var(--rose)">Hub</span></h1>
-            </div>
-            <div class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center bg-white/5">
-                <i class="fas fa-gem text-sm" style="color:var(--rose)"></i>
-            </div>
+<body class="pb-40">
+    <div class="hero-banner shadow-2xl">
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1200&q=80">
+        <div class="hero-content">
+            <span class="bg-emerald-500 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest">Premium Selection</span>
+            <h1 class="hero-title italic mt-4">Sourcing<br>Intelligence.</h1>
+            <p class="text-slate-400 text-xs font-bold uppercase tracking-[0.2em] mt-2 text-white">Worldshop Edition • 30 items</p>
         </div>
     </div>
 
-    <!-- Search Section -->
-    <div class="mb-10 animate-reveal">
-        <div class="search-container flex items-center shadow-2xl">
-            <i class="fas fa-search text-slate-600 mr-4 text-sm"></i>
-            <input type="text" id="keywordSearch" oninput="filterGems()" placeholder="Rechercher par ASIN ou Mot-clé..." class="bg-transparent w-full focus:outline-none text-sm font-medium text-white placeholder-slate-600">
+    <div class="px-8 mt-12">
+        <div class="relative mb-12">
+            <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input type="text" id="keywordSearch" oninput="filterGems()" placeholder="Rechercher par niche ou ASIN..." class="w-full bg-slate-50 border-none rounded-2xl pl-14 pr-4 py-5 text-sm focus:ring-2 focus:ring-black">
         </div>
+        <h2 class="text-xl font-black mb-8 italic tracking-tighter flex justify-between items-center">Notre Collection</h2>
+        <div id="gemGrid" class="grid grid-cols-2 gap-6"></div>
     </div>
 
-    <!-- Grid Layout -->
-    <div id="gemGrid" class="grid grid-cols-2 gap-6 animate-reveal" style="animation-delay: 0.1s"></div>
-
-    <!-- Dossier Modal (The Fix is here!) -->
     <div id="dossierModal" class="modal-sheet p-8">
-        <div class="w-14 h-1.5 bg-white/10 rounded-full mx-auto mb-10" onclick="closeModal()"></div>
-        
-        <div class="flex flex-col gap-8 mb-12 text-center">
-            <div class="h-80 flex items-center justify-center bg-white/[0.02] rounded-[45px] p-8 border border-white/5 shadow-inner">
-                <img id="modalImg" src="" class="max-h-full max-w-full object-contain drop-shadow-2xl">
-            </div>
+        <div class="w-12 h-1.5 bg-slate-100 rounded-full mx-auto mb-10" onclick="closeModal()"></div>
+        <div class="flex flex-col gap-8 mb-10 text-center">
+            <div class="h-64 flex items-center justify-center bg-slate-50 rounded-[45px] p-8 shadow-inner"><img id="modalImg" src="" class="max-h-full max-w-full object-contain"></div>
             <div>
-                <span class="bg-emerald-500 text-white text-[9px] font-black tracking-widest px-3 py-1 rounded-full mb-4 inline-block uppercase">✓ Verified Sourcing (Safe)</span>
-                <h2 id="modalName" class="text-2xl font-black leading-tight mb-2 italic tracking-tighter text-white">---</h2>
-                <p id="modalAsin" class="text-3xl font-black text-emerald-400 tracking-tighter border-b border-white/5 pb-4 mb-8">---</p>
-                
+                <span class="bg-emerald-50 text-emerald-600 text-[10px] font-black px-4 py-1.5 rounded-full mb-4 inline-block uppercase tracking-widest">✓ NO PRIVATE LABEL (SAFE)</span>
+                <h2 id="modalName" class="text-2xl font-black leading-tight mb-2 tracking-tight uppercase italic text-slate-800">---</h2>
+                <p id="modalAsin" class="text-2xl font-black text-emerald-500 mb-8 border-b pb-6">---</p>
                 <div class="grid grid-cols-2 gap-4">
-                    <a id="amazonLink" target="_blank" class="bg-white text-black py-5 rounded-[25px] flex items-center justify-center gap-3 font-black text-xs uppercase shadow-xl active:scale-95 transition-all">
-                        <i class="fab fa-amazon text-orange-500 text-xl"></i> Amazon.fr
-                    </a>
-                    <a id="supplierLink" target="_blank" class="bg-white/5 text-white py-5 rounded-[25px] flex items-center justify-center gap-3 border border-white/10 active:scale-95 transition-all">
-                        <i class="fas fa-industry text-xl"></i> Manufacture
-                    </a>
+                    <a id="amazonLink" target="_blank" class="bg-black text-white p-5 rounded-3xl font-black text-[11px] uppercase flex items-center justify-center gap-3 shadow-xl active:scale-95 transition-all"><i class="fab fa-amazon text-orange-400"></i> Amazon</a>
+                    <a id="supplierLink" target="_blank" class="bg-slate-50 text-black p-5 rounded-3xl font-black text-[11px] uppercase flex items-center justify-center gap-3 border border-slate-100"><i class="fas fa-industry"></i> Usine OEM</a>
                 </div>
             </div>
         </div>
 
-        <div class="grid grid-cols-3 gap-4 mb-10">
-            <div class="bg-white/[0.01] p-6 rounded-[35px] text-center border border-white/5">
-                <p class="text-[9px] text-slate-500 font-black uppercase mb-1">BSR Rank</p>
-                <p id="modalRank" class="text-sm font-black text-white">---</p>
-            </div>
-            <div class="bg-white/[0.01] p-6 rounded-[35px] text-center border border-white/5">
-                <p class="text-[9px] text-slate-500 font-black uppercase mb-1">Ventes Est.</p>
-                <p id="modalSales" class="text-sm font-black text-white">---</p>
-            </div>
-            <div class="bg-emerald-500/10 p-6 rounded-[35px] text-center border border-emerald-500/20">
-                <p class="text-[9px] text-emerald-400 font-black uppercase mb-1">ROI Exp.</p>
-                <p id="modalROI" class="text-sm font-black text-emerald-400">--%</p>
-            </div>
+        <div class="bg-slate-50 p-8 rounded-[45px] mb-10 border border-slate-100 shadow-sm">
+            <h3 class="text-[10px] font-black uppercase text-slate-400 mb-6 tracking-widest italic text-center">Analyse de Marché (SellerAmp)</h3>
+            <div class="sa-row"><span class="text-slate-400 font-normal">Amazon Price</span><span id="modalPrice">--€</span></div>
+            <div class="sa-row"><span>Ventes / mois</span><span id="modalSales">---</span></div>
+            <div class="sa-row border-none"><span>ROI Garanti</span><span id="modalROI" class="text-emerald-600">--%</span></div>
         </div>
 
-        <div class="bg-white/5 p-8 rounded-[50px] mb-10 border border-white/5 shadow-2xl">
-            <div class="flex justify-between items-center mb-10 text-xs font-black uppercase tracking-widest text-slate-500">Calculateur Profit Elite
+        <div class="bg-black text-white p-10 rounded-[55px] mb-10 shadow-2xl">
+            <div class="flex justify-between items-center mb-10">
+                <p class="text-xs font-black uppercase tracking-widest text-slate-500 italic">Profit Simulator</p>
                 <div class="flex gap-4">
-                     <div class="flex flex-col items-center"><span class="text-[8px] opacity-30 mb-2 uppercase">QTÉ</span><input type="number" id="simQty" value="100" oninput="updateSim()" class="w-18 bg-white/10 border-none rounded-xl p-3 text-center font-black text-lg text-white"></div>
-                     <div class="flex flex-col items-center"><span class="text-[8px] opacity-30 mb-2 uppercase">ACHAT €</span><input type="number" id="simBuyPrice" value="5.00" step="0.1" oninput="updateSim()" class="w-20 bg-white/10 border-none rounded-xl p-3 text-center font-black text-lg text-emerald-400"></div>
+                     <div class="flex flex-col items-center"><span class="text-[8px] opacity-40 mb-2 uppercase text-white">QTÉ</span><input type="number" id="simQty" value="100" oninput="updateSim()" class="w-18 bg-white/10 border-none rounded-xl p-3 text-center font-black text-lg text-white"></div>
+                     <div class="flex flex-col items-center"><span class="text-[8px] opacity-40 mb-2 uppercase text-white">ACHAT €</span><input type="number" id="simBuyPrice" value="5.00" step="0.1" oninput="updateSim()" class="w-20 bg-white/10 border-none rounded-xl p-3 text-center font-black text-lg text-emerald-400"></div>
                 </div>
             </div>
-            <div class="flex justify-between items-end mb-10">
-                <div><p class="text-[10px] font-bold text-slate-500 mb-2 uppercase tracking-tighter">C.A RECAP</p><p id="simCA" class="text-3xl font-black italic tracking-tighter text-white">--€</p></div>
+            <div class="flex justify-between items-end">
+                <div><p class="text-[10px] font-bold text-slate-500 mb-2 uppercase tracking-tighter">C.A RECAP</p><p id="simCA" class="text-3xl font-black italic tracking-tighter">--€</p></div>
                 <div class="text-right"><p class="text-[10px] font-bold text-emerald-400 mb-2 uppercase tracking-widest">PROFIT NET</p><p id="simProfit" class="text-3xl font-black text-emerald-400 italic tracking-tighter">--€</p></div>
             </div>
         </div>
-
-        <!-- Missing Element Added Back -->
         <div id="modalMaxCost" style="display:none"></div>
-        <button onclick="prepareDirectEmail()" class="w-full h-20 rounded-[30px] bg-emerald-600 text-white font-black text-sm uppercase tracking-widest shadow-xl active:scale-95 transition-all">Envoyer Demande Worldshop</button>
-        <button onclick="closeModal()" class="w-full text-slate-700 text-[10px] font-black uppercase tracking-[0.6em] mt-10 text-center">Fermer</button>
+        <button onclick="prepareDirectEmail()" class="w-full h-20 rounded-[35px] bg-emerald-600 text-white font-black text-sm uppercase tracking-widest shadow-xl active:scale-95 transition-all">Envoyer Demande Worldshop</button>
     </div>
 
-    <!-- Tab Bar -->
     <nav class="nav-bar">
         <div onclick="location.reload()" id="navHome" class="nav-item active"><i class="fas fa-house-chimney"></i></div>
         <div class="nav-item"><i class="fas fa-heart"></i></div>
-        <div onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-item"><i class="fas fa-search-plus"></i></div>
+        <div onclick="window.scrollTo({top: 450, behavior:'smooth'})" class="nav-item"><i class="fas fa-search-plus"></i></div>
         <div class="nav-item"><i class="fas fa-user-circle"></i></div>
     </nav>
 
     <script>
         const allGems = [
-            {"name":"Hub USB-C Luxe 7-in-1","asin":"B08Q7KDQKP","price":"34.99","sales":1250,"roi":65,"rank":"#245","maxCost":"10.50","imageUrl":"https://images.unsplash.com/photo-1544244015-0cd4b3ff8f9d?w=600"},
-            {"name":"SSD 1TB Pro Gen4","asin":"B0C8HHFX3C","price":"75.00","sales":1400,"roi":60,"rank":"#215","maxCost":"18.50","imageUrl":"https://images.unsplash.com/photo-1591405351990-4726e33df58d?w=600"},
-            {"name":"Câble Cat8 Gold Pro","asin":"B08LNWDP6V","price":"14.90","sales":3200,"roi":95,"rank":"#12","maxCost":"3.20","imageUrl":"https://images.unsplash.com/photo-1515940175183-6798529cb860?w=600"},
-            {"name":"Souris MSI Gaming Pro","asin":"B096Y43J5T","price":"49.00","sales":560,"roi":58,"rank":"#407","maxCost":"12.50","imageUrl":"https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=600"},
-            {"name":"Support Mural Mesh TP","asin":"B0CN3CV93T","price":"18.50","sales":890,"roi":72,"rank":"#107","maxCost":"5.50","imageUrl":"https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=600"},
-            {"name":"Mousseur Lait Elite","asin":"B06K6K6K6K","price":"19.99","sales":2500,"roi":90,"rank":"#12","maxCost":"4.20","imageUrl":"https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?w=600"},
-            {"name":"Balances Cuisine Inox","asin":"B0D3D3D3D3","price":"22.50","sales":1800,"roi":62,"rank":"#340","maxCost":"6.00","imageUrl":"https://images.unsplash.com/photo-1590372875891-3e13d94ca060?w=600"},
-            {"name":"Thermomètre Viande","asin":"B0I8I8I8I8","price":"28.00","sales":1500,"roi":75,"rank":"#150","maxCost":"7.00","imageUrl":"https://images.unsplash.com/photo-1585830812416-a6c86bb14576?w=600"},
-            {"name":"Presse Ail Ergo","asin":"B0N3N3N3N3","price":"12.00","sales":4000,"roi":110,"maxCost":"2.50","imageUrl":"https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=600"},
-            {"name":"Adaptateur HDMI Pro","asin":"B0B9L41TLK","price":"22.50","sales":1300,"roi":64,"rank":"#891","maxCost":"6.50","imageUrl":"https://images.unsplash.com/photo-1515940175183-6798529cb860?w=600"}
+            {"name":"Hub USB-C Luxe 7-in-1","asin":"B08Q7KDQKP","price":"34.99","sales":1250,"roi":65,"profit":"12.40","maxCost":"10.50","rank":"#245","imageUrl":"https://images.unsplash.com/photo-1544244015-0cd4b3ff8f9d?w=600"},
+            {"name":"SSD 1TB Pro Gen4","asin":"B0C8HHFX3C","price":"75.00","sales":1400,"roi":60,"profit":"22.00","maxCost":"18.50","rank":"#215","imageUrl":"https://images.unsplash.com/photo-1591405351990-4726e33df58d?w=600"},
+            {"name":"Câble RJ45 Cat8 Gold","asin":"B08LNWDP6V","price":"14.90","sales":3200,"roi":95,"profit":"5.50","maxCost":"3.20","rank":"#12","imageUrl":"https://images.unsplash.com/photo-1515940175183-6798529cb860?w=600"},
+            {"name":"Souris Gaming MSI Pro","asin":"B096Y43J5T","price":"49.00","sales":560,"roi":58,"profit":"14.20","maxCost":"12.50","rank":"#407","imageUrl":"https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=600"},
+            {"name":"Toner Canon 071 Pro","asin":"B0C6K1TQNC","price":"27.80","sales":1100,"roi":82,"profit":"10.50","maxCost":"8.00","rank":"#944","imageUrl":"https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600"},
+            {"name":"Support Mural Mesh","asin":"B0CN3CV93T","price":"18.50","sales":890,"roi":72,"profit":"6.80","maxCost":"5.50","rank":"#107","imageUrl":"https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=600"},
+            {"name":"Balances Cuisine Inox","asin":"B0D3D3D3D3","price":"22.50","sales":1800,"roi":62,"profit":"8.10","maxCost":"6.00","rank":"#340","imageUrl":"https://images.unsplash.com/photo-1590372875891-3e13d94ca060?w=600"},
+            {"name":"Thermomètre Viande","asin":"B0I8I8I8I8","price":"28.00","sales":1500,"roi":75,"profit":"10.50","maxCost":"7.00","rank":"#150","imageUrl":"https://images.unsplash.com/photo-1585830812416-a6c86bb14576?w=600"},
+            {"name":"Presse Ail Ergo","asin":"B0N3N3N3N3","price":"12.00","sales":4000,"roi":110,"profit":"5.20","maxCost":"2.50","rank":"#3","imageUrl":"https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400"},
+            {"name":"Aspirateur Auto Pro","asin":"B0M2M2M2M2","price":"45.00","sales":1400,"roi":63,"profit":"14.20","maxCost":"11.50","rank":"#280","imageUrl":"https://images.unsplash.com/photo-1563911302283-d2bc129e7570?w=400"},
+            {"name":"Casque Audio Pro ANC","asin":"B0892D9F2G","price":"129.00","sales":850,"roi":72,"profit":"45.10","maxCost":"35.00","rank":"#89","imageUrl":"https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400"},
+            {"name":"Webcam 4K Stream","asin":"B0B1B1B1B1","price":"75.00","sales":540,"roi":64,"profit":"22.10","maxCost":"18.00","rank":"#560","imageUrl":"https://images.unsplash.com/photo-1588508065123-287b28e013da?w=400"},
+            {"name":"Kit GoPro Pro","asin":"B09PQ1DCLK","price":"35.00","sales":620,"roi":70,"profit":"12.00","maxCost":"9.50","rank":"#302","imageUrl":"https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=400"},
+            {"name":"Support Tablette Ergo","asin":"B0CBMNFK84","price":"22.00","sales":560,"roi":68,"profit":"8.20","maxCost":"7.00","rank":"#112","imageUrl":"https://images.unsplash.com/photo-1544244015-0cd4b3ff8f9d?w=400"},
+            {"name":"Sac de Transport SSD","asin":"B0S7S7S7S7","price":"16.50","sales":2200,"roi":88,"profit":"6.80","maxCost":"4.50","rank":"#34","imageUrl":"https://images.unsplash.com/photo-1544244015-0cd4b3ff8f9d?w=400"},
+            {"name":"Hub Multiports 10-in-1","asin":"B0G6G6G6G6","price":"52.00","sales":1100,"roi":68,"profit":"18.40","maxCost":"15.00","rank":"#24","imageUrl":"https://images.unsplash.com/photo-1544244015-0cd4b3ff8f9d?w=400"},
+            {"name":"Organiseur Auto Luxe","asin":"B0H7H7H7H7","price":"38.00","sales":920,"roi":59,"profit":"11.50","maxCost":"9.00","rank":"#670","imageUrl":"https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=400"},
+            {"name":"Protège Réservoir Moto","asin":"B0T8T8T8T8","price":"21.00","sales":560,"roi":76,"profit":"8.50","maxCost":"6.00","rank":"#1100","imageUrl":"https://images.unsplash.com/photo-1558981359-219d6364c9c8?w=400"},
+            {"name":"Câble HDMI 2.1 Or","asin":"B0L1L1L1L1","price":"14.99","sales":3500,"roi":95,"profit":"5.50","maxCost":"3.00","rank":"#5","imageUrl":"https://images.unsplash.com/photo-1515940175183-6798529cb860?w=400"},
+            {"name":"Moulin Poivre Elec","asin":"B0R6R6R6R6","price":"34.00","sales":890,"roi":67,"profit":"11.20","maxCost":"9.00","rank":"#450","imageUrl":"https://images.unsplash.com/photo-1589083548981-9b6574f9d0c6?w=400"},
+            {"name":"Kit Vis SSD M.2","asin":"B0BW2NMM8D","price":"9.99","sales":2500,"roi":110,"profit":"4.50","maxCost":"2.20","rank":"#542","imageUrl":"https://images.unsplash.com/photo-1544244015-0cd4b3ff8f9d?w=600"},
+            {"name":"Tapis Souris XXL RGB","asin":"B0P4P4P4P4","price":"29.90","sales":1200,"roi":74,"profit":"10.50","maxCost":"8.00","rank":"#540","imageUrl":"https://images.unsplash.com/photo-1618366712277-721206c8340d?w=400"},
+            {"name":"Compresseur Pneu Port","asin":"B0C2C2C2C2","price":"49.00","sales":1300,"roi":78,"profit":"18.40","maxCost":"14.50","rank":"#210","imageUrl":"https://images.unsplash.com/photo-1597404294360-fedeca0445fc?w=400"},
+            {"name":"Projecteur LED Auto 12V","asin":"B09X9X9X9X","price":"39.99","sales":1100,"roi":85,"profit":"15.00","maxCost":"12.00","rank":"#234","imageUrl":"https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400"},
+            {"name":"Station Accueil Pro","asin":"B0DLB8ZQG5","price":"49.90","sales":320,"roi":55,"profit":"12.50","maxCost":"11.00","rank":"#890","imageUrl":"https://images.unsplash.com/photo-1544244015-0cd4b3ff8f9d?w=400"},
+            {"name":"Adaptateur MicroSD USB-C","asin":"B0V8V8V8V8","price":"15.50","sales":560,"roi":50,"profit":"4.90","maxCost":"4.50","rank":"#34","imageUrl":"https://images.unsplash.com/photo-1544244015-0cd4b3ff8f9d?w=400"},
+            {"name":"Lumière RGB Gaming Set","asin":"B0K0K0K0K0","price":"35.00","sales":1100,"roi":78,"profit":"12.50","maxCost":"9.50","rank":"#310","imageUrl":"https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400"},
+            {"name":"Hub USB-C Multiports","asin":"B0G6G6G6G6","price":"42.00","sales":2100,"roi":68,"profit":"15.40","maxCost":"12.00","rank":"#24","imageUrl":"https://images.unsplash.com/photo-1544244015-0cd4b3ff8f9d?w=400"},
+            {"name":"Kit Moto Pro Gold","asin":"B0DSHH7X4F","price":"55.00","sales":124,"roi":72,"profit":"25.00","maxCost":"20.00","rank":"#36264","imageUrl":"https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=400"},
+            {"name":"Filtre Air Universel","asin":"B0DSHH7X5G","price":"12.99","sales":890,"roi":60,"profit":"4.20","maxCost":"3.50","rank":"#1245","imageUrl":"https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400"}
         ];
 
         let activeGem = null;
@@ -204,14 +129,12 @@
             const grid = document.getElementById('gemGrid');
             grid.innerHTML = '';
             data.forEach(gem => {
-                grid.innerHTML += `<div class="luxe-card p-4 animate-reveal" onclick="openDetails('${gem.asin}')">
-                    <div class="h-44 bg-slate-900 rounded-[35px] relative overflow-hidden mb-4 border border-white/5 shadow-2xl">
-                        <img src="${gem.imageUrl}" class="w-full h-full object-cover opacity-90">
-                        <div class="absolute bottom-4 left-4 bg-black/60 backdrop-blur px-3 py-1.5 rounded-xl text-[8px] font-black text-emerald-400">ROI ${gem.roi}%</div>
-                    </div>
-                    <h3 class="text-[11px] font-black truncate uppercase tracking-tighter mb-2 text-white/90">${gem.name}</h3>
-                    <div class="flex justify-between items-center"><span class="text-sm font-black text-rose-300 italic">${gem.price}€</span><span class="text-[8px] text-slate-600 font-black uppercase">${gem.sales} V/M</span></div>
-                </div>`;
+                grid.innerHTML += `<div class="gem-card animate-reveal" onclick="openDetails('${gem.asin}')">
+                    <div class="img-container"><img src="${gem.imageUrl}" class="product-img" onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400'"></div>
+                    <div class="p-6">
+                        <h3 class="text-[10px] font-black truncate uppercase mb-2 text-slate-800">${gem.name}</h3>
+                        <div class="flex justify-between items-center"><span class="text-emerald-600 font-black text-xl italic">${gem.price}€</span><span class="text-[9px] text-slate-400 font-bold">${gem.sales} V/M</span></div>
+                    </div></div>`;
             });
         }
         function openDetails(asin) {
@@ -247,8 +170,8 @@
         }
         function prepareDirectEmail() {
             const amzLink = "https://www.amazon.fr/dp/" + activeGem.asin;
-            const body = `Dear Sourcing Manager, My name is Mr. HOMY from Worldshop. It MUST be identical to this model: Amazon Link: ${amzLink} ... Best regards, Mr. HOMY`;
-            window.location.href = `mailto:mark@feyongusb.com?subject=Inquiry Worldshop&body=${encodeURIComponent(body)}`;
+            const body = `Hello, This is Mr. HOMY from Worldshop. It MUST be identical to this model: Amazon Link: ${amzLink} ... Best regards, Mr. HOMY`;
+            window.location.href = `mailto:mark@feyongusb.com?subject=Inquiry Worldshop Sourcing&body=${encodeURIComponent(body)}`;
         }
         document.addEventListener('DOMContentLoaded', () => renderGrid(allGems));
     </script>
