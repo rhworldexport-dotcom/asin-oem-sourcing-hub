@@ -1,1 +1,2 @@
 {"ts":1781256862918,"jobId":"cron-1781196179589-2becowq4","action":"finished","status":"error","error":"exit code 127","outputText":"sh: node: command not found","runAtMs":1781256862918,"durationMs":9}
+{"ts":1781429052502,"jobId":"cron-1781196179589-2becowq4","action":"finished","status":"error","error":"exit code 127","outputText":"sh: node: command not found","runAtMs":1781429052502,"durationMs":17}

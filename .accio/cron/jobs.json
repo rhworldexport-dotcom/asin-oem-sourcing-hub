@@ -7,7 +7,7 @@
       "enabled": true,
       "deleteAfterRun": false,
       "createdAtMs": 1781196179589,
-      "updatedAtMs": 1781309827562,
+      "updatedAtMs": 1781429053410,
       "schedule": {
         "kind": "cron",
         "expr": "0 8 * * 1,3,5,7"
@@ -17,10 +17,10 @@
         "command": "node /Users/rachidhomm/.accio/accounts/1701143321/agents/DID-DB9653-81DB9653U1778280-2221-4A5C42/project/daily-scan.js"
       },
       "state": {
-        "nextRunAtMs": 1781416800000,
-        "lastRunAtMs": 1781256862918,
+        "nextRunAtMs": 1781503200000,
+        "lastRunAtMs": 1781429052502,
         "lastStatus": "error",
-        "lastDurationMs": 9,
+        "lastDurationMs": 17,
         "lastError": "exit code 127"
       },
       "target": {
