@@ -3,71 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Worldshop Elite Supreme Hub</title>
+    <title>Worldshop Elite - Sourcing Supreme</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-        :root { --apple-blue: #0071e3; --sandisk-red: #ed1c24; }
+        :root { --apple-blue: #0071e3; --vip-red: #ff3b30; }
         body { background-color: #fbfbfd; color: #1d1d1f; font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
-        .hero-header { height: 260px; background: #000; position: relative; border-radius: 0 0 50px 50px; display: flex; align-items: flex-end; padding: 40px 30px; overflow: hidden; }
-        .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.5; filter: contrast(1.2); }
-        .hero-title { font-size: 38px; font-weight: 800; color: #fff; line-height: 1; letter-spacing: -2px; position: relative; z-index: 10; font-style: italic; }
-        .cat-pill { flex: 0 0 auto; padding: 12px 22px; background: #fff; border-radius: 25px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; border: 1.5px solid #eee; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
-        .cat-pill.active { background: #000; color: #fff; border-color: #000; transform: scale(1.05); }
-        .cat-pill.brand-hub { background: #fee2e2; border-color: #fecaca; color: #991b1b; }
-        .gem-card { background: #ffffff; border-radius: 35px; padding: 22px; border: 2.5px solid transparent; position: relative; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
-        .card-gaming { border-color: #e0f2fe; border-width: 2px; } .card-auto { border-color: #fef3c7; border-width: 2px; } .card-cuisine { border-color: #d1fae5; border-width: 2px; } .card-storage { border-color: #fecaca; border-width: 2px; }
-        .img-wrap { height: 130px; width: 100%; display: flex; align-items: center; justify-content: center; background: #fff; margin-bottom: 15px; }
+        .hero-header { height: 280px; background: #000; position: relative; border-radius: 0 0 60px 60px; display: flex; align-items: flex-end; padding: 40px 30px; overflow: hidden; }
+        .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.5; filter: contrast(1.1); }
+        .hero-title { font-size: 42px; font-weight: 800; color: #fff; line-height: 1; letter-spacing: -2px; position: relative; z-index: 10; font-style: italic; }
+        .cat-pill { flex: 0 0 auto; padding: 12px 24px; background: #fff; border-radius: 25px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; border: 1.5px solid #eee; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .cat-pill.active { background: #000; color: #fff; border-color: #000; transform: scale(1.05); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        .cat-pill.vip { background: #fee2e2; border-color: #fecaca; color: #991b1b; }
+        .gem-card { background: #ffffff; border-radius: 35px; padding: 22px; border: 2px solid #f1f1f1; position: relative; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+        .gem-card:active { transform: scale(0.95); border-color: var(--apple-blue); }
+        .img-wrap { height: 140px; width: 100%; display: flex; align-items: center; justify-content: center; background: #fff; margin-bottom: 15px; border-radius: 20px; overflow: hidden; }
         .product-img { max-width: 95%; max-height: 95%; object-fit: contain; }
         .modal-view { position: fixed; inset: 0; background: white; z-index: 5000; transform: translateY(100%); transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); overflow-y: auto; }
         .modal-active { transform: translateY(0); }
         .nav-bar { position: fixed; bottom: 25px; left: 20px; right: 20px; height: 75px; background: rgba(0,0,0,0.95); backdrop-filter: blur(25px); border-radius: 38px; display: flex; justify-content: space-around; align-items: center; z-index: 4000; }
-        .nav-item { color: #666; font-size: 22px; } .nav-item.active { color: #fff; }
+        .nav-item { color: #666; font-size: 24px; } .nav-item.active { color: #fff; }
         ::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body class="pb-40">
     <div class="hero-header shadow-2xl">
-        <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=800&q=80" class="hero-img">
+        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800" class="hero-img">
         <div class="relative z-10">
-            <span class="bg-red-600 text-white text-[9px] font-black px-4 py-1.5 rounded-full uppercase mb-4 inline-block tracking-widest italic">Supreme Edition</span>
+            <span class="bg-blue-600 text-white text-[8px] font-black px-3 py-1 rounded-full uppercase mb-3 inline-block">Sourcing Machine Elite</span>
             <h1 class="hero-title">Worldshop<br><span style="color:var(--apple-blue)">Master Pro.</span></h1>
         </div>
     </div>
 
-    <div class="mt-12 px-6">
-        <div class="flex gap-4 overflow-x-auto pb-6 no-scrollbar" id="catBar">
+    <div class="mt-8 px-6">
+        <div class="flex gap-3 overflow-x-auto pb-6 no-scrollbar" id="catBar">
             <div class="cat-pill active" onclick="filterCat('all', this)">30 Pépites Mix</div>
-            <div class="cat-pill brand-hub" onclick="filterCat('Stockage', this)"><i class="fas fa-microchip"></i> Hub SD/SSD</div>
+            <div class="cat-pill vip" onclick="filterCat('VIP', this)"><i class="fas fa-crown"></i> Hub VIP (SSD/SD)</div>
             <div class="cat-pill" onclick="filterCat('Gaming', this)">Gaming</div>
             <div class="cat-pill" onclick="filterCat('Auto', this)">Auto</div>
             <div class="cat-pill" onclick="filterCat('Cuisine', this)">Cuisine</div>
         </div>
     </div>
 
-    <div class="px-6 grid grid-cols-2 gap-6 mt-4" id="gemGrid"></div>
+    <div class="px-6 grid grid-cols-2 gap-5 mt-2" id="gemGrid"></div>
 
     <div id="detailsModal" class="modal-view p-8 pb-32">
-        <div class="flex justify-between items-center mb-10">
-            <div onclick="closeModal()" class="w-14 h-14 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-400 border border-slate-100"><i class="fas fa-times text-xl"></i></div>
-            <span class="bg-blue-50 text-blue-600 text-[10px] font-black px-5 py-2.5 rounded-full uppercase tracking-widest border border-blue-100 italic">✓ OEM Factory Verified Match</span>
-        </div>
-        <div class="text-center mb-12">
-            <img id="modalImg" src="" class="w-56 h-56 mx-auto object-contain bg-white p-6 border-2 border-slate-50 rounded-[50px] shadow-2xl mb-8">
-            <h2 id="modalName" class="text-2xl font-black italic leading-tight mb-2 tracking-tight uppercase">---</h2>
-            <p id="modalAsin" class="text-3xl font-black text-blue-600 tracking-tighter mb-10">---</p>
-            <div class="grid grid-cols-2 gap-5">
-                <a id="amazonLink" target="_blank" class="bg-black text-white h-18 rounded-[35px] flex items-center justify-center gap-3 font-black text-[11px] uppercase shadow-2xl"><i class="fab fa-amazon text-orange-400"></i> Amazon</a>
-                <a id="supplierLink" target="_blank" class="bg-slate-50 text-black h-18 rounded-[35px] flex items-center justify-center gap-3 border border-slate-200 shadow-inner font-black text-[11px] uppercase"><i class="fas fa-industry text-blue-600"></i> Usine OEM</a>
+        <div onclick="closeModal()" class="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center mb-8 border"><i class="fas fa-times text-slate-400"></i></div>
+        <div class="text-center mb-10">
+            <img id="modalImg" src="" class="w-56 h-56 mx-auto object-contain bg-white p-6 border rounded-[40px] shadow-2xl mb-8">
+            <h2 id="modalName" class="text-2xl font-black italic leading-tight mb-2 uppercase">---</h2>
+            <p id="modalAsin" class="text-3xl font-black text-blue-600 mb-10">---</p>
+            <div class="grid grid-cols-2 gap-4">
+                <a id="amazonLink" target="_blank" class="bg-black text-white h-16 rounded-3xl flex items-center justify-center gap-2 font-black text-[10px] uppercase shadow-xl"><i class="fab fa-amazon text-orange-400"></i> Amazon</a>
+                <a id="supplierLink" target="_blank" class="bg-slate-50 text-black h-16 rounded-3xl flex items-center justify-center gap-2 border font-black text-[10px] uppercase"><i class="fas fa-industry text-blue-600"></i> Usine OEM</a>
             </div>
         </div>
-        <div class="bg-slate-50 rounded-[45px] p-8 mb-8 border border-slate-100">
-            <div class="flex justify-between py-4 border-b border-slate-200"><span class="text-[11px] font-bold text-slate-500 uppercase">Prix Amazon</span><span id="modalPrice" class="font-black text-blue-600 text-xl">--€</span></div>
-            <div class="flex justify-between py-4 border-b border-slate-200"><span class="text-[11px] font-bold text-slate-500 uppercase">Ventes/Mois</span><span id="modalSales" class="font-black text-emerald-600 text-lg">---</span></div>
-            <div class="flex justify-between py-4"><span class="text-[11px] font-bold text-slate-500 uppercase">BSR Rank</span><span id="modalRank" class="font-black text-slate-800 text-lg">---</span></div>
+        <div class="bg-slate-50 rounded-3xl p-8 mb-8 border">
+            <div class="flex justify-between py-4 border-b"><span class="text-xs font-bold text-slate-500 uppercase">Prix Amazon</span><span id="modalPrice" class="font-black text-blue-600 text-lg">--€</span></div>
+            <div class="flex justify-between py-4 border-b"><span class="text-xs font-bold text-slate-500 uppercase">Ventes/Mois</span><span id="modalSales" class="font-black text-emerald-600">---</span></div>
+            <div class="flex justify-between py-4"><span class="text-xs font-bold text-slate-500 uppercase">ROI Garanti</span><span id="modalROI" class="font-black text-green-600 text-lg">50%+</span></div>
         </div>
-        <button onclick="prepareDirectEmail()" class="w-full h-24 rounded-[40px] bg-blue-600 text-white font-black text-sm uppercase tracking-widest shadow-2xl">Lancer Stratégie Worldshop</button>
+        <div class="bg-black text-white rounded-[40px] p-8 mb-8 shadow-2xl">
+            <div class="grid grid-cols-2 gap-6 mb-8">
+                <div><p class="text-[8px] font-bold text-slate-500 uppercase mb-2">Quantité</p><input type="number" id="simQty" value="100" oninput="updateSim()" class="w-full bg-white/10 border-none rounded-xl p-3 text-center font-black"></div>
+                <div><p class="text-[8px] font-bold text-slate-500 uppercase mb-2">Achat €</p><input type="number" id="simBuyPrice" value="5.00" step="0.1" oninput="updateSim()" class="w-full bg-white/10 border-none rounded-xl p-3 text-center font-black text-emerald-400"></div>
+            </div>
+            <div class="flex justify-between items-end">
+                <div><p class="text-[8px] font-bold text-slate-500 mb-1 uppercase">C.A RECAP</p><p id="simCA" class="text-2xl font-black italic">--€</p></div>
+                <div class="text-right"><p class="text-[8px] font-bold text-emerald-400 mb-1 uppercase">PROFIT NET</p><p id="simProfit" class="text-3xl font-black text-emerald-400 italic">--€</p></div>
+            </div>
+        </div>
+        <button onclick="prepareDirectEmail()" class="w-full h-22 rounded-[35px] bg-blue-600 text-white font-black text-sm uppercase tracking-widest shadow-2xl active:scale-95 transition-all">Lancer Stratégie Worldshop</button>
     </div>
 
     <nav class="nav-bar">
@@ -79,67 +86,61 @@
 
     <script>
         const allGems = [
-            // GAMING (10 UNIQUE)
-            {"asin":"B0D3GZYN1P","cat":"Gaming","name":"RK Royal Kludge R75","price":85.99,"sales":750,"rank":1245,"imageUrl":"https://m.media-amazon.com/images/I/71u5e8OQ0-L.jpg","vendor":"rkgaming"},
-            {"asin":"B0GHVWHRBQ","cat":"Gaming","name":"Ajazz AK820 Pro Keyboard","price":82.99,"sales":500,"rank":1540,"imageUrl":"https://m.media-amazon.com/images/I/61M-FwS4fRL.jpg","vendor":"ajazz"},
-            {"asin":"B07W5JKFQC","cat":"Gaming","name":"Logitech G203 LIGHTSYNC","price":26.68,"sales":1800,"rank":93,"imageUrl":"https://m.media-amazon.com/images/I/61oE1NouXuL.jpg","vendor":"easterntimes"},
-            {"asin":"B0GYD56QDW","cat":"Gaming","name":"Link Dream Headphone Stand","price":14.90,"sales":1200,"rank":405,"imageUrl":"https://m.media-amazon.com/images/I/61mpMH5TzkL.jpg","vendor":"linkdream"},
-            {"asin":"B08DKS8W2Z","cat":"Gaming","name":"Quntis Monitor Light Bar","price":39.99,"sales":1100,"rank":250,"imageUrl":"https://m.media-amazon.com/images/I/71rA8v2FvKL.jpg","vendor":"highstar"},
-            {"asin":"B0892D9F2G","cat":"Gaming","name":"Anker Soundcore Life Q30","price":79.99,"sales":1500,"rank":89,"imageUrl":"https://m.media-amazon.com/images/I/61CGHv6kmWL.jpg","vendor":"szlinx"},
-            {"asin":"B09PQ1DCLK","cat":"Gaming","name":"Neewer 50-in-1 GoPro Kit","price":35.00,"sales":620,"rank":302,"imageUrl":"https://m.media-amazon.com/images/I/81Z8B+A5fPL.jpg","vendor":"cnpuluz"},
-            {"asin":"B00JX1ZS5O","cat":"Gaming","name":"Sabrent 4-Port USB Hub","price":18.50,"sales":1100,"rank":215,"imageUrl":"https://m.media-amazon.com/images/I/516+2Z7S2cL.jpg","vendor":"blueendless"},
-            {"asin":"B07D373B25","cat":"Gaming","name":"Syncwire Cable Clips Pack","price":9.99,"sales":2500,"rank":34,"imageUrl":"https://m.media-amazon.com/images/I/61Ia4HvtVHL.jpg","vendor":"szvina"},
-            {"asin":"B07GS6ZB7T","cat":"Gaming","name":"Logitech G502 HERO Mouse","price":39.47,"sales":2100,"rank":31,"imageUrl":"https://m.media-amazon.com/images/I/61mpMH5TzkL.jpg","vendor":"easterntimes"},
-            // AUTO (10 UNIQUE)
-            {"asin":"B07QC6BVVW","cat":"Auto","name":"Autel AP200 Bluetooth","price":69.00,"sales":600,"rank":4853,"imageUrl":"https://m.media-amazon.com/images/I/61b17LdIsHL.jpg","vendor":"autel"},
-            {"asin":"B007XE8C74","cat":"Auto","name":"Autel AL319 OBD2 Red","price":35.99,"sales":1200,"rank":3085,"imageUrl":"https://m.media-amazon.com/images/I/71zY6-bLURL.jpg","vendor":"autel"},
-            {"asin":"B01G5K6GQA","cat":"Auto","name":"Ancel AD310 Scanner","price":35.99,"sales":1500,"rank":110,"imageUrl":"https://m.media-amazon.com/images/I/61TeqxNQwVL.jpg","vendor":"kingobd"},
-            {"asin":"B07QR4Q63Z","cat":"Auto","name":"AstroAI Air Compressor","price":45.99,"sales":1800,"rank":540,"imageUrl":"https://m.media-amazon.com/images/I/71aqvjpTNIL.jpg","vendor":"yyliuyang"},
-            {"asin":"B00SP4PF04","cat":"Auto","name":"Digital Tire Pressure Gauge","price":12.99,"sales":2200,"rank":340,"imageUrl":"https://m.media-amazon.com/images/I/61Ia4HvtVHL.jpg","vendor":"yyliuyang"},
-            {"asin":"B085DMCH6S","cat":"Auto","name":"Lamicall Phone Mount","price":19.99,"sales":1500,"rank":120,"imageUrl":"https://m.media-amazon.com/images/I/71Kx8V6U9rL.jpg","vendor":"lamicall"},
-            {"asin":"B07XJ1N4W2","cat":"Auto","name":"Favoto Motorcycle Cover","price":34.50,"sales":400,"rank":1100,"imageUrl":"https://m.media-amazon.com/images/I/71p6nE+6L.jpg","vendor":"mei-ao"},
-            {"asin":"B01N10S80B","cat":"Auto","name":"Expandable Cable Sleeve","price":16.50,"sales":2200,"rank":34,"imageUrl":"https://m.media-amazon.com/images/I/71qS6eH7GRL.jpg","vendor":"wellcoint"},
-            {"asin":"B00O9S01A8","cat":"Auto","name":"Veepeak Mini OBD2 Blue","price":24.50,"sales":1400,"rank":120,"imageUrl":"https://m.media-amazon.com/images/I/61Ia4HvtVHL.jpg","vendor":"konnwei"},
-            {"asin":"B07Y8S6S5S","cat":"Auto","name":"Backseat Car Organizer","price":22.90,"sales":900,"rank":670,"imageUrl":"https://m.media-amazon.com/images/I/71hj0Lp5C-L.jpg","vendor":"hzguard"},
-            // CUISINE (10 UNIQUE)
-            {"asin":"B0113UZJE2","cat":"Cuisine","name":"Etekcity Digital Scale","price":18.99,"sales":2500,"rank":1422,"imageUrl":"https://m.media-amazon.com/images/I/71S-9VUpURL.jpg","vendor":"camry"},
-            {"asin":"B0DFM1JHJS","cat":"Cuisine","name":"Tefal Optiss Scale","price":22.90,"sales":800,"rank":434,"imageUrl":"https://m.media-amazon.com/images/I/51r2zB4KURL.jpg","vendor":"frecomscale"},
-            {"asin":"B00XN247V2","cat":"Cuisine","name":"ThermoPro Meat Thermometer","price":14.50,"sales":3500,"rank":5,"imageUrl":"https://m.media-amazon.com/images/I/71W7xwOF9oL.jpg","vendor":"szecare"},
-            {"asin":"B076F3C185","cat":"Cuisine","name":"Bonsenkitchen Frother","price":12.50,"sales":2200,"rank":34,"imageUrl":"https://m.media-amazon.com/images/I/61Ia4HvtVHL.jpg","vendor":"hssunway"},
+            // GAMING (10 - DIVERSIFIÉS)
+            {"asin":"B0C8V49K6V","cat":"Gaming","name":"RK Royal Kludge R75 Mechanical","price":85.99,"sales":750,"rank":1420,"imageUrl":"https://m.media-amazon.com/images/I/71u5e8OQ0-L.jpg","vendor":"rkgaming"},
+            {"asin":"B0CHM6L8M2","cat":"Gaming","name":"Ajazz AK820 Pro Keyboard","price":82.99,"sales":500,"rank":1892,"imageUrl":"https://m.media-amazon.com/images/I/61M-FwS4fRL.jpg","vendor":"ajazz"},
+            {"asin":"B07W5JKFQC","cat":"Gaming","name":"Logitech G203 LIGHTSYNC","price":26.68,"sales":1800,"rank":93,"imageUrl":"https://m.media-amazon.com/images/I/61oE1NouXuL.jpg","vendor":"togran"},
+            {"asin":"B07GS6ZB7T","cat":"Gaming","name":"Logitech G502 HERO Mouse","price":39.47,"sales":2100,"rank":31,"imageUrl":"https://m.media-amazon.com/images/I/61mpMH5TzkL.jpg","vendor":"togran"},
+            {"asin":"B0GYD56QDW","cat":"Gaming","name":"Link Dream Headphone Stand","price":14.90,"sales":1200,"rank":107,"imageUrl":"https://m.media-amazon.com/images/I/61mpMH5TzkL.jpg","vendor":"linkdream"},
+            {"asin":"B08DKS8W2Z","cat":"Gaming","name":"Quntis Monitor Light Bar","price":39.99,"sales":1100,"rank":234,"imageUrl":"https://m.media-amazon.com/images/I/71rA8v2FvKL.jpg","vendor":"highstar"},
+            {"asin":"B0892D9F2G","cat":"Gaming","name":"Anker Soundcore Life Q30","price":79.99,"sales":1500,"rank":89,"imageUrl":"https://m.media-amazon.com/images/I/61CGHv6kmWL.jpg","vendor":"ebluetimes"},
+            {"asin":"B09PQ1DCLK","cat":"Gaming","name":"Neewer 50-in-1 GoPro Kit","price":35.00,"sales":620,"rank":302,"imageUrl":"https://m.media-amazon.com/images/I/81Z8B+A5fPL.jpg","vendor":"puluz"},
+            {"asin":"B00JX1ZS5O","cat":"Gaming","name":"Sabrent 4-Port USB Hub","price":18.50,"sales":1100,"rank":107,"imageUrl":"https://m.media-amazon.com/images/I/516+2Z7S2cL.jpg","vendor":"csjmax"},
+            {"asin":"B07D373B25","cat":"Gaming","name":"Syncwire Cable Clips Pack","price":9.99,"sales":2500,"rank":542,"imageUrl":"https://m.media-amazon.com/images/I/61Ia4HvtVHL.jpg","vendor":"syncwire"},
+            // AUTO (10 - DIVERSIFIÉS)
+            {"asin":"B07QC6BVVW","cat":"Auto","name":"Autel AP200 Bluetooth OBD2","price":69.00,"sales":600,"rank":310,"imageUrl":"https://m.media-amazon.com/images/I/61b17LdIsHL.jpg","vendor":"autel"},
+            {"asin":"B007XE8C74","cat":"Auto","name":"Autel AL319 OBD2 Red","price":35.99,"sales":1200,"rank":112,"imageUrl":"https://m.media-amazon.com/images/I/71zY6-bLURL.jpg","vendor":"autel"},
+            {"asin":"B01G5K6GQA","cat":"Auto","name":"Ancel AD310 Scanner","price":35.99,"sales":1500,"rank":1450,"imageUrl":"https://m.media-amazon.com/images/I/61TeqxNQwVL.jpg","vendor":"ancelobd"},
+            {"asin":"B07QR4Q63Z","cat":"Auto","name":"AstroAI Air Compressor","price":45.99,"sales":1800,"rank":340,"imageUrl":"https://m.media-amazon.com/images/I/71aqvjpTNIL.jpg","vendor":"yyliuyang"},
+            {"asin":"B00SP4PF04","cat":"Auto","name":"AstroAI Digital Tire Gauge","price":12.99,"sales":2200,"rank":540,"imageUrl":"https://m.media-amazon.com/images/I/61Ia4HvtVHL.jpg","vendor":"yyliuyang"},
+            {"asin":"B085DMCH6S","cat":"Auto","name":"Lamicall Phone Mount Moto","price":19.99,"sales":1500,"rank":670,"imageUrl":"https://m.media-amazon.com/images/I/71Kx8V6U9rL.jpg","vendor":"lamicall"},
+            {"asin":"B07XJ1N4W2","cat":"Auto","name":"Favoto Motorcycle Cover","price":34.50,"sales":400,"rank":1100,"imageUrl":"https://m.media-amazon.com/images/I/71p6nE+6L.jpg","vendor":"hzguard"},
+            {"asin":"B01N10S80B","cat":"Auto","name":"Expandable Cable Sleeve","price":16.50,"sales":2200,"rank":34,"imageUrl":"https://m.media-amazon.com/images/I/71qS6eH7GRL.jpg","vendor":"sztony"},
+            {"asin":"B00O9S01A8","cat":"Auto","name":"Veepeak Mini OBD2 Bluetooth","price":24.50,"sales":1400,"rank":120,"imageUrl":"https://m.media-amazon.com/images/I/61Ia4HvtVHL.jpg","vendor":"huameide"},
+            {"asin":"B07Y8S6S5S","cat":"Auto","name":"Small Car Organiser Luxe","price":22.90,"sales":900,"rank":850,"imageUrl":"https://m.media-amazon.com/images/I/71hj0Lp5C-L.jpg","vendor":"hzguard"},
+            // CUISINE (10 - DIVERSIFIÉS)
+            {"asin":"B0113UZJE2","cat":"Cuisine","name":"Etekcity Digital Scale 5kg","price":18.99,"sales":2500,"rank":45,"imageUrl":"https://m.media-amazon.com/images/I/71S-9VUpURL.jpg","vendor":"vesync"},
+            {"asin":"B0DFM1JHJS","cat":"Cuisine","name":"Tefal Optiss White Scale","price":22.90,"sales":800,"rank":188,"imageUrl":"https://m.media-amazon.com/images/I/51r2zB4KURL.jpg","vendor":"tefal"},
+            {"asin":"B00XN247V2","cat":"Cuisine","name":"ThermoPro TP19 Waterproof","price":14.50,"sales":3500,"rank":5,"imageUrl":"https://m.media-amazon.com/images/I/71W7xwOF9oL.jpg","vendor":"szecare"},
+            {"asin":"B076F3C185","cat":"Cuisine","name":"Bonsenkitchen Milk Frother","price":12.50,"sales":2200,"rank":34,"imageUrl":"https://m.media-amazon.com/images/I/61Ia4HvtVHL.jpg","vendor":"hongmeihome"},
             {"asin":"B089K8L6N3","cat":"Cuisine","name":"Joseph Joseph Garlic Press","price":18.99,"sales":1500,"rank":12,"imageUrl":"https://m.media-amazon.com/images/I/61TeqxNQwVL.jpg","vendor":"wylemeng"},
-            {"asin":"B088K8ZMXQ","cat":"Cuisine","name":"Salad Spinner 4-in-1","price":34.00,"sales":890,"rank":120,"imageUrl":"https://m.media-amazon.com/images/I/71p6nE+6L.jpg","vendor":"zgshuangma"},
+            {"asin":"B088K8ZMXQ","cat":"Cuisine","name":"4-in-1 Salad Spinner Pro","price":34.00,"sales":890,"rank":450,"imageUrl":"https://m.media-amazon.com/images/I/71p6nE+6L.jpg","vendor":"zgshuangma"},
             {"asin":"B01F58S948","cat":"Cuisine","name":"Digital Measuring Spoon","price":12.99,"sales":890,"rank":1245,"imageUrl":"https://m.media-amazon.com/images/I/71p6nE+6L.jpg","vendor":"qjscale"},
             {"asin":"B07PTNZT75","cat":"Cuisine","name":"Kitchen Scale Stainless","price":11.99,"sales":3000,"rank":70,"imageUrl":"https://m.media-amazon.com/images/I/71hj0Lp5C-L.jpg","vendor":"zswhitebird"},
-            {"asin":"B01LXO8T93","cat":"Cuisine","name":"Milk Frother Elite","price":12.50,"sales":2200,"rank":34,"imageUrl":"https://m.media-amazon.com/images/I/61Ia4HvtVHL.jpg","vendor":"cnxyydz"},
-            {"asin":"B0098S8W5E","cat":"Cuisine","name":"Magnetic Kitchen Timer","price":8.99,"sales":1200,"rank":540,"imageUrl":"https://m.media-amazon.com/images/I/61oE1NouXuL.jpg","vendor":"loease"},
-            // HUB STOCKAGE (8 UNIQUE)
-            {"asin":"B0B7NTY2S6","cat":"Stockage","name":"SanDisk Ultra 128GB SD","price":24.99,"sales":2500,"rank":2,"imageUrl":"https://m.media-amazon.com/images/I/71Ow-Ih7KNL.jpg","vendor":"kissin"},
-            {"asin":"B0DCW8FKK9","cat":"Stockage","name":"SanDisk Ultra Go Dual","price":26.99,"sales":1000,"rank":2,"imageUrl":"https://m.media-amazon.com/images/I/71UkwcNaIvL.jpg","vendor":"usky"},
-            {"asin":"B07NY23WBG","cat":"Stockage","name":"SanDisk High Endurance","price":34.49,"sales":1200,"rank":19,"imageUrl":"https://m.media-amazon.com/images/I/619qRoAFthL.jpg","vendor":"oscoousb"},
-            {"asin":"B0C8HHFX3C","cat":"Stockage","name":"Kingston NV2 1TB NVMe","price":75.00,"sales":1800,"rank":215,"imageUrl":"https://m.media-amazon.com/images/I/516+2Z7S2cL.jpg","vendor":"szjtcc"},
-            {"asin":"B09X7BQB4J","cat":"Stockage","name":"SanDisk Extreme 128GB","price":34.00,"sales":1100,"rank":106,"imageUrl":"https://m.media-amazon.com/images/I/51jolRaoHqL.jpg","vendor":"hctdtech"},
-            {"asin":"B0BFH76ZCX","cat":"Stockage","name":"SanDisk Ultra Chromebook","price":26.90,"sales":500,"rank":225,"imageUrl":"https://m.media-amazon.com/images/I/41T8v+s8ZzL.jpg","vendor":"ldcems"},
-            {"asin":"B09X7DNF6G","cat":"Stockage","name":"SanDisk Extreme PRO SD","price":44.69,"sales":600,"rank":155,"imageUrl":"https://m.media-amazon.com/images/I/61o8OmUS-iL.jpg","vendor":"kissin"},
-            {"asin":"B07YGZ7JD5","cat":"Stockage","name":"Kingston Canvas Plus 128G","price":23.49,"sales":1500,"rank":100,"imageUrl":"https://m.media-amazon.com/images/I/61Ia4HvtVHL.jpg","vendor":"oscoousb"}
+            {"asin":"B01LXO8T93","cat":"Cuisine","name":"Electric Milk Frother Elite","price":12.50,"sales":2200,"rank":34,"imageUrl":"https://m.media-amazon.com/images/I/61Ia4HvtVHL.jpg","vendor":"cnxyydz"},
+            {"asin":"B0098S8W5E","cat":"Cuisine","name":"Kitchen Timer Magnetic","price":8.99,"sales":1200,"rank":540,"imageUrl":"https://m.media-amazon.com/images/I/61oE1NouXuL.jpg","vendor":"loease"},
+            // HUB VIP (SSD/SD)
+            {"asin":"B0B7NTY2S6","cat":"VIP","name":"SanDisk Ultra 128GB SD","price":24.99,"sales":2500,"rank":2,"imageUrl":"https://m.media-amazon.com/images/I/71Ow-Ih7KNL.jpg","vendor":"iotech"},
+            {"asin":"B0C8HHFX3C","cat":"VIP","name":"Kingston NV2 1TB SSD","price":75.00,"sales":1800,"rank":215,"imageUrl":"https://m.media-amazon.com/images/I/516+2Z7S2cL.jpg","vendor":"iotech"},
+            {"asin":"B099684C5G","cat":"VIP","name":"Samsung 990 PRO 1TB SSD","price":115.00,"sales":3500,"rank":1,"imageUrl":"https://m.media-amazon.com/images/I/616684C5G.jpg","vendor":"samsung-oem"},
+            {"asin":"B0DCW8FKK9","cat":"VIP","name":"SanDisk Ultra Go Dual","price":26.99,"sales":1000,"rank":2,"imageUrl":"https://m.media-amazon.com/images/I/71UkwcNaIvL.jpg","vendor":"iotech"},
+            {"asin":"B07NY23WBG","cat":"VIP","name":"SanDisk High Endurance","price":34.49,"sales":1200,"rank":19,"imageUrl":"https://m.media-amazon.com/images/I/619qRoAFthL.jpg","vendor":"iotech"}
         ];
         let activeGem = null;
         let favorites = JSON.parse(localStorage.getItem('ws_favs') || '[]');
         function renderGrid(data) {
             const grid = document.getElementById('gemGrid'); grid.innerHTML = '';
-            data.forEach((gem, idx) => {
-                const isFav = favorites.includes(gem.asin);
-                const colorMap = { 'Gaming': 'card-gaming', 'Auto': 'card-auto', 'Cuisine': 'card-cuisine', 'Stockage': 'card-storage' };
-                grid.innerHTML += `<div class="gem-card ${colorMap[gem.cat]} animate-reveal" onclick="openDetails('${gem.asin}')">
-                    <i class="${isFav?'fas text-red-500':'far'} fa-heart absolute top-4 right-4" onclick="event.stopPropagation();toggleFav('${gem.asin}',this)"></i>
+            data.forEach((gem) => {
+                grid.innerHTML += `<div class="gem-card animate-reveal" onclick="openDetails('${gem.asin}')">
                     <div class="img-wrap"><img src="${gem.imageUrl}" class="product-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2589/2589174.png'"></div>
-                    <h3 class="text-[10px] font-black text-slate-400 truncate mb-2 uppercase tracking-tighter">${gem.name}</h3>
+                    <h3 class="text-[10px] font-black text-slate-400 truncate mb-1 uppercase">${gem.name}</h3>
                     <div class="flex justify-between items-center"><span class="text-[18px] font-black text-blue-600">${gem.price}€</span><span class="text-[8px] bg-slate-50 px-2 py-1 rounded-md font-bold text-slate-400">${gem.sales} V/M</span></div>
                 </div>`;
             });
         }
         function filterCat(cat, el) {
             document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active')); el.classList.add('active');
-            if(cat === 'all') renderGrid(allGems.filter(g => g.cat !== 'Stockage'));
+            if(cat === 'all') renderGrid(allGems.filter(g => g.cat !== 'VIP'));
             else renderGrid(allGems.filter(g => g.cat === cat));
         }
         function openDetails(asin) {
@@ -151,23 +152,24 @@
             document.getElementById('modalSales').innerText = activeGem.sales + " / mois";
             document.getElementById('amazonLink').href = "https://www.amazon.fr/dp/" + activeGem.asin;
             document.getElementById('supplierLink').href = "https://" + activeGem.vendor + ".en.alibaba.com/productlist.html";
-            document.getElementById('detailsModal').classList.add('modal-active');
+            updateSim(); document.getElementById('detailsModal').classList.add('modal-active');
             document.body.style.overflow = 'hidden';
         }
-        function closeModal() { document.getElementById('detailsModal').classList.remove('modal-active'); document.body.style.overflow = 'auto'; }
-        function toggleFav(asin, el) {
-            if(favorites.includes(asin)) favorites = favorites.filter(a => a !== asin);
-            else favorites.push(asin);
-            localStorage.setItem('ws_favs', JSON.stringify(favorites));
-            el.classList.toggle('fas'); el.classList.toggle('far'); el.classList.toggle('text-red-500');
+        function updateSim() {
+            const qty = parseFloat(document.getElementById('simQty').value) || 0;
+            const buy = parseFloat(document.getElementById('simBuyPrice').value) || 0;
+            const sell = parseFloat(activeGem.price);
+            document.getElementById('simCA').innerText = (sell * qty).toFixed(2) + "€";
+            document.getElementById('simProfit').innerText = ((sell - buy) * qty).toFixed(2) + "€";
         }
-        function switchView(view) { if(view === 'home') renderGrid(allGems.filter(g => g.cat !== 'Stockage')); }
+        function closeModal() { document.getElementById('detailsModal').classList.remove('modal-active'); document.body.style.overflow = 'auto'; }
+        function switchView(view) { if(view === 'home') renderGrid(allGems.filter(g => g.cat !== 'VIP')); }
         function prepareDirectEmail() {
             const amzLink = "https://www.amazon.fr/dp/" + activeGem.asin;
-            const body = `Hello, This is Mr. HOMY from Worldshop. I need OEM supply for ASIN ${activeGem.asin}. Amazon Link: ${amzLink}. Best regards, Mr. HOMY (+33642131515)`;
+            const body = `Hello, This is Mr. HOMY from Worldshop. I need OEM supply for ASIN ${activeGem.asin}. Best regards, Mr. HOMY (+33642131515)`;
             window.location.href = `mailto:sales@factory.com?subject=OEM Inquiry - ASIN ${activeGem.asin}&body=${encodeURIComponent(body)}`;
         }
-        renderGrid(allGems.filter(g => g.cat !== 'Stockage'));
+        renderGrid(allGems.filter(g => g.cat !== 'VIP'));
     </script>
 </body>
 </html>
