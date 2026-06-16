@@ -3,39 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Worldshop - Pro Sourcing Dashboard</title>
+    <title>Worldshop Pro - Supreme Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
         :root { --apple-blue: #0071e3; --sa-green: #27ae60; --sandisk-red: #ff3b30; }
         body { background-color: #fbfbfd; color: #1d1d1f; font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
-        .hero-header { background: #000; padding: 60px 24px 30px 24px; border-radius: 0 0 40px 40px; }
-        .hero-title { font-size: 32px; font-weight: 800; color: #fff; letter-spacing: -1.5px; line-height: 1; }
-        .cat-pill { flex: 0 0 auto; padding: 12px 20px; background: #fff; border-radius: 20px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; border: 1.5px solid #eee; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        
+        /* Banner Dynamique Style Apple */
+        .hero-banner { height: 260px; background: #000; position: relative; border-radius: 0 0 50px 50px; display: flex; align-items: flex-end; padding: 40px 30px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+        .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.6; filter: contrast(1.2) brightness(0.8); }
+        .hero-title { font-size: 36px; font-weight: 800; color: #fff; line-height: 1; letter-spacing: -1.5px; position: relative; z-index: 10; font-style: italic; }
+        
+        .cat-pill { flex: 0 0 auto; padding: 12px 22px; background: #fff; border-radius: 20px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; border: 1.5px solid #eee; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
         .cat-pill.active { background: #000; color: #fff; border-color: #000; transform: scale(1.05); }
         .cat-pill.vip { background: #fee2e2; border-color: #fecaca; color: #991b1b; }
-        .data-card { background: #fff; border-radius: 28px; padding: 20px; border: 2.5px solid #f1f1f1; position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.02); transition: 0.3s; }
-        .card-gaming { border-color: #e0f2fe; } .card-auto { border-color: #fef3c7; } .card-cuisine { border-color: #d1fae5; } .card-vip { border-color: #fecaca; }
-        .asin-badge { font-size: 18px; font-weight: 900; color: var(--apple-blue); letter-spacing: -0.5px; }
-        .sales-badge { background: #f0fdf4; color: #166534; padding: 4px 10px; rounded-full; font-size: 10px; font-weight: 800; }
-        .action-btn { height: 45px; border-radius: 15px; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 10px; font-weight: 800; text-transform: uppercase; transition: 0.2s; }
-        .btn-amz { background: #000; color: #fff; flex: 1; } .btn-oem { background: #f5f5f7; color: #000; border: 1px solid #eee; flex: 1.2; }
-        .btn-mail { background: var(--apple-blue); color: #fff; width: 100%; margin-top: 10px; }
-        .nav-bar { position: fixed; bottom: 25px; left: 20px; right: 20px; height: 75px; background: rgba(0,0,0,0.95); backdrop-filter: blur(25px); border-radius: 38px; display: flex; justify-content: space-around; align-items: center; z-index: 4000; }
-        .nav-item { color: #666; font-size: 22px; } .nav-item.active { color: #fff; }
+
+        /* Cartes Data avec Contours Accentues */
+        .data-card { background: #fff; border-radius: 35px; padding: 24px; border: 3px solid #f1f1f1; position: relative; box-shadow: 0 15px 35px rgba(0,0,0,0.03); transition: 0.3s; }
+        .card-gaming { border-color: #e0f2fe; } /* Bleu */
+        .card-auto { border-color: #fef3c7; }    /* Orange */
+        .card-cuisine { border-color: #d1fae5; } /* Vert */
+        .card-vip { border-color: #fecaca; border-width: 4px; } /* Rouge VIP */
+        
+        .asin-badge { font-size: 20px; font-weight: 900; color: var(--apple-blue); letter-spacing: -0.5px; }
+        .sales-badge { background: #f0fdf4; color: #166534; padding: 6px 12px; border-radius: 12px; font-size: 11px; font-weight: 800; }
+        
+        .action-btn { height: 50px; border-radius: 18px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 11px; font-weight: 900; text-transform: uppercase; transition: 0.2s; }
+        .btn-amz { background: #000; color: #fff; flex: 1; }
+        .btn-oem { background: #f5f5f7; color: #000; border: 1px solid #eee; flex: 1.5; }
+        .btn-mail { background: var(--apple-blue); color: #fff; width: 100%; margin-top: 12px; box-shadow: 0 10px 20px rgba(0, 113, 227, 0.2); }
+        
+        .nav-bar { position: fixed; bottom: 25px; left: 20px; right: 20px; height: 80px; background: rgba(0,0,0,0.95); backdrop-filter: blur(25px); border-radius: 40px; display: flex; justify-content: space-around; align-items: center; z-index: 4000; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        .nav-item { color: #666; font-size: 24px; } .nav-item.active { color: #fff; }
         ::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body class="pb-40">
-    <div class="hero-header shadow-2xl">
-        <p class="text-blue-500 text-[10px] font-black uppercase tracking-[0.4em] mb-2">Worldshop Pro Hub</p>
-        <h1 class="hero-title italic">Wholesale<br>Intelligence.</h1>
+    <div class="hero-banner">
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80" class="hero-img">
+        <div class="relative z-10">
+            <span class="bg-blue-600 text-white text-[8px] font-black px-3 py-1 rounded-full uppercase mb-4 inline-block tracking-widest italic">Worldshop Strategy</span>
+            <h1 class="hero-title">Sourcing<br><span style="color:var(--apple-blue)">Elite Master.</span></h1>
+        </div>
     </div>
 
     <div class="mt-8 px-6">
         <div class="flex gap-3 overflow-x-auto pb-6 no-scrollbar" id="catBar">
-            <div class="cat-pill active" onclick="filterCat('all', this)">Toutes les pépites</div>
+            <div class="cat-pill active" onclick="filterCat('all', this)">30 Pépites Mix</div>
             <div class="cat-pill vip" onclick="filterCat('VIP', this)"><i class="fas fa-crown"></i> Hub VIP (10)</div>
             <div class="cat-pill" onclick="filterCat('Gaming', this)">Gaming</div>
             <div class="cat-pill" onclick="filterCat('Auto', this)">Auto</div>
@@ -43,81 +59,80 @@
         </div>
     </div>
 
-    <div class="px-6 space-y-6" id="gemGrid"></div>
+    <div class="px-6 space-y-8" id="gemGrid"></div>
 
     <nav class="nav-bar">
-        <div onclick="switchView('home')" id="navHome" class="nav-item active"><i class="fas fa-list-ul"></i></div>
+        <div onclick="switchView('home')" id="navHome" class="nav-item active"><i class="fas fa-layer-group"></i></div>
         <div onclick="switchView('fav')" class="nav-item"><i class="fas fa-heart"></i></div>
-        <div onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-item"><i class="fas fa-bolt text-blue-400"></i></div>
+        <div onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-item text-blue-400"><i class="fas fa-bolt"></i></div>
         <div class="nav-item"><i class="fas fa-user-circle"></i></div>
     </nav>
 
     <script>
         const allGems = [
-            // HUB VIP (10)
-            {"asin":"B0B7NTY2S6","cat":"VIP","name":"SanDisk Ultra 128GB MicroSD","price":24.99,"sales":2500,"buy":8.50,"vendor":"kissin"},
+            // HUB VIP (10 - SAMSUNG/SANDISK/KINGSTON)
+            {"asin":"B0B7NTY2S6","cat":"VIP","name":"SanDisk Ultra 128GB MicroSD","price":24.99,"sales":2500,"buy":8.20,"vendor":"kissin"},
             {"asin":"B0C8HHFX3C","cat":"VIP","name":"Kingston NV2 1TB NVMe SSD","price":75.00,"sales":1800,"buy":32.00,"vendor":"szjtcc"},
+            {"asin":"B0B7NVV55M","cat":"VIP","name":"SanDisk Extreme SD Twin Pack","price":50.49,"sales":300,"buy":21.50,"vendor":"kissin"},
+            {"asin":"B0DCW8FKK9","cat":"VIP","name":"SanDisk Ultra Go Dual USB","price":26.99,"sales":1000,"buy":10.50,"vendor":"usky"},
+            {"asin":"B07NY23WBG","cat":"VIP","name":"SanDisk High Endurance SD","price":34.49,"sales":1200,"buy":12.80,"vendor":"oscoousb"},
             {"asin":"B099684C5G","cat":"VIP","name":"Samsung 990 PRO 1TB SSD","price":115.00,"sales":3500,"buy":55.00,"vendor":"samsung-oem"},
-            {"asin":"B0DCW8FKK9","cat":"VIP","name":"SanDisk Ultra Go Dual USB","price":26.99,"sales":1000,"buy":10.20,"vendor":"usky"},
-            {"asin":"B07NY23WBG","cat":"VIP","name":"SanDisk High Endurance SD","price":34.49,"sales":1200,"buy":12.50,"vendor":"oscoousb"},
-            {"asin":"B09X7DNF6G","cat":"VIP","name":"SanDisk Extreme PRO 128G","price":44.69,"sales":800,"buy":16.00,"vendor":"kissin"},
-            {"asin":"B0B7NVV55M","cat":"VIP","name":"SanDisk SD Twin Pack Elite","price":50.49,"sales":300,"buy":22.00,"vendor":"kissin"},
-            {"asin":"B07YGZ7JD5","cat":"VIP","name":"Kingston Canvas Plus 128G","price":23.49,"sales":1500,"buy":7.80,"vendor":"oscoousb"},
             {"asin":"B099684C5H","cat":"VIP","name":"Samsung 990 PRO 2TB SSD","price":195.00,"sales":1200,"buy":98.00,"vendor":"samsung-oem"},
-            {"asin":"B08G8T9B4L","cat":"VIP","name":"Samsung T7 Portable 1TB","price":125.00,"sales":900,"buy":65.00,"vendor":"samsung-oem"},
+            {"asin":"B07YGZ7JD5","cat":"VIP","name":"Kingston Canvas Plus 128G","price":23.49,"sales":1500,"buy":7.50,"vendor":"oscoousb"},
+            {"asin":"B09X7DNF6G","cat":"VIP","name":"SanDisk Extreme PRO 128G","price":44.69,"sales":800,"buy":16.50,"vendor":"kissin"},
+            {"asin":"B08G8T9B4L","cat":"VIP","name":"Samsung T7 Portable 1TB","price":125.00,"sales":900,"buy":62.00,"vendor":"samsung-oem"},
             // GAMING (10)
-            {"asin":"B07GS6ZB7T","cat":"Gaming","name":"Logitech G502 HERO Mouse","price":39.47,"sales":2100,"buy":14.50,"vendor":"togran"},
-            {"asin":"B0D3GZYN1P","cat":"Gaming","name":"RK Royal Kludge R75","price":85.99,"sales":750,"buy":35.00,"vendor":"rkgaming"},
-            {"asin":"B0GHVWHRBQ","cat":"Gaming","name":"Ajazz AK820 Pro Keyboard","price":82.99,"sales":500,"buy":32.00,"vendor":"ajazz"},
-            {"asin":"B07W5JKFQC","cat":"Gaming","name":"Logitech G203 LIGHTSYNC","price":26.68,"sales":1800,"buy":9.50,"vendor":"togran"},
-            {"asin":"B0GYD56QDW","cat":"Gaming","name":"Link Dream Headphone Stand","price":14.90,"sales":1200,"buy":4.20,"vendor":"linkdream"},
-            {"asin":"B08DKS8W2Z","cat":"Gaming","name":"Quntis Monitor Light Bar","price":39.99,"sales":1100,"buy":15.00,"vendor":"highstar"},
-            {"asin":"B0892D9F2G","cat":"Gaming","name":"Anker Soundcore Life Q30","price":79.99,"sales":1500,"buy":38.00,"vendor":"szlinx"},
-            {"asin":"B09PQ1DCLK","cat":"Gaming","name":"Neewer 50-in-1 GoPro Kit","price":35.00,"sales":620,"buy":12.00,"vendor":"cnpuluz"},
-            {"asin":"B00JX1ZS5O","cat":"Gaming","name":"Sabrent 4-Port USB Hub","price":18.50,"sales":1100,"buy":6.50,"vendor":"blueendless"},
-            {"asin":"B07D373B25","cat":"Gaming","name":"Syncwire Cable Clips Pack","price":9.99,"sales":2500,"buy":2.10,"vendor":"szvina"},
+            {"asin":"B07GS6ZB7T","cat":"Gaming","name":"Logitech G502 HERO Mouse","price":39.47,"sales":2100,"buy":14.00,"vendor":"togran"},
+            {"asin":"B0D3GZYN1P","cat":"Gaming","name":"RK Royal Kludge R75","price":85.99,"sales":750,"buy":32.00,"vendor":"rkgaming"},
+            {"asin":"B07W5JKFQC","cat":"Gaming","name":"Logitech G203 LIGHTSYNC","price":26.68,"sales":1800,"buy":9.20,"vendor":"togran"},
+            {"asin":"B0GYD56QDW","cat":"Gaming","name":"Link Dream Headphone Stand","price":14.90,"sales":1200,"buy":3.80,"vendor":"linkdream"},
+            {"asin":"B08DKS8W2Z","cat":"Gaming","name":"Quntis Monitor Light Bar","price":39.99,"sales":1100,"buy":14.50,"vendor":"highstar"},
+            {"asin":"B0892D9F2G","cat":"Gaming","name":"Anker Soundcore Life Q30","price":79.99,"sales":1500,"buy":35.00,"vendor":"szlinx"},
+            {"asin":"B09PQ1DCLK","cat":"Gaming","name":"Neewer 50-in-1 GoPro Kit","price":35.00,"sales":620,"buy":11.50,"vendor":"puluz"},
+            {"asin":"B00JX1ZS5O","cat":"Gaming","name":"Sabrent 4-Port USB Hub","price":18.50,"sales":1100,"buy":6.20,"vendor":"blueendless"},
+            {"asin":"B07D373B25","cat":"Gaming","name":"Syncwire Cable Clips Pack","price":9.99,"sales":2500,"buy":1.90,"vendor":"syncwire"},
+            {"asin":"B07W6JNY7T","cat":"Gaming","name":"Logitech G502 X Wireless","price":79.99,"sales":150,"buy":38.00,"vendor":"togran"},
             // AUTO (10)
             {"asin":"B07QC6BVVW","cat":"Auto","name":"Autel AP200 Bluetooth OBD2","price":69.00,"sales":600,"buy":31.00,"vendor":"autel"},
-            {"asin":"B007XE8C74","cat":"Auto","name":"Autel AL319 OBD2 Red","price":35.99,"sales":1200,"buy":14.00,"vendor":"autel"},
-            {"asin":"B01G5K6GQA","cat":"Auto","name":"Ancel AD310 Classic Scan","price":35.99,"sales":1500,"buy":13.00,"vendor":"kingobd"},
+            {"asin":"B007XE8C74","cat":"Auto","name":"Autel AL319 OBD2 Red","price":35.99,"sales":1200,"buy":14.50,"vendor":"autel"},
+            {"asin":"B01G5K6GQA","cat":"Auto","name":"Ancel AD310 Classic Scan","price":35.99,"sales":1500,"buy":13.00,"vendor":"ancelobd"},
             {"asin":"B07QR4Q63Z","cat":"Auto","name":"AstroAI Air Compressor","price":45.99,"sales":1800,"buy":18.00,"vendor":"yyliuyang"},
-            {"asin":"B00SP4PF04","cat":"Auto","name":"AstroAI Digital Tire Gauge","price":12.99,"sales":2200,"buy":3.80,"vendor":"yyliuyang"},
-            {"asin":"B085DMCH6S","cat":"Auto","name":"Lamicall Phone Mount Moto","price":19.99,"sales":1500,"buy":5.50,"vendor":"lamicall"},
-            {"asin":"B07XJ1N4W2","cat":"Auto","name":"Favoto Motorcycle Cover","price":34.50,"sales":400,"buy":11.00,"vendor":"mei-ao"},
-            {"asin":"B01N10S80B","cat":"Auto","name":"Expandable Cable Sleeve","price":16.50,"sales":2200,"buy":4.50,"vendor":"wellcoint"},
-            {"asin":"B00O9S01A8","cat":"Auto","name":"Veepeak Mini OBD2 Blue","price":24.50,"sales":1400,"buy":8.20,"vendor":"konnwei"},
-            {"asin":"B07Y8S6S5S","cat":"Auto","name":"Backseat Car Organizer","price":22.90,"sales":900,"buy":7.50,"vendor":"hzguard"},
+            {"asin":"B00SP4PF04","cat":"Auto","name":"AstroAI Digital Tire Gauge","price":12.99,"sales":2200,"buy":3.50,"vendor":"yyliuyang"},
+            {"asin":"B085DMCH6S","cat":"Auto","name":"Lamicall Phone Mount Moto","price":19.99,"sales":1500,"buy":5.20,"vendor":"lamicall"},
+            {"asin":"B07XJ1N4W2","cat":"Auto","name":"Favoto Motorcycle Cover","price":34.50,"sales":400,"buy":11.00,"vendor":"hzguard"},
+            {"asin":"B01N10S80B","cat":"Auto","name":"Expandable Cable Sleeve","price":16.50,"sales":2200,"buy":4.20,"vendor":"wellcoint"},
+            {"asin":"B00O9S01A8","cat":"Auto","name":"Veepeak Mini OBD2 Blue","price":24.50,"sales":1400,"buy":8.00,"vendor":"huameide"},
+            {"asin":"B07Y8S6S5S","cat":"Auto","name":"Backseat Car Organizer","price":22.90,"sales":900,"buy":7.00,"vendor":"hzguard"},
             // CUISINE (10)
-            {"asin":"B0113UZJE2","cat":"Cuisine","name":"Etekcity Digital Scale 5kg","price":18.99,"sales":2500,"buy":6.80,"vendor":"camry"},
-            {"asin":"B0DFM1JHJS","cat":"Cuisine","name":"Tefal Optiss White Scale","price":22.90,"sales":800,"buy":9.00,"vendor":"frecomscale"},
-            {"asin":"B00XN247V2","cat":"Cuisine","name":"ThermoPro TP19 Meat Probe","price":14.50,"sales":3500,"buy":4.50,"vendor":"szecare"},
-            {"asin":"B076F3C185","cat":"Cuisine","name":"Bonsenkitchen Frother","price":12.50,"sales":2200,"buy":3.80,"vendor":"hssunway"},
-            {"asin":"B089K8L6N3","cat":"Cuisine","name":"Joseph Joseph Garlic Press","price":18.99,"sales":1500,"buy":6.20,"vendor":"wylemeng"},
-            {"asin":"B088K8ZMXQ","cat":"Cuisine","name":"Salad Spinner 4-in-1 Pro","price":34.00,"sales":890,"buy":12.00,"vendor":"zgshuangma"},
-            {"asin":"B01F58S948","cat":"Cuisine","name":"Digital Measuring Spoon","price":12.99,"sales":890,"buy":3.50,"vendor":"qjscale"},
-            {"asin":"B07PTNZT75","cat":"Cuisine","name":"Kitchen Scale Stainless","price":11.99,"sales":3000,"buy":3.90,"vendor":"zswhitebird"},
-            {"asin":"B01LXO8T93","cat":"Cuisine","name":"Milk Frother Elite Master","price":12.50,"sales":2200,"buy":3.40,"vendor":"cnxyydz"},
-            {"asin":"B0098S8W5E","cat":"Cuisine","name":"Magnetic Kitchen Timer","price":8.99,"sales":1200,"buy":2.10,"vendor":"loease"}
+            {"asin":"B0113UZJE2","cat":"Cuisine","name":"Etekcity Digital Scale 5kg","price":18.99,"sales":2500,"buy":6.50,"vendor":"vesync"},
+            {"asin":"B0DFM1JHJS","cat":"Cuisine","name":"Tefal Optiss White Scale","price":22.90,"sales":800,"buy":8.80,"vendor":"tefal"},
+            {"asin":"B00XN247V2","cat":"Cuisine","name":"ThermoPro TP19 Meat Probe","price":14.50,"sales":3500,"buy":4.20,"vendor":"thermopro"},
+            {"asin":"B076F3C185","cat":"Cuisine","name":"Bonsenkitchen Frother","price":12.50,"sales":2200,"buy":3.50,"vendor":"hongmeihome"},
+            {"asin":"B089K8L6N3","cat":"Cuisine","name":"Joseph Joseph Garlic Press","price":18.99,"sales":1500,"buy":6.00,"vendor":"angele"},
+            {"asin":"B088K8ZMXQ","cat":"Cuisine","name":"Salad Spinner 4-in-1 Pro","price":34.00,"sales":890,"buy":11.50,"vendor":"zgshuangma"},
+            {"asin":"B01F58S948","cat":"Cuisine","name":"Digital Measuring Spoon","price":12.99,"sales":890,"buy":3.20,"vendor":"qjscale"},
+            {"asin":"B07PTNZT75","cat":"Cuisine","name":"Kitchen Scale Stainless","price":11.99,"sales":3000,"buy":3.80,"vendor":"zswhitebird"},
+            {"asin":"B01LXO8T93","cat":"Cuisine","name":"Milk Frother Elite Master","price":12.50,"sales":2200,"buy":3.20,"vendor":"cnxyydz"},
+            {"asin":"B0098S8W5E","cat":"Cuisine","name":"Magnetic Kitchen Timer","price":8.99,"sales":1200,"buy":2.00,"vendor":"loease"}
         ];
-        let favorites = JSON.parse(localStorage.getItem('ws_favs') || '[]');
         function renderGrid(data) {
             const grid = document.getElementById('gemGrid'); grid.innerHTML = '';
             data.forEach((gem) => {
                 const colorMap = { 'Gaming': 'card-gaming', 'Auto': 'card-auto', 'Cuisine': 'card-cuisine', 'VIP': 'card-vip' };
                 grid.innerHTML += `<div class="data-card ${colorMap[gem.cat]}">
                     <div class="flex justify-between items-start mb-4">
-                        <div><p class="asin-badge">${gem.asin}</p><p class="text-[9px] font-bold text-slate-400 uppercase truncate w-40">${gem.name}</p></div>
+                        <div><p class="asin-badge">${gem.asin}</p><p class="text-[10px] font-extrabold text-slate-500 uppercase truncate w-48">${gem.name}</p></div>
                         <span class="sales-badge">${gem.sales} V/M</span>
                     </div>
-                    <div class="grid grid-cols-2 gap-4 mb-4 bg-slate-50 p-4 rounded-2xl">
-                        <div><p class="text-[8px] font-black text-slate-400 uppercase">Prix Amazon</p><p class="text-lg font-black text-blue-600">${gem.price}€</p></div>
-                        <div class="text-right"><p class="text-[8px] font-black text-slate-400 uppercase">Achat Max</p><p class="text-lg font-black text-emerald-600">${gem.buy}€</p></div>
+                    <div class="grid grid-cols-2 gap-4 mb-5 bg-slate-50 p-4 rounded-2xl">
+                        <div><p class="text-[8px] font-black text-slate-400 uppercase">Prix Amazon</p><p class="text-xl font-black text-blue-600">${gem.price}€</p></div>
+                        <div class="text-right"><p class="text-[8px] font-black text-slate-400 uppercase">Achat Direct</p><p class="text-xl font-black text-emerald-600">${gem.buy}€</p></div>
                     </div>
                     <div class="flex gap-2">
-                        <a href="https://www.amazon.fr/dp/${gem.asin}" target="_blank" class="action-btn btn-amz"><i class="fab fa-amazon"></i></a>
-                        <a href="https://${gem.vendor}.en.alibaba.com/productlist.html" target="_blank" class="action-btn btn-oem">Usine OEM <i class="fas fa-external-link-alt ml-1"></i></a>
+                        <a href="https://www.amazon.fr/dp/${gem.asin}" target="_blank" class="action-btn btn-amz"><i class="fab fa-amazon text-sm"></i></a>
+                        <a href="https://${gem.vendor}.en.alibaba.com/productlist.html" target="_blank" class="action-btn btn-oem">Showroom OEM <i class="fas fa-external-link-alt ml-1"></i></a>
                     </div>
-                    <button onclick="sendMail('${gem.asin}', '${gem.name}')" class="action-btn btn-mail">Contacter Worldshop Strategy</button>
+                    <button onclick="sendMail('${gem.asin}', '${gem.name}')" class="action-btn btn-mail">Email Worldshop Strategy</button>
                 </div>`;
             });
         }
@@ -127,7 +142,7 @@
             else renderGrid(allGems.filter(g => g.cat === cat));
         }
         function sendMail(asin, name) {
-            const body = `Hello, This is Mr. HOMY from Worldshop. I need OEM supply for ASIN ${asin} (${name}). Amazon Link: https://www.amazon.fr/dp/${asin}. Best regards, Mr. HOMY (+33642131515)`;
+            const body = `Hello, This is Mr. HOMY from Worldshop. I need OEM supply for ASIN ${asin} (${name}). Amazon Link: https://www.amazon.fr/dp/${asin}. WhatsApp: +33642131515. Best regards.`;
             window.location.href = `mailto:sales@factory.com?subject=OEM Inquiry - ASIN ${asin}&body=${encodeURIComponent(body)}`;
         }
         function switchView(view) { if(view === 'home') renderGrid(allGems.filter(g => g.cat !== 'VIP')); }
