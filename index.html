@@ -3,55 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Worldshop Pro - Supreme Dashboard</title>
+    <title>Worldshop Pro - Shenzhen Master Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-        :root { --apple-blue: #0071e3; --sa-green: #27ae60; --sandisk-red: #ff3b30; }
+        :root { --apple-blue: #0071e3; --vip-red: #ff3b30; }
         body { background-color: #fbfbfd; color: #1d1d1f; font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
         
-        /* Banner Dynamique Style Apple */
-        .hero-banner { height: 260px; background: #000; position: relative; border-radius: 0 0 50px 50px; display: flex; align-items: flex-end; padding: 40px 30px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
-        .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.6; filter: contrast(1.2) brightness(0.8); }
-        .hero-title { font-size: 36px; font-weight: 800; color: #fff; line-height: 1; letter-spacing: -1.5px; position: relative; z-index: 10; font-style: italic; }
+        /* Banner Shenzhen Master */
+        .hero-banner { height: 280px; background: #000; position: relative; border-radius: 0 0 60px 60px; display: flex; align-items: flex-end; padding: 40px 30px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+        .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.7; filter: contrast(1.1); }
+        .hero-title { font-size: 38px; font-weight: 800; color: #fff; line-height: 1; letter-spacing: -1.5px; position: relative; z-index: 10; font-style: italic; }
         
         .cat-pill { flex: 0 0 auto; padding: 12px 22px; background: #fff; border-radius: 20px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; border: 1.5px solid #eee; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
         .cat-pill.active { background: #000; color: #fff; border-color: #000; transform: scale(1.05); }
         .cat-pill.vip { background: #fee2e2; border-color: #fecaca; color: #991b1b; }
 
-        /* Cartes Data avec Contours Accentues */
+        /* Cartes Pro Dashboard */
         .data-card { background: #fff; border-radius: 35px; padding: 24px; border: 3px solid #f1f1f1; position: relative; box-shadow: 0 15px 35px rgba(0,0,0,0.03); transition: 0.3s; }
-        .card-gaming { border-color: #e0f2fe; } /* Bleu */
-        .card-auto { border-color: #fef3c7; }    /* Orange */
-        .card-cuisine { border-color: #d1fae5; } /* Vert */
-        .card-vip { border-color: #fecaca; border-width: 4px; } /* Rouge VIP */
+        .card-gaming { border-color: #e0f2fe; }
+        .card-auto { border-color: #fef3c7; }
+        .card-cuisine { border-color: #d1fae5; }
+        .card-vip { border-color: #fecaca; border-width: 4px; }
         
-        .asin-badge { font-size: 20px; font-weight: 900; color: var(--apple-blue); letter-spacing: -0.5px; }
-        .sales-badge { background: #f0fdf4; color: #166534; padding: 6px 12px; border-radius: 12px; font-size: 11px; font-weight: 800; }
+        .asin-badge { font-size: 22px; font-weight: 900; color: var(--apple-blue); letter-spacing: -0.5px; }
+        .fav-btn { position: absolute; top: 24px; right: 24px; font-size: 20px; color: #ddd; transition: 0.3s; cursor: pointer; }
+        .fav-active { color: var(--vip-red) !important; }
         
-        .action-btn { height: 50px; border-radius: 18px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 11px; font-weight: 900; text-transform: uppercase; transition: 0.2s; }
+        .action-btn { height: 55px; border-radius: 20px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 11px; font-weight: 900; text-transform: uppercase; transition: 0.2s; }
         .btn-amz { background: #000; color: #fff; flex: 1; }
         .btn-oem { background: #f5f5f7; color: #000; border: 1px solid #eee; flex: 1.5; }
-        .btn-mail { background: var(--apple-blue); color: #fff; width: 100%; margin-top: 12px; box-shadow: 0 10px 20px rgba(0, 113, 227, 0.2); }
+        .btn-mail { background: var(--apple-blue); color: #fff; width: 100%; margin-top: 15px; box-shadow: 0 10px 20px rgba(0, 113, 227, 0.2); }
         
-        .nav-bar { position: fixed; bottom: 25px; left: 20px; right: 20px; height: 80px; background: rgba(0,0,0,0.95); backdrop-filter: blur(25px); border-radius: 40px; display: flex; justify-content: space-around; align-items: center; z-index: 4000; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
-        .nav-item { color: #666; font-size: 24px; } .nav-item.active { color: #fff; }
+        .nav-bar { position: fixed; bottom: 25px; left: 20px; right: 20px; height: 80px; background: rgba(0,0,0,0.96); backdrop-filter: blur(25px); border-radius: 40px; display: flex; justify-content: space-around; align-items: center; z-index: 4000; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .nav-item { color: #555; font-size: 24px; cursor: pointer; } .nav-item.active { color: #fff; }
         ::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body class="pb-40">
     <div class="hero-banner">
-        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80" class="hero-img">
+        <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1200&q=80" class="hero-img">
         <div class="relative z-10">
-            <span class="bg-blue-600 text-white text-[8px] font-black px-3 py-1 rounded-full uppercase mb-4 inline-block tracking-widest italic">Worldshop Strategy</span>
-            <h1 class="hero-title">Sourcing<br><span style="color:var(--apple-blue)">Elite Master.</span></h1>
+            <span class="bg-red-600 text-white text-[8px] font-black px-3 py-1 rounded-full uppercase mb-4 inline-block tracking-widest italic">Shenzhen Master Edition</span>
+            <h1 class="hero-title">Sourcing<br><span style="color:var(--apple-blue)">Intelligence.</span></h1>
         </div>
     </div>
 
     <div class="mt-8 px-6">
         <div class="flex gap-3 overflow-x-auto pb-6 no-scrollbar" id="catBar">
-            <div class="cat-pill active" onclick="filterCat('all', this)">30 Pépites Mix</div>
+            <div class="cat-pill active" onclick="filterCat('all', this)">Toutes les pépites</div>
             <div class="cat-pill vip" onclick="filterCat('VIP', this)"><i class="fas fa-crown"></i> Hub VIP (10)</div>
             <div class="cat-pill" onclick="filterCat('Gaming', this)">Gaming</div>
             <div class="cat-pill" onclick="filterCat('Auto', this)">Auto</div>
@@ -63,7 +64,7 @@
 
     <nav class="nav-bar">
         <div onclick="switchView('home')" id="navHome" class="nav-item active"><i class="fas fa-layer-group"></i></div>
-        <div onclick="switchView('fav')" class="nav-item"><i class="fas fa-heart"></i></div>
+        <div onclick="switchView('fav')" id="navFav" class="nav-item"><i class="fas fa-heart"></i></div>
         <div onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-item text-blue-400"><i class="fas fa-bolt"></i></div>
         <div class="nav-item"><i class="fas fa-user-circle"></i></div>
     </nav>
@@ -71,15 +72,15 @@
     <script>
         const allGems = [
             // HUB VIP (10 - SAMSUNG/SANDISK/KINGSTON)
-            {"asin":"B0B7NTY2S6","cat":"VIP","name":"SanDisk Ultra 128GB MicroSD","price":24.99,"sales":2500,"buy":8.20,"vendor":"kissin"},
+            {"asin":"B0B7NTY2S6","cat":"VIP","name":"SanDisk Ultra 128GB SD Card","price":24.99,"sales":2500,"buy":8.20,"vendor":"kissin"},
             {"asin":"B0C8HHFX3C","cat":"VIP","name":"Kingston NV2 1TB NVMe SSD","price":75.00,"sales":1800,"buy":32.00,"vendor":"szjtcc"},
-            {"asin":"B0B7NVV55M","cat":"VIP","name":"SanDisk Extreme SD Twin Pack","price":50.49,"sales":300,"buy":21.50,"vendor":"kissin"},
-            {"asin":"B0DCW8FKK9","cat":"VIP","name":"SanDisk Ultra Go Dual USB","price":26.99,"sales":1000,"buy":10.50,"vendor":"usky"},
-            {"asin":"B07NY23WBG","cat":"VIP","name":"SanDisk High Endurance SD","price":34.49,"sales":1200,"buy":12.80,"vendor":"oscoousb"},
             {"asin":"B099684C5G","cat":"VIP","name":"Samsung 990 PRO 1TB SSD","price":115.00,"sales":3500,"buy":55.00,"vendor":"samsung-oem"},
             {"asin":"B099684C5H","cat":"VIP","name":"Samsung 990 PRO 2TB SSD","price":195.00,"sales":1200,"buy":98.00,"vendor":"samsung-oem"},
+            {"asin":"B0DCW8FKK9","cat":"VIP","name":"SanDisk Ultra Go Dual USB","price":26.99,"sales":1000,"buy":10.50,"vendor":"usky"},
+            {"asin":"B07NY23WBG","cat":"VIP","name":"SanDisk High Endurance SD","price":34.49,"sales":1200,"buy":12.80,"vendor":"oscoousb"},
             {"asin":"B07YGZ7JD5","cat":"VIP","name":"Kingston Canvas Plus 128G","price":23.49,"sales":1500,"buy":7.50,"vendor":"oscoousb"},
             {"asin":"B09X7DNF6G","cat":"VIP","name":"SanDisk Extreme PRO 128G","price":44.69,"sales":800,"buy":16.50,"vendor":"kissin"},
+            {"asin":"B0B7NVV55M","cat":"VIP","name":"SanDisk Extreme SD Twin","price":50.49,"sales":300,"buy":21.50,"vendor":"kissin"},
             {"asin":"B08G8T9B4L","cat":"VIP","name":"Samsung T7 Portable 1TB","price":125.00,"sales":900,"buy":62.00,"vendor":"samsung-oem"},
             // GAMING (10)
             {"asin":"B07GS6ZB7T","cat":"Gaming","name":"Logitech G502 HERO Mouse","price":39.47,"sales":2100,"buy":14.00,"vendor":"togran"},
@@ -115,11 +116,14 @@
             {"asin":"B01LXO8T93","cat":"Cuisine","name":"Milk Frother Elite Master","price":12.50,"sales":2200,"buy":3.20,"vendor":"cnxyydz"},
             {"asin":"B0098S8W5E","cat":"Cuisine","name":"Magnetic Kitchen Timer","price":8.99,"sales":1200,"buy":2.00,"vendor":"loease"}
         ];
+        let favorites = JSON.parse(localStorage.getItem('ws_favs') || '[]');
         function renderGrid(data) {
             const grid = document.getElementById('gemGrid'); grid.innerHTML = '';
             data.forEach((gem) => {
+                const isFav = favorites.includes(gem.asin);
                 const colorMap = { 'Gaming': 'card-gaming', 'Auto': 'card-auto', 'Cuisine': 'card-cuisine', 'VIP': 'card-vip' };
                 grid.innerHTML += `<div class="data-card ${colorMap[gem.cat]}">
+                    <i class="fas fa-heart fav-btn ${isFav?'fav-active':''}" onclick="toggleFav('${gem.asin}', this)"></i>
                     <div class="flex justify-between items-start mb-4">
                         <div><p class="asin-badge">${gem.asin}</p><p class="text-[10px] font-extrabold text-slate-500 uppercase truncate w-48">${gem.name}</p></div>
                         <span class="sales-badge">${gem.sales} V/M</span>
@@ -130,11 +134,17 @@
                     </div>
                     <div class="flex gap-2">
                         <a href="https://www.amazon.fr/dp/${gem.asin}" target="_blank" class="action-btn btn-amz"><i class="fab fa-amazon text-sm"></i></a>
-                        <a href="https://${gem.vendor}.en.alibaba.com/productlist.html" target="_blank" class="action-btn btn-oem">Showroom OEM <i class="fas fa-external-link-alt ml-1"></i></a>
+                        <a href="https://${gem.vendor}.en.alibaba.com/productlist.html" target="_blank" class="action-btn btn-oem">Showroom OEM</a>
                     </div>
-                    <button onclick="sendMail('${gem.asin}', '${gem.name}')" class="action-btn btn-mail">Email Worldshop Strategy</button>
+                    <button onclick="sendMail('${gem.asin}', '${gem.name}')" class="action-btn btn-mail">Worldshop Email Strategy</button>
                 </div>`;
             });
+        }
+        function toggleFav(asin, el) {
+            if(favorites.includes(asin)) favorites = favorites.filter(a => a !== asin);
+            else favorites.push(asin);
+            localStorage.setItem('ws_favs', JSON.stringify(favorites));
+            el.classList.toggle('fav-active');
         }
         function filterCat(cat, el) {
             document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active')); el.classList.add('active');
@@ -142,10 +152,15 @@
             else renderGrid(allGems.filter(g => g.cat === cat));
         }
         function sendMail(asin, name) {
-            const body = `Hello, This is Mr. HOMY from Worldshop. I need OEM supply for ASIN ${asin} (${name}). Amazon Link: https://www.amazon.fr/dp/${asin}. WhatsApp: +33642131515. Best regards.`;
-            window.location.href = `mailto:sales@factory.com?subject=OEM Inquiry - ASIN ${asin}&body=${encodeURIComponent(body)}`;
+            const amzLink = `https://www.amazon.fr/dp/${asin}`;
+            const body = `Dear Julie,\n\nThank you for your reply on Alibaba. To clarify: we are looking for BOTH options to compare:\n\n1. High Copy / OEM quality using original chipsets (the one we discussed to meet our price targets).\n2. 100% Original SanDisk/Kingston cards.\n\nProduct: ${name}\nASIN: ${asin}\nAmazon Link: ${amzLink}\n\nPlease provide your best pricing for both categories for the models mentioned. Our goal is to maintain a 30% margin based on our cost analysis, so competitive pricing for the OEM/High Copy with original chipsets is our priority for weekly volume (50-100 pcs).\n\nPlease also confirm the sample cost and lead time for a test batch of 10-20 units total across these models.\n\nBest regards,\nWorldshop Team\nWhatsApp: +33664231515`;
+            window.location.href = `mailto:julie@factory.com?subject=OEM Inquiry - ASIN ${asin}&body=${encodeURIComponent(body)}`;
         }
-        function switchView(view) { if(view === 'home') renderGrid(allGems.filter(g => g.cat !== 'VIP')); }
+        function switchView(view) {
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            if(view === 'home') { document.getElementById('navHome').classList.add('active'); renderGrid(allGems.filter(g => g.cat !== 'VIP')); }
+            if(view === 'fav') { document.getElementById('navFav').classList.add('active'); renderGrid(allGems.filter(g => favorites.includes(g.asin))); }
+        }
         renderGrid(allGems.filter(g => g.cat !== 'VIP'));
     </script>
 </body>
