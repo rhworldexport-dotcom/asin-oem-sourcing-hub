@@ -3,60 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Worldshop Pro - Diamond Hub 5.0</title>
+    <title>Worldshop Pro - Diamond Master 6.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-        :root { --apple-blue: #0071e3; --vip-red: #ff3b30; }
+        :root { --apple-blue: #0071e3; --vip-red: #ff3b30; --gold: #c5a059; }
         body { background-color: #fbfbfd; color: #1d1d1f; font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
         
-        /* Banner Shenzhen Skyline Master */
-        .hero-banner { height: 300px; background: #000; position: relative; border-radius: 0 0 60px 60px; display: flex; align-items: flex-end; padding: 40px 30px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.3); }
-        .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.9; filter: brightness(0.6) contrast(1.1); }
-        .hero-title { font-size: 42px; font-weight: 900; color: #fff; line-height: 0.9; letter-spacing: -2px; position: relative; z-index: 10; font-style: italic; text-transform: uppercase; }
+        .hero-banner { height: 320px; background: #000; position: relative; border-radius: 0 0 60px 60px; display: flex; align-items: flex-end; padding: 40px 30px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.3); }
+        .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.8; filter: brightness(0.7) contrast(1.1); }
+        .hero-title { font-size: 40px; font-weight: 900; color: #fff; line-height: 0.9; letter-spacing: -2px; position: relative; z-index: 10; font-style: italic; text-transform: uppercase; }
         
-        /* Cartes Data 5.0 avec Contours Ultra Epais et Reflets */
-        .data-card { background: #ffffff; border-radius: 40px; padding: 28px; border: 5px solid #f2f2f2; position: relative; box-shadow: 0 20px 45px rgba(0,0,0,0.06); transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); margin-bottom: 25px; overflow: hidden; }
-        .data-card::after { content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent); transform: rotate(45deg); pointer-events: none; }
-        .data-card:active { transform: scale(0.95); }
+        .cat-pill { flex: 0 0 auto; padding: 12px 24px; background: #fff; border-radius: 25px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; border: 2px solid #eee; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .cat-pill.active { background: #000; color: #fff; border-color: #000; transform: scale(1.05); }
+
+        .data-card { background: #fff; border-radius: 40px; padding: 28px; border: 5px solid #f2f2f2; position: relative; box-shadow: 0 15px 40px rgba(0,0,0,0.05); transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); margin-bottom: 25px; overflow: hidden; }
+        .data-card:active { transform: scale(0.96); }
         
-        .card-gaming { border-color: #0071e3; box-shadow: 0 10px 30px rgba(0, 113, 227, 0.1); }
-        .card-auto { border-color: #ff9f0a; box-shadow: 0 10px 30px rgba(255, 159, 10, 0.1); }
-        .card-cuisine { border-color: #34c759; box-shadow: 0 10px 30px rgba(52, 199, 89, 0.1); }
-        .card-vip { border-color: #ff3b30; border-width: 6px; box-shadow: 0 10px 30px rgba(255, 59, 48, 0.15); }
-        
-        .asin-badge { font-size: 26px; font-weight: 900; color: #1d1d1f; letter-spacing: -1.5px; }
-        .sales-badge { background: #f0fdf4; color: #166534; padding: 8px 16px; border-radius: 15px; font-size: 12px; font-weight: 900; }
-        
-        .fav-icon { position: absolute; top: 25px; right: 25px; font-size: 30px; color: #eee; transition: 0.3s; cursor: pointer; z-index: 20; }
+        .card-gaming { border-color: #0071e3; } 
+        .card-auto { border-color: #ff9f0a; }   
+        .card-cuisine { border-color: #34c759; } 
+        .card-vip { border-color: #ff3b30; border-width: 6px; } 
+        .card-euro { border-color: #5856d6; border-width: 6px; } 
+
+        .asin-badge { font-size: 24px; font-weight: 900; color: #1d1d1f; letter-spacing: -1px; }
+        .sales-badge { background: #f0fdf4; color: #166534; padding: 8px 16px; border-radius: 15px; font-size: 11px; font-weight: 900; }
+        .fav-icon { position: absolute; top: 28px; right: 28px; font-size: 28px; color: #eee; transition: 0.3s; cursor: pointer; z-index: 20; }
         .fav-active { color: var(--vip-red) !important; }
         
-        .action-btn { height: 60px; border-radius: 22px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 12px; font-weight: 900; text-transform: uppercase; transition: 0.2s; }
+        .action-btn { height: 60px; border-radius: 22px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 11px; font-weight: 900; text-transform: uppercase; transition: 0.2s; }
         .btn-amz { background: #000; color: #fff; flex: 1; }
-        .btn-oem { background: #f5f5f7; color: #000; border: 2px solid #eee; flex: 1.5; }
-        .btn-mail { background: #0071e3; color: #fff; width: 100%; margin-top: 18px; box-shadow: 0 12px 24px rgba(0, 113, 227, 0.3); font-size: 13px; }
+        .btn-oem { background: #f5f5f7; color: #000; border: 1px solid #eee; flex: 1.5; }
+        .btn-mail { background: #0071e3; color: #fff; width: 100%; margin-top: 18px; box-shadow: 0 12px 24px rgba(0, 113, 227, 0.3); }
         
         .nav-bar { position: fixed; bottom: 25px; left: 20px; right: 20px; height: 85px; background: rgba(0,0,0,0.96); backdrop-filter: blur(30px); border-radius: 45px; display: flex; justify-content: space-around; align-items: center; z-index: 4000; box-shadow: 0 25px 50px rgba(0,0,0,0.5); }
-        .nav-item { color: #555; font-size: 26px; } .nav-item.active { color: #fff; }
-        .cat-pill { flex: 0 0 auto; padding: 12px 24px; background: #fff; border-radius: 25px; font-size: 11px; font-weight: 800; text-transform: uppercase; cursor: pointer; border: 1.5px solid #eee; transition: 0.3s; }
-        .cat-pill.active { background: #000; color: #fff; border-color: #000; }
+        .nav-item { color: #555; font-size: 26px; cursor: pointer; } .nav-item.active { color: #fff; }
         ::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body class="pb-44">
     <div class="hero-banner">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Night_View_of_Office_Buildings_in_Shenzhen_Bay.jpg" class="hero-img">
+        <img src="https://images.unsplash.com/photo-1523395211542-7c3ff17b544d?q=80&w=1200" class="hero-img">
         <div class="relative z-10">
-            <p class="text-blue-400 text-[10px] font-black uppercase tracking-[0.5em] mb-3">Shenzhen Master Edition</p>
-            <h1 class="hero-title">Worldshop<br>Supreme.</h1>
+            <p class="text-blue-400 text-[9px] font-black uppercase tracking-[0.5em] mb-3 italic">Worldshop Master Hub</p>
+            <h1 class="hero-title">Sourcing<br>Machine.</h1>
         </div>
     </div>
 
     <div class="mt-8 px-6">
         <div class="flex gap-3 overflow-x-auto pb-6 no-scrollbar" id="catBar">
             <div class="cat-pill active" onclick="filterCat('all', this)">30 Pépites</div>
-            <div class="cat-pill" style="background:#fee2e2" onclick="filterCat('VIP', this)"><i class="fas fa-crown"></i> Hub VIP (10)</div>
+            <div class="cat-pill" style="background:#fee2e2" onclick="filterCat('VIP', this)"><i class="fas fa-crown"></i> Hub VIP (SSD/SD)</div>
+            <div class="cat-pill" style="background:#e5e7eb" onclick="filterCat('EURO', this)"><i class="fas fa-euro-sign"></i> Destockeurs Europe</div>
             <div class="cat-pill" onclick="filterCat('Gaming', this)">Gaming</div>
             <div class="cat-pill" onclick="filterCat('Auto', this)">Auto</div>
             <div class="cat-pill" onclick="filterCat('Cuisine', this)">Cuisine</div>
@@ -74,72 +73,62 @@
 
     <script>
         const allGems = [
-            // HUB VIP (10)
-            {"asin":"B0B7NTY2S6","cat":"VIP","name":"SanDisk Ultra 128GB MicroSD","price":24.99,"sales":2500,"buy":8.20,"vendor":"kissin"},
+            // DESTOCKEURS EUROPE (Hub Spécial)
+            {"asin":"LDLC PRO","cat":"EURO","name":"LDLC Pro France - High-Tech Wholesaler","price":0,"sales":"PRO","buy":0,"vendor":"ldlc-pro.com"},
+            {"asin":"IT-SCOPE","cat":"EURO","name":"IT-Scope EU - B2B IT Platform","price":0,"sales":"PRO","buy":0,"vendor":"itscope.com"},
+            {"asin":"ALSO","cat":"EURO","name":"ALSO Cloud / Destockage Europe","price":0,"sales":"PRO","buy":0,"vendor":"also.com"},
+            {"asin":"TECH DATA","cat":"EURO","name":"TD SYNNEX - Global Wholesaler","price":0,"sales":"PRO","buy":0,"vendor":"tdsynnex.com"},
+            // HUB VIP (SAMSUNG/SANDISK/BRAUN)
+            {"asin":"B0B7CKVCCV","cat":"VIP","name":"Samsung 990 PRO 1TB NVMe","price":119.00,"sales":3500,"buy":55.00,"vendor":"samsung-oem"},
+            {"asin":"B09X7DNF6G","cat":"VIP","name":"SanDisk Extreme PRO 128GB","price":44.69,"sales":800,"buy":16.50,"vendor":"kissin"},
+            {"asin":"B01BGOI9Z8","cat":"VIP","name":"Braun Series 9 Electric Shaver","price":179.00,"sales":1200,"buy":95.00,"vendor":"braun-distrib"},
             {"asin":"B0C8HHFX3C","cat":"VIP","name":"Kingston NV2 1TB SSD","price":75.00,"sales":1800,"buy":32.00,"vendor":"szjtcc"},
-            {"asin":"B0B7CKVCCV","cat":"VIP","name":"Samsung 990 PRO 1TB SSD","price":115.00,"sales":3500,"buy":55.00,"vendor":"samsung-oem"},
-            {"asin":"B0B7COV3QH","cat":"VIP","name":"Samsung 990 PRO 2TB SSD","price":195.00,"sales":1200,"buy":98.00,"vendor":"samsung-oem"},
-            {"asin":"B09X7DNF6G","cat":"VIP","name":"SanDisk Extreme PRO 128G","price":44.69,"sales":800,"buy":16.50,"vendor":"kissin"},
-            {"asin":"B0DCW8FKK9","cat":"VIP","name":"SanDisk Ultra Go Dual USB","price":26.99,"sales":1000,"buy":10.50,"vendor":"usky"},
-            {"asin":"B07NY23WBG","cat":"VIP","name":"SanDisk High Endurance SD","price":34.49,"sales":1200,"buy":12.80,"vendor":"oscoousb"},
-            {"asin":"B07YGZ7JD5","cat":"VIP","name":"Kingston Canvas Plus 128G","price":23.49,"sales":1500,"buy":7.50,"vendor":"oscoousb"},
-            {"asin":"B0B7NVV55M","cat":"VIP","name":"SanDisk SD Twin Pack Elite","price":50.49,"sales":300,"buy":21.50,"vendor":"kissin"},
-            {"asin":"B08G8T9B4L","cat":"VIP","name":"Samsung T7 Portable 1TB","price":125.00,"sales":900,"buy":62.00,"vendor":"samsung-oem"},
-            // GAMING (10 REAL ASINS)
-            {"asin":"B006MJS09G","cat":"Gaming","name":"APM Wired Keyboard Pro","price":9.99,"sales":750,"buy":3.50,"vendor":"rkgaming"},
-            {"asin":"B0BGPZ3FWZ","cat":"Gaming","name":"SPYCO Action Mouse Pro","price":7.99,"sales":1200,"buy":2.80,"vendor":"togran"},
-            {"asin":"B0GYD56QDW","cat":"Gaming","name":"Link Dream Headphone Stand","price":14.90,"sales":1200,"buy":3.80,"vendor":"linkdream"},
-            {"asin":"B08DKS8W2Z","cat":"Gaming","name":"Quntis Monitor Light Bar","price":39.99,"sales":1100,"buy":14.50,"vendor":"highstar"},
-            {"asin":"B01N229Y9Z","cat":"Gaming","name":"Pack Clavier Souris RGB","price":29.99,"sales":850,"buy":10.50,"vendor":"togran"},
-            {"asin":"B00JX1ZS5O","cat":"Gaming","name":"Sabrent 4-Port USB Hub","price":18.50,"sales":1100,"buy":6.20,"vendor":"csjmax"},
-            {"asin":"B07D373B25","cat":"Gaming","name":"Syncwire Cable Clips Pack","price":9.99,"sales":2500,"buy":1.90,"vendor":"syncwire"},
-            {"asin":"B07GS6ZB7T","cat":"Gaming","name":"Logitech G502 HERO Mouse","price":39.47,"sales":2100,"buy":14.00,"vendor":"togran"},
-            {"asin":"B07W5JKFQC","cat":"Gaming","name":"Logitech G203 LIGHTSYNC","price":26.68,"sales":1800,"buy":9.20,"vendor":"togran"},
-            {"asin":"B0892D9F2G","cat":"Gaming","name":"Casque Soundcore Life Q30","price":79.99,"sales":1500,"buy":35.00,"vendor":"szlinx"},
-            // AUTO (10 REAL ASINS)
-            {"asin":"B09VCCV22S","cat":"Auto","name":"ELM327 OBD2 Bluetooth","price":7.99,"sales":1400,"buy":2.50,"vendor":"huameide"},
-            {"asin":"B07QC6BVVW","cat":"Auto","name":"Autel AP200 Bluetooth","price":69.00,"sales":600,"buy":31.00,"vendor":"autel"},
-            {"asin":"B007XE8C74","cat":"Auto","name":"Autel AL319 OBD2 Engine","price":35.99,"sales":1200,"buy":14.50,"vendor":"autel"},
-            {"asin":"B01G5K6GQA","cat":"Auto","name":"Ancel AD310 Classic Scan","price":35.99,"sales":1500,"buy":13.00,"vendor":"ancelobd"},
-            {"asin":"B07QR4Q63Z","cat":"Auto","name":"AstroAI Air Compressor","price":45.99,"sales":1800,"buy":18.00,"vendor":"yyliuyang"},
-            {"asin":"B00SP4PF04","cat":"Auto","name":"AstroAI Digital Tire Gauge","price":12.99,"sales":2200,"buy":3.50,"vendor":"yyliuyang"},
-            {"asin":"B085DMCH6S","cat":"Auto","name":"Lamicall Phone Mount Moto","price":19.99,"sales":1500,"buy":5.20,"vendor":"lamicall"},
-            {"asin":"B07XJ1N4W2","cat":"Auto","name":"Favoto Motorcycle Cover","price":34.50,"sales":400,"buy":11.00,"vendor":"hzguard"},
-            {"asin":"B01N10S80B","cat":"Auto","name":"Expandable Cable Sleeve","price":16.50,"sales":2200,"buy":4.20,"vendor":"wellcoint"},
-            {"asin":"B07Y8S6S5S","cat":"Auto","name":"Backseat Car Organizer","price":22.90,"sales":900,"buy":7.00,"vendor":"hzguard"},
-            // CUISINE (10 REAL ASINS)
-            {"asin":"B0C74684ZR","cat":"Cuisine","name":"Digital Kitchen Scale 10kg","price":9.99,"sales":3000,"buy":3.90,"vendor":"thermopro"},
-            {"asin":"B07CB8JG21","cat":"Cuisine","name":"ThermoPro TP01S Thermom.","price":7.99,"sales":3500,"buy":2.50,"vendor":"thermopro"},
-            {"asin":"B0113UZJE2","cat":"Cuisine","name":"Etekcity Digital Scale 5kg","price":18.99,"sales":2500,"buy":6.50,"vendor":"vesync"},
-            {"asin":"B0DFM1JHJS","cat":"Cuisine","name":"Tefal Optiss White Scale","price":22.90,"sales":800,"buy":8.80,"vendor":"tefal"},
-            {"asin":"B076F3C185","cat":"Cuisine","name":"Bonsenkitchen Frother","price":12.50,"sales":2200,"buy":3.50,"vendor":"hongmeihome"},
-            {"asin":"B089K8L6N3","cat":"Cuisine","name":"Joseph Joseph Garlic Press","price":18.99,"sales":1500,"buy":6.00,"vendor":"angele"},
+            // GAMING (>30€ UNIQUE)
+            {"asin":"B0D3GZYN1P","cat":"Gaming","name":"RK Royal Kludge R75 Wireless","price":85.99,"sales":750,"buy":32.00,"vendor":"rkgaming"},
+            {"asin":"B0GHVWHRBQ","cat":"Gaming","name":"Ajazz AK820 Pro Mechanical","price":82.99,"sales":500,"buy":35.00,"vendor":"ajazz"},
+            {"asin":"B08DKS8W2Z","cat":"Gaming","name":"Quntis Computer Monitor Light","price":39.99,"sales":1100,"buy":14.50,"vendor":"highstar"},
+            {"asin":"B0892D9F2G","cat":"Gaming","name":"Anker Soundcore Life Q30","price":79.99,"sales":1500,"buy":35.00,"vendor":"szlinx"},
+            {"asin":"B0C8V49K6V","cat":"Gaming","name":"Link Dream Headphone Stand","price":34.50,"sales":890,"buy":12.00,"vendor":"linkdream"},
+            // AUTO (>30€ UNIQUE)
+            {"asin":"B07QC6BVVW","cat":"Auto","name":"Autel AP200 Bluetooth OBD2","price":69.00,"sales":600,"buy":31.00,"vendor":"autel"},
+            {"asin":"B007XE8C74","cat":"Auto","name":"Autel AL319 OBD2 Engine Red","price":39.99,"sales":1200,"buy":14.00,"vendor":"autel"},
+            {"asin":"B07QR4Q63Z","cat":"Auto","name":"AstroAI Air Compressor 150PSI","price":45.99,"sales":1800,"buy":18.00,"vendor":"yyliuyang"},
+            {"asin":"B01IX6DC98","cat":"Auto","name":"Autel AL539B 3-in-1 Scanner","price":109.00,"sales":400,"buy":45.00,"vendor":"autel"},
+            {"asin":"B07XJ1N4W2","cat":"Auto","name":"Favoto Motorcycle Cover XL","price":34.50,"sales":400,"buy":11.00,"vendor":"mei-ao"},
+            // CUISINE (>30€ UNIQUE)
+            {"asin":"B0113UZJE2","cat":"Cuisine","name":"Etekcity Digital Kitchen 5kg","price":32.70,"sales":500,"buy":12.00,"vendor":"vesync"},
             {"asin":"B088K8ZMXQ","cat":"Cuisine","name":"Salad Spinner 4-in-1 Pro","price":34.00,"sales":890,"buy":11.50,"vendor":"zgshuangma"},
-            {"asin":"B01F58S948","cat":"Cuisine","name":"Digital Measuring Spoon","price":12.99,"sales":890,"buy":3.20,"vendor":"qjscale"},
-            {"asin":"B07PTNZT75","cat":"Cuisine","name":"Kitchen Scale Stainless","price":11.99,"sales":3000,"buy":3.80,"vendor":"zswhitebird"},
-            {"asin":"B0098S8W5E","cat":"Cuisine","name":"Magnetic Kitchen Timer","price":8.99,"sales":1200,"buy":2.00,"vendor":"loease"}
+            {"asin":"B0C8HHFX3D","cat":"Cuisine","name":"Sous Vide Stick Precision","price":75.00,"sales":1200,"buy":28.00,"vendor":"bonsen"},
+            {"asin":"B07B4X8CWW","cat":"Cuisine","name":"Automatic Vacuum Sealer Pro","price":45.00,"sales":1400,"buy":18.00,"vendor":"bonsen"},
+            {"asin":"B0C9G6X8M2","cat":"Cuisine","name":"Digital Food Dehydrator 5-Tray","price":59.99,"sales":600,"buy":22.00,"vendor":"hongmeihome"}
         ];
         let favorites = JSON.parse(localStorage.getItem('ws_favs') || '[]');
         function renderGrid(data) {
             const grid = document.getElementById('gemGrid'); grid.innerHTML = '';
             data.forEach((gem) => {
                 const isFav = favorites.includes(gem.asin);
-                const colorMap = { 'Gaming': 'card-gaming', 'Auto': 'card-auto', 'Cuisine': 'card-cuisine', 'VIP': 'card-vip' };
+                const colorMap = { 'Gaming': 'card-gaming', 'Auto': 'card-auto', 'Cuisine': 'card-cuisine', 'VIP': 'card-vip', 'EURO': 'card-euro' };
                 grid.innerHTML += `<div class="data-card ${colorMap[gem.cat]}">
                     <i class="fas fa-heart fav-icon ${isFav?'fav-active':''}" onclick="toggleFav('${gem.asin}', this)"></i>
                     <div class="flex justify-between items-start mb-6">
                         <div><p class="asin-badge">${gem.asin}</p><p class="text-[12px] font-black text-slate-400 uppercase truncate w-48">${gem.name}</p></div>
                         <span class="sales-badge">${gem.sales} V/M</span>
                     </div>
-                    <div class="grid grid-cols-2 gap-4 mb-6 bg-slate-50 p-5 rounded-3xl">
-                        <div><p class="text-[9px] font-black text-slate-400 uppercase">Prix Amazon</p><p class="text-2xl font-black text-blue-600">${gem.price}€</p></div>
-                        <div class="text-right"><p class="text-[9px] font-black text-slate-400 uppercase">Achat Max</p><p class="text-2xl font-black text-emerald-600">${gem.buy}€</p></div>
-                    </div>
-                    <div class="flex gap-3">
-                        <a href="https://www.amazon.fr/dp/${gem.asin}" target="_blank" class="action-btn btn-amz"><i class="fab fa-amazon text-lg"></i></a>
-                        <a href="https://${gem.vendor}.en.alibaba.com/productlist.html" target="_blank" class="action-btn btn-oem">Showroom</a>
-                    </div>
-                    <button onclick="sendMail('${gem.asin}', '${gem.name}')" class="action-btn btn-mail">Email Worldshop Team (Julie)</button>
+                    ${gem.cat === 'EURO' ? `
+                        <div class="flex gap-3">
+                            <a href="https://${gem.vendor}" target="_blank" class="action-btn btn-mail" style="margin-top:0">Ouvrir Portail Grossiste Pro</a>
+                        </div>
+                    ` : `
+                        <div class="grid grid-cols-2 gap-4 mb-6 bg-slate-50 p-5 rounded-3xl">
+                            <div><p class="text-[9px] font-black text-slate-400 uppercase">Amazon.fr</p><p class="text-2xl font-black text-blue-600">${gem.price}€</p></div>
+                            <div class="text-right"><p class="text-[9px] font-black text-slate-400 uppercase">Achat Max</p><p class="text-2xl font-black text-emerald-600">${gem.buy}€</p></div>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="https://www.amazon.fr/dp/${gem.asin}" target="_blank" class="action-btn btn-amz"><i class="fab fa-amazon text-lg"></i></a>
+                            <a href="https://${gem.vendor}.en.alibaba.com/productlist.html" target="_blank" class="action-btn btn-oem">Showroom</a>
+                        </div>
+                        <button onclick="sendMail('${gem.asin}', '${gem.name}')" class="action-btn btn-mail">Email Worldshop Team (Julie)</button>
+                    `}
                 </div>`;
             });
         }
@@ -151,20 +140,20 @@
         }
         function filterCat(cat, el) {
             document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active')); el.classList.add('active');
-            if(cat === 'all') renderGrid(allGems.filter(g => g.cat !== 'VIP'));
+            if(cat === 'all') renderGrid(allGems.filter(g => g.cat !== 'VIP' && g.cat !== 'EURO'));
             else renderGrid(allGems.filter(g => g.cat === cat));
         }
         function sendMail(asin, name) {
             const amzLink = `https://www.amazon.fr/dp/${asin}`;
-            const body = `Dear Julie,\n\nThank you for your reply on Alibaba. To clarify: we are looking for BOTH options to compare:\n\n1. High Copy / OEM quality using original chipsets (the one we discussed to meet our price targets).\n2. 100% Original SanDisk/Kingston/Samsung cards.\n\nProduct: ${name}\nASIN: ${asin}\nAmazon Link: ${amzLink}\n\nOur goal is to maintain a 30% margin based on our cost analysis, so competitive pricing for the OEM/High Copy with original chipsets is our priority for weekly volume (50-100 pcs).\n\nPlease also confirm the sample cost and lead time for a test batch of 10-20 units total across these models.\n\nBest regards,\nWorldshop Team\nWhatsApp: +33664231515`;
+            const body = `Dear Julie,\n\nThank you for your reply on Alibaba. To clarify: we are looking for BOTH options to compare:\n\n1. High Copy / OEM quality using original chipsets (the one we discussed to meet our price targets).\n2. 100% Original cards/products.\n\nProduct: ${name}\nASIN: ${asin}\nAmazon Link: ${amzLink}\n\nOur goal is to maintain a 30% margin based on our cost analysis, so competitive pricing for the OEM/High Copy with original chipsets is our priority for weekly volume (50-100 pcs).\n\nPlease also confirm the sample cost and lead time for a test batch.\n\nBest regards,\nWorldshop Team\nWhatsApp: +33664231515`;
             window.location.href = `mailto:julie@factory.com?subject=OEM Inquiry - ASIN ${asin}&body=${encodeURIComponent(body)}`;
         }
         function switchView(view) {
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-            if(view === 'home') { document.getElementById('navHome').classList.add('active'); renderGrid(allGems.filter(g => g.cat !== 'VIP')); }
+            if(view === 'home') { document.getElementById('navHome').classList.add('active'); renderGrid(allGems.filter(g => g.cat !== 'VIP' && g.cat !== 'EURO')); }
             if(view === 'fav') { document.getElementById('navFav').classList.add('active'); renderGrid(allGems.filter(g => favorites.includes(g.asin))); }
         }
-        renderGrid(allGems.filter(g => g.cat !== 'VIP'));
+        renderGrid(allGems.filter(g => g.cat !== 'VIP' && g.cat !== 'EURO'));
     </script>
 </body>
 </html>
