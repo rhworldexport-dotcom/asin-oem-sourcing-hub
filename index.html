@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Worldshop Pro 10.0 - L'Intégrale</title>
+    <title>Worldshop Pro 11.0 - Supreme Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -11,30 +11,36 @@
         :root { --apple-blue: #0071e3; --vip-red: #ff3b30; --status-locked: #8e8e93; --status-progress: #ff9500; --status-unlocked: #34c759; }
         body { background-color: #fbfbfd; color: #1d1d1f; font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
         
+        /* Banner Shenzhen Skyline Master */
         .hero-banner { height: 320px; background: #000; position: relative; border-radius: 0 0 60px 60px; display: flex; align-items: flex-end; padding: 40px 30px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.3); }
         .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.85; filter: brightness(0.7) contrast(1.2); }
         .hero-title { font-size: 40px; font-weight: 900; color: #fff; line-height: 0.9; letter-spacing: -2px; position: relative; z-index: 10; font-style: italic; text-transform: uppercase; }
         
-        .data-card { background: #fff; border-radius: 40px; padding: 28px; border: 6px solid #f2f2f2; position: relative; box-shadow: 0 15px 40px rgba(0,0,0,0.06); transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); margin-bottom: 25px; }
+        /* Cartes Data 11.0 avec Contours Epais */
+        .data-card { background: #fff; border-radius: 40px; padding: 28px; border: 6px solid #f2f2f2; position: relative; box-shadow: 0 15px 40px rgba(0,0,0,0.06); transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); margin-bottom: 30px; }
         .data-card:active { transform: scale(0.96); }
+        
         .card-gaming { border-color: #0071e3; } .card-auto { border-color: #ff9f0a; } .card-cuisine { border-color: #34c759; }
-        .card-vip { border-color: #ff3b30; } .card-ungating { border-color: #5856d6; }
+        .card-vip { border-color: #ff3b30; border-width: 8px; } .card-ungating { border-color: #5856d6; border-width: 8px; }
         
         .status-badge { width: 100%; height: 45px; border-radius: 15px; font-size: 11px; font-weight: 900; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 15px; color: #fff; cursor: pointer; }
         .status-locked { background: var(--status-locked); } .status-progress { background: var(--status-progress); } .status-unlocked { background: var(--status-unlocked); }
 
-        .asin-badge { font-size: 24px; font-weight: 900; color: #1d1d1f; letter-spacing: -1px; }
+        .asin-badge { font-size: 24px; font-weight: 900; color: #1d1d1f; letter-spacing: -1.5px; }
         .sales-badge { background: #f0fdf4; color: #166534; padding: 8px 16px; border-radius: 15px; font-size: 11px; font-weight: 900; }
+        
+        .fav-icon { position: absolute; top: 28px; right: 28px; font-size: 32px; color: #eee; transition: 0.3s; cursor: pointer; z-index: 50; }
+        .fav-active { color: var(--vip-red) !important; }
         
         .modal-view { position: fixed; inset: 0; background: white; z-index: 5000; transform: translateY(100%); transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); overflow-y: auto; }
         .modal-active { transform: translateY(0); }
         .sa-panel { background: #f5f5f7; border-radius: 30px; padding: 20px; margin-bottom: 20px; border: 1px solid #eee; }
         
         .action-btn { height: 60px; border-radius: 22px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 11px; font-weight: 900; text-transform: uppercase; transition: 0.2s; cursor: pointer; }
+        .btn-amz { background: #000; color: #fff; width: 100%; }
+        .btn-oem { background: #fff; color: #000; border: 2px solid #eee; width: 100%; margin-top: 10px; }
         .btn-mail { background: var(--apple-blue); color: #fff; width: 100%; margin-top: 15px; box-shadow: 0 12px 24px rgba(0, 113, 227, 0.3); }
 
-        .nav-bar { position: fixed; bottom: 25px; left: 20px; right: 20px; height: 85px; background: rgba(0,0,0,0.96); backdrop-filter: blur(30px); border-radius: 45px; display: flex; justify-content: space-around; align-items: center; z-index: 4000; box-shadow: 0 25px 50px rgba(0,0,0,0.5); }
-        .nav-item { color: #555; font-size: 26px; cursor: pointer; } .nav-item.active { color: #fff; }
         .cat-pill { flex: 0 0 auto; padding: 12px 24px; background: #fff; border-radius: 25px; font-size: 11px; font-weight: 800; text-transform: uppercase; cursor: pointer; border: 2px solid #eee; transition: 0.3s; }
         .cat-pill.active { background: #000; color: #fff; }
         ::-webkit-scrollbar { display: none; }
@@ -44,15 +50,15 @@
     <div class="hero-banner">
         <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Night_View_of_Office_Buildings_in_Shenzhen_Bay.jpg" class="hero-img">
         <div class="relative z-10">
-            <p class="text-blue-400 text-[9px] font-black uppercase tracking-[0.5em] mb-3 italic">Maison Worldshop Elite</p>
-            <h1 class="hero-title">Sourcing<br>Machine 10.0</h1>
+            <p class="text-blue-400 text-[9px] font-black uppercase tracking-[0.5em] mb-3 italic">Worldshop Master 11.0</p>
+            <h1 class="hero-title">Sourcing<br>Intelligence.</h1>
         </div>
     </div>
 
     <div class="mt-8 px-6 flex gap-3 overflow-x-auto no-scrollbar" id="catBar">
-        <div class="cat-pill active" onclick="filterCat('all', this)">Pépites (30)</div>
-        <div class="cat-pill" style="background:#e5e7eb" onclick="filterCat('UNGATING', this)"><i class="fas fa-unlock-alt"></i> Déblocage</div>
-        <div class="cat-pill" style="background:#fee2e2" onclick="filterCat('VIP', this)"><i class="fas fa-crown"></i> VIP Hub</div>
+        <div class="cat-pill active" onclick="filterCat('all', this)">Pépites Mix</div>
+        <div class="cat-pill" style="background:#e5e7eb" onclick="filterCat('UNGATING', this)"><i class="fas fa-unlock-alt"></i> Hub Déblocage</div>
+        <div class="cat-pill" style="background:#fee2e2" onclick="filterCat('VIP', this)"><i class="fas fa-crown"></i> Hub VIP (10)</div>
         <div class="cat-pill" onclick="filterCat('Gaming', this)">Gaming</div>
         <div class="cat-pill" onclick="filterCat('Auto', this)">Auto</div>
         <div class="cat-pill" onclick="filterCat('Cuisine', this)">Cuisine</div>
@@ -60,21 +66,22 @@
 
     <div class="px-6 space-y-1 mt-8" id="gemGrid"></div>
 
+    <!-- Modal Details Master -->
     <div id="detailsModal" class="modal-view p-8 pb-32">
         <div class="flex justify-between items-center mb-10">
             <div onclick="closeModal()" class="w-14 h-14 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-400 border"><i class="fas fa-times text-xl"></i></div>
-            <span id="modalTypeBadge" class="bg-blue-50 text-blue-600 text-[10px] font-black px-5 py-2.5 rounded-full uppercase border italic">✓ GlobalSeller Verified</span>
+            <span id="modalTypeBadge" class="bg-blue-50 text-blue-600 text-[10px] font-black px-5 py-2.5 rounded-full uppercase border italic">✓ Elite Match</span>
         </div>
         <div class="mb-10"><p id="modalAsinText" class="asin-badge mb-1">---</p><h2 id="modalName" class="text-xl font-bold text-slate-500 uppercase truncate">---</h2></div>
         <div class="sa-panel shadow-inner">
-            <div class="flex justify-between py-4 border-b border-slate-200"><span class="text-xs font-bold text-slate-500 uppercase">Ventes / Mois</span><span id="modalSales" class="text-emerald-600 font-black">---</span></div>
-            <div class="flex justify-between py-4"><span class="text-xs font-bold text-slate-500 uppercase">Catégorie</span><span id="modalCat" class="uppercase font-black text-blue-600">---</span></div>
+            <div class="flex justify-between py-4 border-b border-slate-200"><span class="text-xs font-bold text-slate-500 uppercase">Volume / Mois</span><span id="modalSales" class="text-emerald-600 font-black">---</span></div>
+            <div class="flex justify-between py-4 border-none"><span class="text-xs font-bold text-slate-500 uppercase">Catégorie</span><span id="modalCat" class="uppercase font-black text-blue-600">---</span></div>
         </div>
         <div class="bg-black text-white rounded-[45px] p-8 mb-8 shadow-2xl relative overflow-hidden">
             <div class="absolute top-0 right-0 w-32 h-32 bg-blue-600 opacity-20 blur-3xl"></div>
             <div class="grid grid-cols-1 gap-4 mb-4 relative z-10">
-                <a id="amzLink" target="_blank" class="action-btn bg-white/10 border border-white/20"><i class="fab fa-amazon text-orange-400"></i> Fiche Amazon.fr</a>
-                <a id="oemLink" target="_blank" class="action-btn bg-white/10 border border-white/20"><i class="fas fa-industry text-blue-400"></i> Usine OEM Alibaba</a>
+                <a id="amzLink" target="_blank" class="action-btn bg-white/10 border border-white/20"><i class="fab fa-amazon text-orange-400"></i> Voir Amazon.fr</a>
+                <a id="oemLink" target="_blank" class="action-btn bg-white/10 border border-white/20"><i class="fas fa-industry text-blue-400"></i> Boutique Usine OEM</a>
                 <a id="ungatingLink" target="_blank" class="action-btn bg-blue-600/30 border border-blue-500/40" style="display:none"><i class="fas fa-euro-sign text-green-400"></i> Grossiste Déblocage EU</a>
             </div>
         </div>
@@ -101,21 +108,45 @@
             {"asin":"B09TNRRK2Q","cat":"UNGATING","name":"Nettoyeur Pattes Chien","sales":"+80","vendor":"https://www.alibaba.com/product-detail/2-in-1-Silicone-Dog-Paw_1600687244336.html","ungating":"https://www.polytrans.fr/marques/trixie/","amz":"https://www.amazon.fr/dp/B09TNRRK2Q"},
             {"asin":"B0D5D13ZJ2","cat":"UNGATING","name":"Sacs Silicone (Lot 10)","sales":"+100","vendor":"https://www.alibaba.com/product-detail/Reusable-Storage-Bags-10-Pack-PEVA_1600117967954.html","ungating":"https://www.orderchamp.com/fr/brand/lekue","amz":"https://www.amazon.fr/dp/B0D5D13ZJ2"},
             {"asin":"B09QX5S925","cat":"UNGATING","name":"Sous-main Cuir 90x40","sales":"+400","vendor":"https://www.alibaba.com/product-detail/90-40cm-Waterproof-Premium-Desk-Mat_1601456430982.html","ungating":"https://www.vikingdirect.fr/fr/logitech-m-802","amz":"https://www.amazon.fr/dp/B09QX5S925"},
-            // GAMING (10 ORIGINE)
-            {"asin":"B0F1YS92S2","cat":"Gaming","name":"Logitech PRO X 2 Mouse","sales":450,"vendor":"togran.en.alibaba.com","amz":"https://www.amazon.fr/dp/B0F1YS92S2"},
-            {"asin":"B07GS6ZB7T","cat":"Gaming","name":"Logitech G502 HERO","sales":2100,"vendor":"togran.en.alibaba.com","amz":"https://www.amazon.fr/dp/B07GS6ZB7T"},
-            {"asin":"B07W5JKFQC","cat":"Gaming","name":"Logitech G203 LIGHTSYNC","sales":1800,"vendor":"togran.en.alibaba.com","amz":"https://www.amazon.fr/dp/B07W5JKFQC"},
-            {"asin":"B0GYD56QDW","cat":"Gaming","name":"Headphone Stand Elite","sales":1200,"vendor":"linkdream.en.alibaba.com","amz":"https://www.amazon.fr/dp/B0GYD56QDW"},
+            // GAMING (10 UNIQUES)
+            {"asin":"B0D3GZYN1P","cat":"Gaming","name":"RK Royal Kludge R75","sales":750,"vendor":"rkgaming.en.alibaba.com","amz":"https://www.amazon.fr/dp/B0D3GZYN1P"},
+            {"asin":"B0CHM6L8M2","cat":"Gaming","name":"Ajazz AK820 Pro Keyboard","sales":500,"vendor":"ajazz.en.alibaba.com","amz":"https://www.amazon.fr/dp/B0CHM6L8M2"},
             {"asin":"B08DKS8W2Z","cat":"Gaming","name":"Monitor Light Bar Pro","sales":1100,"vendor":"highstar.en.alibaba.com","amz":"https://www.amazon.fr/dp/B08DKS8W2Z"},
-            // AUTO (10 ORIGINE)
+            {"asin":"B0GYD56QDW","cat":"Gaming","name":"Headphone Stand Elite","sales":1200,"vendor":"linkdream.en.alibaba.com","amz":"https://www.amazon.fr/dp/B0GYD56QDW"},
+            {"asin":"B0892D9F2G","cat":"Gaming","name":"Casque ANC Wireless","sales":850,"vendor":"ebluetimes.en.alibaba.com","amz":"https://www.amazon.fr/dp/B0892D9F2G"},
+            {"asin":"B07W5JKFQC","cat":"Gaming","name":"Logitech G203 LIGHTSYNC","sales":1800,"vendor":"togran.en.alibaba.com","amz":"https://www.amazon.fr/dp/B07W5JKFQC"},
+            {"asin":"B07GS6ZB7T","cat":"Gaming","name":"Logitech G502 HERO","sales":2100,"vendor":"togran.en.alibaba.com","amz":"https://www.amazon.fr/dp/B07GS6ZB7T"},
+            {"asin":"B00JX1ZS5O","cat":"Gaming","name":"Sabrent 4-Port USB Hub","sales":1100,"vendor":"csjmax.en.alibaba.com","amz":"https://www.amazon.fr/dp/B00JX1ZS5O"},
+            {"asin":"B07D373B25","cat":"Gaming","name":"Cable Clips Manager Pack","sales":2500,"vendor":"syncwire.en.alibaba.com","amz":"https://www.amazon.fr/dp/B07D373B25"},
+            {"asin":"B09PQ1DCLK","cat":"Gaming","name":"GoPro 50-in-1 Kit Pro","sales":620,"vendor":"puluz.en.alibaba.com","amz":"https://www.amazon.fr/dp/B09PQ1DCLK"},
+            // AUTO (10 UNIQUES)
             {"asin":"B07QC6BVVW","cat":"Auto","name":"Autel AP200 Bluetooth","sales":500,"vendor":"autel.en.alibaba.com","amz":"https://www.amazon.fr/dp/B07QC6BVVW"},
-            {"asin":"B007XE8C74","cat":"Auto","name":"Autel AL319 OBD2","sales":1200,"vendor":"autel.en.alibaba.com","amz":"https://www.amazon.fr/dp/B007XE8C74"},
-            // CUISINE (10 ORIGINE)
-            {"asin":"B0113UZJE2","cat":"Cuisine","name":"Digital Scale 5kg Pro","sales":2500,"vendor":"thermopro.en.alibaba.com","amz":"https://www.amazon.fr/dp/B0113UZJE2"},
-            {"asin":"B00XN247V2","cat":"Cuisine","name":"Meat Thermometer Elite","sales":3500,"vendor":"thermopro.en.alibaba.com","amz":"https://www.amazon.fr/dp/B00XN247V2"},
-            // VIP HUB (10)
-            {"asin":"B0B9C3ZVHR","cat":"VIP","name":"Samsung 990 PRO 1TB","sales":3500,"vendor":"samsung-oem.en.alibaba.com","amz":"https://www.amazon.fr/dp/B0B9C3ZVHR"},
-            {"asin":"B0B7NTY2S6","cat":"VIP","name":"SanDisk Ultra 128GB","sales":2500,"vendor":"kissin.en.alibaba.com","amz":"https://www.amazon.fr/dp/B0B7NTY2S6"}
+            {"asin":"B007XE8C74","cat":"Auto","name":"Autel AL319 OBD2 Red","sales":1200,"vendor":"autel.en.alibaba.com","amz":"https://www.amazon.fr/dp/B007XE8C74"},
+            {"asin":"B01G5K6GQA","cat":"Auto","name":"Ancel AD310 Diagnostic","sales":1500,"vendor":"ancelobd.en.alibaba.com","amz":"https://www.amazon.fr/dp/B01G5K6GQA"},
+            {"asin":"B07QR4Q63Z","cat":"Auto","name":"AstroAI Air Compressor","sales":1800,"vendor":"yyliuyang.en.alibaba.com","amz":"https://www.amazon.fr/dp/B07QR4Q63Z"},
+            {"asin":"B00SP4PF04","cat":"Auto","name":"Digital Tire Gauge Pro","sales":2200,"vendor":"yyliuyang.en.alibaba.com","amz":"https://www.amazon.fr/dp/B00SP4PF04"},
+            {"asin":"B085DMCH6S","cat":"Auto","name":"Lamicall Phone Mount Moto","sales":1500,"vendor":"lamicall.en.alibaba.com","amz":"https://www.amazon.fr/dp/B085DMCH6S"},
+            {"asin":"B07XJ1N4W2","cat":"Auto","name":"Favoto Motorcycle Cover","sales":400,"vendor":"hzguard.en.alibaba.com","amz":"https://www.amazon.fr/dp/B07XJ1N4W2"},
+            {"asin":"B01N10S80B","cat":"Auto","name":"Expandable Cable Sleeve","sales":2200,"vendor":"wellcoint.en.alibaba.com","amz":"https://www.amazon.fr/dp/B01N10S80B"},
+            {"asin":"B00O9S01A8","cat":"Auto","name":"Veepeak Mini OBD2 Blue","sales":1400,"vendor":"huameide.en.alibaba.com","amz":"https://www.amazon.fr/dp/B00O9S01A8"},
+            {"asin":"B07Y8S6S5S","cat":"Auto","name":"Car Seat Organizer Luxe","sales":900,"vendor":"hzguard.en.alibaba.com","amz":"https://www.amazon.fr/dp/B07Y8S6S5S"},
+            // CUISINE (10 UNIQUES)
+            {"asin":"B0113UZJE2","cat":"Cuisine","name":"Etekcity Digital Scale","sales":2500,"vendor":"camry.en.alibaba.com","amz":"https://www.amazon.fr/dp/B0113UZJE2"},
+            {"asin":"B0DFM1JHJS","cat":"Cuisine","name":"Tefal Optiss White Scale","sales":800,"vendor":"tefal.en.alibaba.com","amz":"https://www.amazon.fr/dp/B0DFM1JHJS"},
+            {"asin":"B00XN247V2","cat":"Cuisine","name":"ThermoPro TP19 Meat Probe","sales":3500,"vendor":"szecare.en.alibaba.com","amz":"https://www.amazon.fr/dp/B00XN247V2"},
+            {"asin":"B076F3C185","cat":"Cuisine","name":"Bonsenkitchen Frother","sales":2200,"vendor":"hongmeihome.en.alibaba.com","amz":"https://www.amazon.fr/dp/B076F3C185"},
+            {"asin":"B089K8L6N3","cat":"Cuisine","name":"Joseph Joseph Garlic Press","sales":1500,"vendor":"wylemeng.en.alibaba.com","amz":"https://www.amazon.fr/dp/B089K8L6N3"},
+            {"asin":"B088K8ZMXQ","cat":"Cuisine","name":"Salad Spinner 4-in-1","sales":890,"vendor":"zgshuangma.en.alibaba.com","amz":"https://www.amazon.fr/dp/B088K8ZMXQ"},
+            {"asin":"B01F58S948","cat":"Cuisine","name":"Digital Measuring Spoon","sales":890,"vendor":"qjscale.en.alibaba.com","amz":"https://www.amazon.fr/dp/B01F58S948"},
+            {"asin":"B07PTNZT75","cat":"Cuisine","name":"Kitchen Scale Stainless","sales":3000,"vendor":"zswhitebird.en.alibaba.com","amz":"https://www.amazon.fr/dp/B07PTNZT75"},
+            {"asin":"B01LXO8T93","cat":"Cuisine","name":"Milk Frother Elite Master","sales":2200,"vendor":"cnxyydz.en.alibaba.com","amz":"https://www.amazon.fr/dp/B01LXO8T93"},
+            {"asin":"B0098S8W5E","cat":"Cuisine","name":"Magnetic Kitchen Timer","sales":1200,"vendor":"loease.en.alibaba.com","amz":"https://www.amazon.fr/dp/B0098S8W5E"},
+            // HUB VIP (10)
+            {"asin":"B0B9C3ZVHR","cat":"VIP","name":"Samsung 990 PRO 1TB SSD","sales":3500,"vendor":"samsung-oem.en.alibaba.com","amz":"https://amazon.fr/dp/B0B9C3ZVHR"},
+            {"asin":"B0B9C4DKKG","cat":"VIP","name":"Samsung 990 PRO 2TB SSD","sales":1200,"vendor":"samsung-oem.en.alibaba.com","amz":"https://amazon.fr/dp/B0B9C4DKKG"},
+            {"asin":"B0B7NTY2S6","cat":"VIP","name":"SanDisk Ultra 128GB SD","sales":2500,"vendor":"kissin.en.alibaba.com","amz":"https://amazon.fr/dp/B0B7NTY2S6"},
+            {"asin":"B07YGZ7JD5","cat":"VIP","name":"Kingston Canvas Plus 128G","sales":1500,"vendor":"oscoousb.en.alibaba.com","amz":"https://amazon.fr/dp/B07YGZ7JD5"},
+            {"asin":"B01BGOI9Z8","cat":"VIP","name":"Braun Series 9 Pro Shaver","sales":1200,"vendor":"braun-distrib.en.alibaba.com","amz":"https://amazon.fr/dp/B01BGOI9Z8"}
         ];
 
         let favorites = JSON.parse(localStorage.getItem('ws_favs_vFinal') || '[]');
@@ -127,14 +158,15 @@
                 const isFav = favorites.includes(gem.asin);
                 const currentStatus = statusDB[gem.asin] || 'Bloqué';
                 const statusClass = currentStatus === 'Bloqué' ? 'status-locked' : (currentStatus === 'En cours' ? 'status-progress' : 'status-unlocked');
-                grid.innerHTML += `<div class="data-card card-${gem.cat.toLowerCase()}" onclick="openDetails('${gem.asin}')">
-                    <i class="fas fa-heart fav-btn ${isFav?'fav-active':''}" onclick="toggleFav('${gem.asin}', this, event)"></i>
-                    <div class="flex justify-between items-start mb-4">
-                        <div><p class="asin-badge">${gem.asin.substring(0,10)}</p><p class="text-[12px] font-black text-slate-400 uppercase truncate w-48">${gem.name}</p></div>
-                        <span class="sales-badge">${gem.sales} V/M</span>
-                    </div>
-                    ${gem.cat === 'UNGATING' ? `<div class="status-badge ${statusClass}" onclick="cycleStatus('${gem.asin}', this, event)">${currentStatus}</div>` : ''}
-                </div>`;
+                grid.innerHTML += `
+                    <div class="data-card card-${gem.cat.toLowerCase()}" onclick="openDetails('${gem.asin}')">
+                        <i class="fas fa-heart fav-icon ${isFav?'fav-active':''}" onclick="toggleFav('${gem.asin}', this, event)"></i>
+                        <div class="flex justify-between items-start mb-4">
+                            <div><p class="asin-badge">${gem.asin.substring(0,10)}</p><p class="text-[12px] font-black text-slate-400 uppercase truncate w-48">${gem.name}</p></div>
+                            <span class="sales-badge">${gem.sales} V/M</span>
+                        </div>
+                        ${gem.cat === 'UNGATING' ? `<div class="status-badge ${statusClass}" onclick="cycleStatus('${gem.asin}', this, event)">${currentStatus}</div>` : ''}
+                    </div>`;
             });
         }
 
@@ -145,6 +177,13 @@
             statusDB[asin] = next; localStorage.setItem('ws_ungating_stats', JSON.stringify(statusDB));
             el.className = `status-badge ${next === 'Bloqué' ? 'status-locked' : (next === 'En cours' ? 'status-progress' : 'status-unlocked')}`;
             el.innerText = next;
+        }
+
+        function toggleFav(asin, el, e) {
+            e.stopPropagation();
+            if(favorites.includes(asin)) { favorites = favorites.filter(a => a !== asin); el.classList.remove('fav-active'); }
+            else { favorites.push(asin); el.classList.add('fav-active'); }
+            localStorage.setItem('ws_favs_vFinal', JSON.stringify(favorites));
         }
 
         function openDetails(asin) {
@@ -161,13 +200,6 @@
             document.body.style.overflow = 'hidden';
         }
 
-        function toggleFav(asin, el, e) {
-            e.stopPropagation();
-            if(favorites.includes(asin)) { favorites = favorites.filter(a => a !== asin); el.classList.remove('fav-active'); }
-            else { favorites.push(asin); el.classList.add('fav-active'); }
-            localStorage.setItem('ws_favs_vFinal', JSON.stringify(favorites));
-        }
-
         function filterCat(cat, el) {
             document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active')); el.classList.add('active');
             if(cat === 'all') renderGrid(allGems.filter(g => g.cat !== 'VIP' && g.cat !== 'UNGATING'));
@@ -175,8 +207,9 @@
         }
 
         function sendStrategicMail() {
-            const gem = allGems.find(g => g.asin === document.getElementById('modalAsinText').innerText);
-            const body = `Dear Julie, we need OEM quality for ${gem.name} (ASIN: ${gem.asin}). Amazon Link: ${gem.amz}. Best regards, Worldshop Team. WhatsApp: +33664231515`;
+            const asin = document.getElementById('modalAsinText').innerText;
+            const gem = allGems.find(g => g.asin === asin);
+            const body = `Dear Julie,\n\nWe need OEM quality for ${gem.name} (ASIN: ${gem.asin}). Amazon Link: ${gem.amz}. Best regards, Worldshop Team. WhatsApp: +33664231515`;
             window.location.href = `mailto:julie@factory.com?subject=Inquiry ${gem.asin}&body=${encodeURIComponent(body)}`;
         }
 
