@@ -57,6 +57,13 @@
     h1 em { font-style: normal; color: var(--mint-strong); }
     .hero-copy { color: var(--muted); max-width: 465px; line-height: 1.7; font-size: 16px; }
     .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+    .history-nav { display: flex; align-items: center; gap: 9px; margin-top: 15px; color: var(--muted); font-size: 13px; }
+    .history-nav button { color: var(--ink); background: transparent; padding: 0; font-weight: 800; text-decoration: underline; text-underline-offset: 4px; }
+    .history-badge { min-width: 22px; padding: 3px 7px; border-radius: 99px; background: var(--sage); color: var(--mint-strong); font-size: 11px; font-weight: 800; text-align: center; }
+    .history-head { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin: 25px 0 22px; }
+    .history-head h2 { font: 800 25px Manrope, sans-serif; letter-spacing: -.06em; margin: 7px 0 0; }
+    .history-total { color: var(--muted); font-size: 13px; font-weight: 700; }
+    .history-total strong { color: var(--ink); font: 800 18px Manrope, sans-serif; margin-left: 5px; }
     .btn { min-height: 52px; padding: 0 20px; border-radius: 15px; font-weight: 800; transition: transform .2s, box-shadow .2s, background .2s; display: inline-flex; align-items: center; justify-content: center; gap: 9px; }
     .btn:hover { transform: translateY(-2px); }
     .btn-primary { background: var(--ink); color: #fff; box-shadow: 0 14px 24px rgba(24,50,44,.17); }
@@ -200,6 +207,7 @@
             <button class="btn btn-primary" data-action="new-mission">+ Nouvelle mission</button>
             <button class="btn btn-soft" data-action="open-last">Voir mes missions</button>
           </div>
+          <div class="history-nav"><span>Une mission terminée ?</span><button data-action="show-history">Voir l’historique</button><span id="historyBadge" class="history-badge">0</span></div>
         </div>
         <div class="hero-card">
           <div class="hero-card-head"><span class="mini-label">Résumé du mois</span><span class="status-pill">● À jour</span></div>
@@ -220,7 +228,14 @@
         </div>
       </div>
     </section>
-
+    <section id="historyView" class="view">
+      <div class="shell" style="padding: 45px 0 100px">
+        <button class="back-link" data-action="go-home">← Retour à l’accueil</button>
+        <div class="history-head"><div><span class="eyebrow">Vos archives</span><h2>Missions passées</h2></div><div class="history-total">Total archivé <strong id="historyTotal">0,00 €</strong></div></div>
+        <div id="historyGrid" class="mission-grid"></div>
+      </div>
+    </section>
+ 
     <section id="appView" class="view">
       <div class="app-wrap shell">
         <div class="app-heading"><div><button class="back-link" data-action="go-home">← Retour à l’accueil</button><h1 id="appTitle">Nouvelle mission</h1></div><button class="btn btn-soft btn-small" data-action="copy-summary">Copier le récapitulatif</button></div>
@@ -272,6 +287,9 @@
 
   <script>
     const STORAGE_KEY = 'frais-deplacement-v1';
+    const STORAGE_TIME_KEY = `${STORAGE_KEY}-updated-at`;
+    const DB_NAME = 'frais-deplacement-db';
+    const DB_STORE = 'app-state';
     const icons = { Transport: '🚆', Repas: '🍽️', Hébergement: '🛏️', Carburant: '⛽', Parking: '🅿️', Autre: '✦' };
     let missions = loadMissions();
     let currentId = null;
@@ -279,7 +297,60 @@
     function loadMissions() {
       try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch (error) { return []; }
     }
-    function saveMissions() { localStorage.setItem(STORAGE_KEY, JSON.stringify(missions)); }
+    function openStorageDb() {
+      return new Promise((resolve, reject) => {
+        if (!('indexedDB' in window)) return reject(new Error('IndexedDB unavailable'));
+        const request = indexedDB.open(DB_NAME, 1);
+        request.onupgradeneeded = () => request.result.createObjectStore(DB_STORE, { keyPath: 'id' });
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+      });
+    }
+    async function readBackup() {
+      try {
+        const db = await openStorageDb();
+        return await new Promise((resolve, reject) => {
+          const request = db.transaction(DB_STORE, 'readonly').objectStore(DB_STORE).get('missions');
+          request.onsuccess = () => resolve(request.result || null);
+          request.onerror = () => reject(request.error);
+        });
+      } catch (error) { return null; }
+    }
+    async function writeBackup(snapshot) {
+      try {
+        const db = await openStorageDb();
+        await new Promise((resolve, reject) => {
+          const request = db.transaction(DB_STORE, 'readwrite').objectStore(DB_STORE).put(snapshot);
+          request.onsuccess = resolve;
+          request.onerror = () => reject(request.error);
+        });
+      } catch (error) { /* localStorage remains the first fallback */ }
+    }
+    function saveMissions() {
+      const updatedAt = Date.now();
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(missions));
+        localStorage.setItem(STORAGE_TIME_KEY, String(updatedAt));
+      } catch (error) { /* IndexedDB backup below remains available */ }
+      writeBackup({ id: 'missions', missions, updatedAt });
+    }
+    async function restoreMissions() {
+      const backup = await readBackup();
+      const localUpdatedAt = Number(localStorage.getItem(STORAGE_TIME_KEY) || 0);
+      if (backup && backup.updatedAt > localUpdatedAt) {
+        missions = Array.isArray(backup.missions) ? backup.missions : [];
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(missions));
+          localStorage.setItem(STORAGE_TIME_KEY, String(backup.updatedAt));
+        } catch (error) { /* IndexedDB already restored the data */ }
+        updateHome();
+      } else if (missions.length) {
+        writeBackup({ id: 'missions', missions, updatedAt: localUpdatedAt || Date.now() });
+      }
+    }
+    function requestPersistentStorage() {
+      if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
+    }
     function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
     function euro(value) { return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(value || 0); }
     function dateLabel(date) { if (!date) return 'Date non renseignée'; return new Intl.DateTimeFormat('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' }).format(new Date(date + 'T12:00:00')); }
@@ -291,18 +362,35 @@
       document.getElementById(view + 'View').classList.add('active');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+    function isPastMission(mission) {
+      if (!mission.endDate) return false;
+      return mission.endDate < new Date().toISOString().slice(0, 10);
+    }
+    function missionCard(mission) {
+      return `<article class="mission-card" data-open-id="${mission.id}"><div class="mission-date">${dateLabel(mission.startDate)}${mission.endDate ? ' — ' + dateLabel(mission.endDate) : ''}</div><h3>${escapeHTML(mission.name || 'Mission sans nom')}</h3><div class="mission-client">${escapeHTML(mission.agency || 'Agence non renseignée')} · ${escapeHTML(mission.place || 'Lieu non renseigné')}</div><div class="mission-bottom"><div><div class="mission-total">${euro(totalOf(mission))}</div><span>${(mission.expenses || []).length} dépense${(mission.expenses || []).length > 1 ? 's' : ''}</span></div><button class="btn btn-soft btn-small">Ouvrir →</button></div></article>`;
+    }
+    function bindMissionCards(container) {
+      container.querySelectorAll('[data-open-id]').forEach(card => card.addEventListener('click', () => openMission(card.dataset.openId)));
+    }
     function updateHome() {
+      const activeMissions = missions.filter(mission => !isPastMission(mission));
+      const archivedMissions = missions.filter(isPastMission);
       const total = missions.reduce((sum, mission) => sum + totalOf(mission), 0);
       const count = missions.reduce((sum, mission) => sum + (mission.expenses || []).length, 0);
+      const archivedTotal = archivedMissions.reduce((sum, mission) => sum + totalOf(mission), 0);
       document.getElementById('heroTotal').innerHTML = euro(total).replace(' €', ' <small>€</small>');
       document.getElementById('heroExpenseCount').textContent = `${count} dépense${count > 1 ? 's' : ''}`;
       document.getElementById('statTotal').textContent = euro(total);
-      document.getElementById('statMissions').textContent = missions.length;
-      document.getElementById('statAverage').textContent = euro(missions.length ? total / missions.length : 0);
+      document.getElementById('statMissions').textContent = activeMissions.length;
+      document.getElementById('statAverage').textContent = euro(activeMissions.length ? activeMissions.reduce((sum, mission) => sum + totalOf(mission), 0) / activeMissions.length : 0);
+      document.getElementById('historyBadge').textContent = archivedMissions.length;
+      document.getElementById('historyTotal').textContent = euro(archivedTotal);
       const grid = document.getElementById('missionGrid');
-      if (!missions.length) { grid.innerHTML = '<div class="empty">Aucune mission pour le moment.<br><strong>Créez votre première mission pour commencer.</strong></div>'; return; }
-      grid.innerHTML = missions.slice().reverse().map(mission => `<article class="mission-card" data-open-id="${mission.id}"><div class="mission-date">${dateLabel(mission.startDate)}${mission.endDate ? ' — ' + dateLabel(mission.endDate) : ''}</div><h3>${escapeHTML(mission.name || 'Mission sans nom')}</h3><div class="mission-client">${escapeHTML(mission.agency || 'Agence non renseignée')} · ${escapeHTML(mission.place || 'Lieu non renseigné')}</div><div class="mission-bottom"><div><div class="mission-total">${euro(totalOf(mission))}</div><span>${(mission.expenses || []).length} dépense${(mission.expenses || []).length > 1 ? 's' : ''}</span></div><button class="btn btn-soft btn-small">Ouvrir →</button></div></article>`).join('');
-      grid.querySelectorAll('[data-open-id]').forEach(card => card.addEventListener('click', () => openMission(card.dataset.openId)));
+      grid.innerHTML = activeMissions.length ? activeMissions.slice().reverse().map(missionCard).join('') : '<div class="empty">Aucune mission active pour le moment.<br><strong>Créez votre prochaine mission pour commencer.</strong></div>';
+      bindMissionCards(grid);
+      const historyGrid = document.getElementById('historyGrid');
+      historyGrid.innerHTML = archivedMissions.length ? archivedMissions.slice().sort((a, b) => (b.endDate || '').localeCompare(a.endDate || '')).map(missionCard).join('') : '<div class="empty">Aucune mission passée pour le moment.<br><strong>Vos missions terminées apparaîtront ici.</strong></div>';
+      bindMissionCards(historyGrid);
     }
     function openModal() { document.getElementById('missionModal').classList.add('open'); setTimeout(() => document.getElementById('quickMission').focus(), 50); }
     function closeModal() { document.getElementById('missionModal').classList.remove('open'); }
@@ -355,12 +443,14 @@
     function openCopy() { document.getElementById('summaryText').value = summary(); document.getElementById('copyModal').classList.add('open'); }
     async function copyText() { try { await navigator.clipboard.writeText(document.getElementById('summaryText').value); toast('Récapitulatif copié'); document.getElementById('copyModal').classList.remove('open'); } catch (error) { document.getElementById('summaryText').select(); document.execCommand('copy'); toast('Récapitulatif copié'); } }
     function toast(message) { const node = document.getElementById('toast'); node.textContent = message; node.classList.add('show'); clearTimeout(window.toastTimer); window.toastTimer = setTimeout(() => node.classList.remove('show'), 2400); }
-    document.addEventListener('click', event => { const action = event.target.closest('[data-action]')?.dataset.action; if (!action) return; if (action === 'new-mission') openModal(); if (action === 'create-mission') createMission(); if (action === 'close-modal') closeModal(); if (action === 'go-home') { updateHome(); showView('home'); } if (action === 'save-mission') saveMissionInfo(); if (action === 'copy-summary') openCopy(); if (action === 'close-copy') document.getElementById('copyModal').classList.remove('open'); if (action === 'copy-text') copyText(); if (action === 'open-last') { if (missions.length) openMission(missions[missions.length - 1].id); else openModal(); } });
+    document.addEventListener('click', event => { const action = event.target.closest('[data-action]')?.dataset.action; if (!action) return; if (action === 'new-mission') openModal(); if (action === 'create-mission') createMission(); if (action === 'close-modal') closeModal(); if (action === 'go-home') { updateHome(); showView('home'); } if (action === 'show-history') { updateHome(); showView('history'); } if (action === 'save-mission') saveMissionInfo(); if (action === 'copy-summary') openCopy(); if (action === 'close-copy') document.getElementById('copyModal').classList.remove('open'); if (action === 'copy-text') copyText(); if (action === 'open-last') { if (missions.length) openMission(missions[missions.length - 1].id); else openModal(); } });
     document.getElementById('expenseForm').addEventListener('submit', addExpense);
     document.getElementById('missionModal').addEventListener('click', event => { if (event.target.id === 'missionModal') closeModal(); });
     document.getElementById('copyModal').addEventListener('click', event => { if (event.target.id === 'copyModal') document.getElementById('copyModal').classList.remove('open'); });
     document.getElementById('quickMission').addEventListener('keydown', event => { if (event.key === 'Enter') createMission(); });
     updateHome();
+    requestPersistentStorage();
+    restoreMissions();
   </script>
 </body>
 </html>
