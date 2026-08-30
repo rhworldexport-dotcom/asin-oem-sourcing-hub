@@ -1,3 +1,14 @@
 node_modules
 .env
 .DS_Store
+server.log
+temp/
+.accio/
+alibaba_supply.csv
+final_recommendations.csv
+final_report.md
+proposition-worldshop.md
+scrape_all_details.js
+scrape_amazon.js
+scraped_products.json
+sourcing_audit_report.json

@@ -1,180 +1,342 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Worldshop - Sourcing Elite</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:ital,wght@1,900&display=swap');
-        body { background-color: #ffffff; color: #111; font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
-        .hero-banner { background: #000; height: 380px; position: relative; display: flex; align-items: flex-end; padding: 40px 30px; border-radius: 0 0 60px 60px; overflow: hidden; }
-        .hero-banner img { position: absolute; inset: 0; width:100%; height:100%; object-fit: cover; opacity: 0.5; }
-        .hero-title { font-family: 'Playfair Display', serif; font-size: 42px; line-height: 1; color: white; position: relative; z-index: 10; }
-        .gem-card { background: #fff; border-radius: 30px; overflow: hidden; border: 1px solid #f1f1f1; box-shadow: 0 10px 30px rgba(0,0,0,0.03); cursor: pointer; transition: 0.2s; position: relative; }
-        .gem-card:active { transform: scale(0.95); }
-        .img-container { height: 180px; background: #fdfdfd; display: flex; align-items: center; justify-content: center; padding: 15px; }
-        .product-img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 15px; }
-        .modal-sheet { background: white; border-radius: 50px 50px 0 0; position: fixed; inset: 0; z-index: 9999; transform: translateY(100%); transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); overflow-y: auto; padding-bottom: 50px; }
-        .modal-active { transform: translateY(0); }
-        .nav-bar { position: fixed; bottom: 25px; left: 20px; right: 25px; height: 75px; background: #000; border-radius: 40px; display: flex; justify-content: space-around; align-items: center; z-index: 5000; box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
-        .nav-item { color: #555; font-size: 24px; cursor: pointer; }
-        .nav-item.active { color: #fff; transform: scale(1.1); }
-        .sa-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #f0f0f0; font-size: 14px; font-weight: 700; }
-        ::-webkit-scrollbar { display: none; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10231f">
+  <title>Worldshop — Test Sourcing Amazon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink:#172c43; --muted:#6f7d8d; --paper:#f6f8fc; --card:#fff; --line:#e1e7ef; --mint:#2d6cdf; --sage:#eaf1ff; --orange:#e5a24c; --danger:#ba6157; --shadow:0 24px 70px rgba(26,52,84,.11); }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family:'DM Sans',sans-serif; -webkit-font-smoothing:antialiased; }
+    button,input,select,textarea { font:inherit; }
+    button { border:0; cursor:pointer; }
+    a { color:inherit; }
+    .shell { width:min(1220px,calc(100% - 36px)); margin:auto; }
+    .topbar { min-height:82px; display:flex; align-items:center; justify-content:space-between; gap:18px; }
+    .brand { display:flex; align-items:center; gap:11px; font:800 20px Manrope,sans-serif; letter-spacing:-.05em; }
+    .brand-mark { width:38px; height:38px; display:grid; place-items:center; color:#fff; background:var(--ink); border-radius:13px; box-shadow:0 8px 18px rgba(24,50,44,.17); }
+    .topbar-note { display:flex; align-items:center; gap:8px; color:var(--muted); font-size:12px; font-weight:700; text-align:right; }
+    .topbar-note span { width:8px; height:8px; border-radius:50%; background:var(--mint); box-shadow:0 0 0 5px #e1f2e8; }
+    .hero { display:grid; grid-template-columns:1.2fr .8fr; gap:24px; align-items:stretch; padding:42px 0 26px; }
+    .hero-copy { padding:30px 0; }
+    .eyebrow { display:inline-flex; align-items:center; gap:8px; color:var(--mint); font-size:11px; font-weight:800; letter-spacing:.13em; text-transform:uppercase; }
+    .eyebrow::before { content:''; width:19px; height:2px; background:var(--mint); }
+    h1,h2,h3,p { margin-top:0; }
+    h1 { max-width:680px; margin:18px 0 20px; font:800 clamp(42px,6vw,76px)/.98 Manrope,sans-serif; letter-spacing:-.08em; }
+    h1 em { color:var(--mint); font-style:normal; }
+    .hero-copy-text { max-width:575px; color:var(--muted); line-height:1.7; font-size:16px; }
+    .hero-card { position:relative; min-height:310px; overflow:hidden; padding:27px; color:#fff; background:var(--ink); border-radius:34px; box-shadow:var(--shadow); }
+    .hero-card::before { content:''; position:absolute; width:250px; height:250px; right:-110px; top:-110px; border-radius:50%; background:#315d4e; }
+    .hero-card::after { content:''; position:absolute; width:145px; height:145px; right:45px; bottom:-65px; border:1px solid rgba(255,255,255,.16); border-radius:50%; }
+    .hero-card > * { position:relative; z-index:1; }
+    .card-label { color:#a7c5b5; font-size:10px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+    .status { padding:7px 10px; color:#c7f1d6; background:rgba(107,193,139,.17); border-radius:99px; font-size:11px; font-weight:700; }
+    .hero-card-head { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .hero-number { margin-top:52px; font:800 56px/1 Manrope,sans-serif; letter-spacing:-.09em; }
+    .hero-number small { color:#a7c5b5; font-size:19px; letter-spacing:-.03em; }
+    .hero-card-foot { position:absolute; left:27px; right:27px; bottom:27px; display:flex; justify-content:space-between; align-items:end; }
+    .hero-card-foot strong { display:block; margin-top:7px; font-size:14px; }
+    .hero-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:27px; }
+    .btn { min-height:48px; display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:0 18px; border-radius:14px; font-weight:800; transition:transform .2s,box-shadow .2s; }
+    .btn:hover { transform:translateY(-2px); }
+    .btn-primary { color:#fff; background:var(--ink); box-shadow:0 13px 25px rgba(24,50,44,.16); }
+    .btn-soft { color:var(--ink); background:#fff; border:1px solid var(--line); }
+    .btn-danger { color:var(--danger); background:#fff4f2; border:1px solid #f4d9d4; }
+    .btn-small { min-height:38px; padding:0 13px; border-radius:11px; font-size:12px; }
+    .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:16px 0 24px; }
+    .stat,.panel { background:var(--card); border:1px solid var(--line); border-radius:22px; }
+    .stat { padding:18px; }
+    .master-panel { margin:0 0 17px; padding:24px; background:linear-gradient(135deg,#fff 0%,#eef4ff 100%); }
+    .master-note { margin:0 0 15px; padding:13px 15px; color:#50647f; background:#f1f6ff; border:1px solid #dce8fa; border-radius:13px; font-size:12px; line-height:1.5; }
+    .master-note strong { color:#2457a8; }
+    .master-import { display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:15px; color:var(--muted); font-size:12px; }
+    .master-import input { display:none; }
+    .file-btn { cursor:pointer; }
+    .master-import span:last-child { margin-left:auto; color:var(--ink); font-weight:800; }
+    .master-list { display:grid; gap:9px; }
+    .master-row { display:grid; grid-template-columns:1fr auto; gap:14px; align-items:center; padding:14px 16px; background:#fff; border:1px solid var(--line); border-radius:15px; }
+    .master-row h3 { margin:0 0 5px; font-size:13px; }
+    .master-row p { margin:0; color:var(--muted); font-size:11px; line-height:1.5; }
+    .master-row-actions { display:flex; gap:7px; align-items:center; }
+    .master-detail { display:none; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-top:13px; padding-top:13px; border-top:1px solid var(--line); color:var(--muted); font-size:11px; line-height:1.5; }
+    .master-row.open .master-detail { display:grid; }
+    .master-detail-card { min-width:0; padding:12px; background:#f8fafc; border:1px solid var(--line); border-radius:12px; }
+    .master-detail-card h4 { margin:0 0 8px; color:var(--ink); font:800 12px Manrope,sans-serif; }
+    .detail-line { display:flex; justify-content:space-between; gap:10px; padding:6px 0; border-bottom:1px solid #e8edf3; }
+    .detail-line:last-child { border-bottom:0; }
+    .detail-line b { color:var(--ink); font-weight:700; }
+    .detail-actions { display:flex; flex-wrap:wrap; gap:6px; margin-top:9px; }
+    .master-detail a { color:var(--mint); font-weight:700; }
+    @media (max-width:900px) { .master-detail { grid-template-columns:1fr; } }
+    .niche-panel { margin:0 0 17px; padding:24px; background:linear-gradient(135deg,#fff 0%,#f0f8f2 100%); }
+    .niche-form { display:grid; grid-template-columns:1.5fr .8fr .8fr auto; gap:9px; align-items:end; }
+    .niche-results { display:grid; gap:9px; margin-top:18px; }
+    .niche-result { display:grid; grid-template-columns:1fr auto; gap:12px; align-items:center; padding:13px 14px; background:#fff; border:1px solid var(--line); border-radius:15px; }
+    .niche-result h3 { margin:0 0 5px; font-size:13px; line-height:1.3; }
+    .niche-result p { margin:0; color:var(--muted); font-size:11px; }
+    .niche-result strong { color:var(--mint); font:800 17px Manrope,sans-serif; }
+    .niche-result.is-rejected { opacity:.62; background:#fbf8f4; }
+    .search-empty { padding:18px; color:var(--muted); background:rgba(255,255,255,.65); border-radius:14px; font-size:12px; line-height:1.5; }
+    .niche-count { margin:12px 0 0; color:var(--muted); font-size:11px; font-weight:700; }
+    .niche-actions { display:flex; align-items:center; gap:10px; margin-top:13px; color:var(--muted); font-size:11px; line-height:1.4; }
+    .niche-summary { display:flex; justify-content:space-between; align-items:center; gap:16px; margin-top:14px; padding:14px 16px; border:1px solid #d5e0f2; border-radius:15px; background:#f5f8ff; }
+    .weekly-panel { margin-top:17px; padding:20px; background:linear-gradient(135deg,#f8fbff 0%,#edf3ff 100%); }
+    .weekly-controls { display:grid; grid-template-columns:1fr .8fr .8fr auto; gap:9px; align-items:end; }
+    .weekly-results { display:grid; gap:9px; margin-top:15px; }
+    .weekly-result { display:grid; grid-template-columns:1fr auto; gap:12px; align-items:center; padding:13px 14px; background:#fff; border:1px solid var(--line); border-radius:15px; }
+    .weekly-result h3 { margin:0 0 5px; font-size:13px; }
+    .weekly-result p { margin:0; color:var(--muted); font-size:11px; }
+    .weekly-result strong { color:var(--mint); font:800 17px Manrope,sans-serif; }
+    .weekly-empty { padding:16px; color:var(--muted); background:rgba(255,255,255,.7); border-radius:14px; font-size:12px; line-height:1.5; }
+    .niche-summary div { display:grid; gap:3px; }
+    .niche-summary b { color:var(--mint); font:800 25px Manrope,sans-serif; }
+    .niche-summary small { color:var(--muted); }
+    .import-box { display:grid; grid-template-columns:1fr 1.5fr auto; align-items:center; gap:12px; margin-top:16px; padding:14px; border:1px dashed #b7c8bb; border-radius:15px; background:rgba(255,255,255,.72); }
+    .import-box div { display:grid; gap:3px; }
+    .import-box small { color:var(--muted); line-height:1.4; }
+    .import-box textarea { width:100%; min-height:70px; padding:10px; border:1px solid var(--line); border-radius:10px; resize:vertical; font:12px 'DM Sans',sans-serif; }
+
+    .stat b { display:block; margin:12px 0 4px; font:800 27px Manrope,sans-serif; letter-spacing:-.06em; }
+    .stat span { color:var(--muted); font-size:12px; }
+    .stat-icon { width:34px; height:34px; display:grid; place-items:center; color:var(--mint); background:var(--sage); border-radius:11px; font-weight:800; }
+    .workspace { display:grid; grid-template-columns:1.65fr .9fr; gap:17px; align-items:start; padding-bottom:90px; }
+    .panel { padding:22px; }
+    .panel-title { display:flex; align-items:start; justify-content:space-between; gap:15px; margin-bottom:18px; }
+    .panel-title h2 { margin:0; font:800 21px Manrope,sans-serif; letter-spacing:-.06em; }
+    .panel-title p { margin:5px 0 0; color:var(--muted); font-size:12px; }
+    .manual-note { padding:14px 16px; margin-bottom:17px; color:#7d664c; background:#fff9ef; border:1px solid #f6ead7; border-radius:15px; font-size:12px; line-height:1.5; }
+    .manual-note strong { color:#9b6b3d; }
+    .controls { display:grid; grid-template-columns:1.5fr .8fr .8fr auto; gap:9px; margin-bottom:17px; }
+    .field { display:grid; gap:7px; }
+    .field label { color:var(--muted); font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+    .field input,.field select,.field textarea { width:100%; min-height:44px; padding:11px 12px; color:var(--ink); background:#fbfcfa; border:1px solid var(--line); border-radius:11px; outline:none; }
+    .field textarea { min-height:73px; resize:vertical; }
+    .field input:focus,.field select:focus,.field textarea:focus { border-color:var(--mint); box-shadow:0 0 0 4px rgba(92,174,130,.12); }
+    .product-list { display:grid; gap:10px; }
+    .product-row { display:grid; grid-template-columns:62px 1fr auto; gap:14px; align-items:center; padding:12px; border:1px solid var(--line); border-radius:17px; background:#fff; transition:transform .2s,box-shadow .2s; }
+    .product-row:hover { transform:translateY(-2px); box-shadow:var(--shadow); }
+    .product-thumb { width:62px; height:62px; display:grid; place-items:center; overflow:hidden; background:#f3f7f4; border-radius:13px; }
+    .product-thumb img { width:100%; height:100%; object-fit:contain; }
+    .product-main h3 { margin:0 0 5px; font-size:13px; font-weight:800; line-height:1.3; }
+    .product-meta { display:flex; flex-wrap:wrap; gap:7px; color:var(--muted); font-size:11px; }
+    .chip { padding:4px 7px; background:#f4f7f4; border-radius:7px; }
+    .chip.good { color:#26714d; background:#e8f5ed; }
+    .chip.warn { color:#9a6b34; background:#fff5e6; }
+    .product-right { min-width:105px; text-align:right; }
+    .product-right strong { display:block; color:var(--mint); font:800 20px Manrope,sans-serif; letter-spacing:-.05em; }
+    .product-right small { display:block; margin-top:3px; color:var(--muted); font-size:10px; }
+    .row-actions { display:flex; justify-content:flex-end; gap:6px; margin-top:7px; }
+    .icon-btn { width:30px; height:30px; color:var(--muted); background:#f5f8f5; border-radius:9px; }
+    .icon-btn:hover { color:var(--ink); background:var(--sage); }
+    .empty { padding:36px 18px; color:var(--muted); text-align:center; border:1px dashed #cfe0d4; border-radius:17px; line-height:1.6; }
+    .side-sticky { position:sticky; top:16px; display:grid; gap:17px; }
+    .score-card { color:#fff; background:var(--ink); border:0; }
+    .score-card h2 { margin:0 0 6px; font:800 22px Manrope,sans-serif; letter-spacing:-.06em; }
+    .score-card p { color:#a7c5b5; font-size:12px; line-height:1.5; }
+    .score { display:flex; align-items:end; gap:5px; margin:24px 0 20px; font:800 54px/1 Manrope,sans-serif; letter-spacing:-.09em; }
+    .score small { color:#a7c5b5; font:700 15px Manrope,sans-serif; letter-spacing:0; }
+    .progress { height:8px; overflow:hidden; background:#345847; border-radius:99px; }
+    .progress i { display:block; width:0; height:100%; background:#86d6a4; border-radius:99px; transition:width .3s; }
+    .score-list { display:grid; gap:10px; margin-top:20px; padding-top:17px; border-top:1px solid rgba(255,255,255,.14); }
+    .score-line { display:flex; justify-content:space-between; gap:10px; color:#b7ccc1; font-size:12px; }
+    .score-line strong { color:#fff; }
+    .quick-list { display:grid; gap:10px; }
+    .quick-list div { display:flex; gap:10px; align-items:start; color:var(--muted); font-size:12px; line-height:1.5; }
+    .quick-list b { display:grid; place-items:center; flex:0 0 23px; height:23px; color:var(--mint); background:var(--sage); border-radius:8px; font-size:11px; }
+    .modal-backdrop { position:fixed; inset:0; z-index:10; display:none; align-items:center; justify-content:center; padding:16px; background:rgba(20,40,33,.42); backdrop-filter:blur(8px); }
+    .modal-backdrop.open { display:flex; }
+    .modal { width:min(660px,100%); max-height:92vh; overflow:auto; padding:24px; background:#fff; border-radius:25px; box-shadow:0 28px 80px rgba(20,40,33,.2); }
+    .modal h2 { margin:0 0 5px; font:800 25px Manrope,sans-serif; letter-spacing:-.06em; }
+    .modal > p { margin-bottom:20px; color:var(--muted); font-size:13px; }
+    .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:11px; }
+    .form-grid .full { grid-column:1/-1; }
+    .modal-actions { display:flex; justify-content:flex-end; gap:9px; margin-top:19px; }
+    .toast { position:fixed; left:50%; bottom:24px; z-index:20; transform:translate(-50%,120px); padding:12px 17px; color:#fff; background:var(--ink); border-radius:12px; font-size:13px; font-weight:700; box-shadow:var(--shadow); transition:transform .3s; }
+    .toast.show { transform:translate(-50%,0); }
+    @media (max-width:900px) { .hero,.workspace { grid-template-columns:1fr; } .side-sticky { position:static; grid-template-columns:1fr 1fr; } .score-card { grid-column:1/-1; } .niche-form { grid-template-columns:1fr 1fr; } .niche-form .niche-keyword { grid-column:1/-1; } .import-box { grid-template-columns:1fr; } }
+    @media (max-width:650px) { .shell { width:min(100% - 26px,1220px); } .topbar-note { max-width:170px; } .hero { padding-top:24px; } h1 { font-size:51px; } .hero-card { min-height:270px; } .stats { grid-template-columns:1fr 1fr; } .controls { grid-template-columns:1fr 1fr; } .controls .search { grid-column:1/-1; } .product-row { grid-template-columns:50px 1fr; } .product-thumb { width:50px; height:50px; } .product-right { grid-column:2; min-width:0; display:flex; align-items:center; justify-content:space-between; text-align:left; } .row-actions { justify-content:flex-start; margin-top:0; } .side-sticky { grid-template-columns:1fr; } .form-grid { grid-template-columns:1fr; } .form-grid .full { grid-column:auto; } .modal { padding:19px; } .niche-form { grid-template-columns:1fr; } .niche-form .niche-keyword { grid-column:auto; } .master-row { grid-template-columns:1fr; } .master-row-actions { justify-content:flex-start; } .master-import span:last-child { margin-left:0; } }
+  </style>
 </head>
-<body class="pb-40">
-    <div class="hero-banner shadow-2xl">
-        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1200&q=80">
-        <div class="hero-content">
-            <span class="bg-emerald-500 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest">Premium Selection</span>
-            <h1 class="hero-title italic mt-4">Sourcing<br>Intelligence.</h1>
-            <p class="text-slate-400 text-xs font-bold uppercase tracking-[0.2em] mt-2 text-white">Worldshop Edition • 30 items</p>
-        </div>
-    </div>
+<body>
+  <header class="topbar shell">
+    <div class="brand"><span class="brand-mark">W</span> Worldshop</div>
+    <div class="topbar-note"><span></span> Test gratuit · recherche Accio manuelle</div>
+  </header>
 
-    <div class="px-8 mt-12">
-        <div class="relative mb-12">
-            <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-slate-400"></i>
-            <input type="text" id="keywordSearch" oninput="filterGems()" placeholder="Rechercher par niche ou ASIN..." class="w-full bg-slate-50 border-none rounded-2xl pl-14 pr-4 py-5 text-sm focus:ring-2 focus:ring-black">
-        </div>
-        <h2 class="text-xl font-black mb-8 italic tracking-tighter flex justify-between items-center">Notre Collection</h2>
-        <div id="gemGrid" class="grid grid-cols-2 gap-6"></div>
-    </div>
+  <main class="shell">
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">Prototype sourcing Amazon</span>
+        <h1>Décider avant<br><em>d’acheter.</em></h1>
+        <p class="hero-copy-text">Une première version simple pour enregistrer 10 à 20 opportunités trouvées manuellement avec Accio, comparer les fournisseurs européens et vérifier la marge avant toute commande.</p>
+        <div class="hero-actions"><button class="btn btn-primary" data-action="open-add">+ Ajouter un produit</button><button class="btn btn-soft" data-action="export">Exporter CSV</button></div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-head"><span class="card-label">Vue du test</span><span class="status">● 0 € d’API</span></div>
+        <div class="hero-number" id="heroProducts">0 <small>produits</small></div>
+        <div class="hero-card-foot"><div><span class="card-label">Dernière modification</span><strong id="lastUpdated">Aucune donnée</strong></div><div class="card-label">LOCAL-FIRST</div></div>
+      </div>
+    </section>
 
-    <div id="dossierModal" class="modal-sheet p-8">
-        <div class="w-12 h-1.5 bg-slate-100 rounded-full mx-auto mb-10" onclick="closeModal()"></div>
-        <div class="flex flex-col gap-8 mb-10 text-center">
-            <div class="h-64 flex items-center justify-center bg-slate-50 rounded-[45px] p-8 shadow-inner"><img id="modalImg" src="" class="max-h-full max-w-full object-contain"></div>
-            <div>
-                <span class="bg-emerald-50 text-emerald-600 text-[10px] font-black px-4 py-1.5 rounded-full mb-4 inline-block uppercase tracking-widest">✓ NO PRIVATE LABEL (SAFE)</span>
-                <h2 id="modalName" class="text-2xl font-black leading-tight mb-2 tracking-tight uppercase italic text-slate-800">---</h2>
-                <p id="modalAsin" class="text-2xl font-black text-emerald-500 mb-8 border-b pb-6">---</p>
-                <div class="grid grid-cols-2 gap-4">
-                    <a id="amazonLink" target="_blank" class="bg-black text-white p-5 rounded-3xl font-black text-[11px] uppercase flex items-center justify-center gap-3 shadow-xl active:scale-95 transition-all"><i class="fab fa-amazon text-orange-400"></i> Amazon</a>
-                    <a id="supplierLink" target="_blank" class="bg-slate-50 text-black p-5 rounded-3xl font-black text-[11px] uppercase flex items-center justify-center gap-3 border border-slate-100"><i class="fas fa-industry"></i> Usine OEM</a>
-                </div>
-            </div>
-        </div>
+    <section class="stats">
+      <div class="stat"><div class="stat-icon">#</div><b id="statCount">0</b><span>Produits suivis</span></div>
+      <div class="stat"><div class="stat-icon">€</div><b id="statProfit">0,00 €</b><span>Marge moyenne / unité</span></div>
+      <div class="stat"><div class="stat-icon">↗</div><b id="statRoi">0 %</b><span>ROI moyen</span></div>
+      <div class="stat"><div class="stat-icon">✓</div><b id="statReady">0</b><span>À vérifier favorablement</span></div>
+    </section>
 
-        <div class="bg-slate-50 p-8 rounded-[45px] mb-10 border border-slate-100 shadow-sm">
-            <h3 class="text-[10px] font-black uppercase text-slate-400 mb-6 tracking-widest italic text-center">Analyse de Marché (SellerAmp)</h3>
-            <div class="sa-row"><span class="text-slate-400 font-normal">Amazon Price</span><span id="modalPrice">--€</span></div>
-            <div class="sa-row"><span>Ventes / mois</span><span id="modalSales">---</span></div>
-            <div class="sa-row border-none"><span>ROI Garanti</span><span id="modalROI" class="text-emerald-600">--%</span></div>
-        </div>
+    <section class="panel master-panel">
+      <div class="panel-title"><div><span class="eyebrow">Dossier maître</span><h2>Base historique des recherches</h2><p>Importe le fichier Markdown GlobalSeller dans ce navigateur. Pour un autre téléphone ou navigateur, importe-le à nouveau : les données ne sont pas encore stockées sur un serveur partagé.</p></div><span class="status" style="color:#2457a8;background:#e7efff">Local-first</span></div>
+      <div class="master-import"><label class="file-btn btn btn-primary btn-small"><input id="masterFile" type="file" accept=".md,.markdown,.csv,.json,text/markdown,text/csv,application/json">Importer le dossier MD</label><span id="masterSource">Aucun dossier importé</span><span id="masterCount">0 ASIN</span></div>
+      <div class="controls master-controls"><div class="field search"><label for="masterSearch">Rechercher dans le dossier</label><input id="masterSearch" type="search" placeholder="ASIN, produit, marque, fournisseur..." data-master-filter></div><div class="field"><label for="masterStatus">Statut</label><select id="masterStatus" data-master-filter><option value="all">Tous</option><option value="Vérifié exact">Vérifié exact</option><option value="Distributeur à confirmer">Distributeur à confirmer</option><option value="Lead à vérifier">Lead à vérifier</option><option value="Exclu">Exclus</option></select></div><button class="btn btn-soft btn-small" type="button" data-action="clear-master">Réinitialiser</button></div>
+      <div id="masterList" class="master-list"><div class="empty">Importe <strong>DOSSIER_SOURCING_WORLDSHOP_MASTER.md</strong> pour afficher tes recherches historiques par ASIN.</div></div>
+    </section>
 
-        <div class="bg-black text-white p-10 rounded-[55px] mb-10 shadow-2xl">
-            <div class="flex justify-between items-center mb-10">
-                <p class="text-xs font-black uppercase tracking-widest text-slate-500 italic">Profit Simulator</p>
-                <div class="flex gap-4">
-                     <div class="flex flex-col items-center"><span class="text-[8px] opacity-40 mb-2 uppercase text-white">QTÉ</span><input type="number" id="simQty" value="100" oninput="updateSim()" class="w-18 bg-white/10 border-none rounded-xl p-3 text-center font-black text-lg text-white"></div>
-                     <div class="flex flex-col items-center"><span class="text-[8px] opacity-40 mb-2 uppercase text-white">ACHAT €</span><input type="number" id="simBuyPrice" value="5.00" step="0.1" oninput="updateSim()" class="w-20 bg-white/10 border-none rounded-xl p-3 text-center font-black text-lg text-emerald-400"></div>
-                </div>
-            </div>
-            <div class="flex justify-between items-end">
-                <div><p class="text-[10px] font-bold text-slate-500 mb-2 uppercase tracking-tighter">C.A RECAP</p><p id="simCA" class="text-3xl font-black italic tracking-tighter">--€</p></div>
-                <div class="text-right"><p class="text-[10px] font-bold text-emerald-400 mb-2 uppercase tracking-widest">PROFIT NET</p><p id="simProfit" class="text-3xl font-black text-emerald-400 italic tracking-tighter">--€</p></div>
-            </div>
-        </div>
-        <div id="modalMaxCost" style="display:none"></div>
-        <button onclick="prepareDirectEmail()" class="w-full h-20 rounded-[35px] bg-emerald-600 text-white font-black text-sm uppercase tracking-widest shadow-xl active:scale-95 transition-all">Envoyer Demande Worldshop</button>
-    </div>
+    <section class="workspace">
+      <div class="panel">
+        <div class="master-note"><strong>Mode dossier :</strong> cette version n’effectue pas de recherche Amazon automatique. Elle sert à consulter toutes tes recherches GlobalSeller déjà reçues, ASIN par ASIN, et à suivre les fournisseurs, contacts et preuves.</div>
+        <div class="panel-title"><div><h2>Opportunités enregistrées</h2><p>Ajoute les résultats de tes recherches Accio une par une.</p></div><button class="btn btn-primary btn-small" data-action="open-add">+ Produit</button></div>
+        <div class="manual-note"><strong>Règles de sélection :</strong> l’import exclut les produits avec moins de 5 vendeurs, sous 30 € ou hors niche. Le Private Label, l’ancienneté de la marque et l’autorisation de revente restent à vérifier avec GlobalSeller, Accio, la marque ou son distributeur officiel.</div>
+        <div class="controls"><div class="field search"><label for="search">Rechercher</label><input id="search" type="search" placeholder="Nom, ASIN, marque..." data-filter></div><div class="field"><label for="statusFilter">Statut</label><select id="statusFilter" data-filter><option value="all">Tous</option><option value="ready">À vérifier</option><option value="pending">En attente</option><option value="avoid">À éviter</option></select></div><div class="field"><label for="sortBy">Trier par</label><select id="sortBy" data-filter><option value="updated">Récent</option><option value="roi">ROI</option><option value="profit">Marge</option><option value="price">Prix Amazon</option></select></div><button class="btn btn-soft btn-small" data-action="clear-filters">Réinitialiser</button></div>
+        <div id="productList" class="product-list"></div>
+      </div>
 
-    <nav class="nav-bar">
-        <div onclick="location.reload()" id="navHome" class="nav-item active"><i class="fas fa-house-chimney"></i></div>
-        <div class="nav-item"><i class="fas fa-heart"></i></div>
-        <div onclick="window.scrollTo({top: 450, behavior:'smooth'})" class="nav-item"><i class="fas fa-search-plus"></i></div>
-        <div class="nav-item"><i class="fas fa-user-circle"></i></div>
-    </nav>
+      <aside class="side-sticky">
+        <section class="panel score-card"><h2>Score de sélection</h2><p>Indicateur local basé sur les critères saisis. Ce n’est pas une validation Amazon.</p><div class="score"><span id="scoreValue">0</span><small>/ 100</small></div><div class="progress"><i id="scoreBar"></i></div><div class="score-list"><div class="score-line"><span>ROI ≥ 50 %</span><strong id="scoreRoi">—</strong></div><div class="score-line"><span>5 vendeurs ou +</span><strong id="scoreSellers">—</strong></div><div class="score-line"><span>Prix ≥ 30 €</span><strong id="scorePrice">—</strong></div><div class="score-line"><span>Fournisseur documenté</span><strong id="scoreSupplier">—</strong></div></div></section>
+        <section class="panel"><div class="panel-title"><div><h2>Parcours du dossier</h2></div></div><div class="quick-list"><div><b>1</b><span>Importer le fichier maître GlobalSeller dans ce navigateur.</span></div><div><b>2</b><span>Rechercher un ASIN, une marque ou un fournisseur dans la base historique.</span></div><div><b>3</b><span>Ouvrir « Infos globales » pour voir Amazon, fournisseur, OEM, contacts et preuves.</span></div><div><b>4</b><span>Cliquer sur les liens ou copier une nouvelle demande fournisseur à vérifier.</span></div></div></section>
+      </aside>
+    </section>
+  </main>
 
-    <script>
-        const allGems = [
-            {"name":"Hub USB-C Luxe 7-in-1","asin":"B08Q7KDQKP","price":"34.99","sales":1250,"roi":65,"profit":"12.40","maxCost":"10.50","rank":"#245","imageUrl":"https://images.unsplash.com/photo-1544244015-0cd4b3ff8f9d?w=600"},
-            {"name":"SSD 1TB Pro Gen4","asin":"B0C8HHFX3C","price":"75.00","sales":1400,"roi":60,"profit":"22.00","maxCost":"18.50","rank":"#215","imageUrl":"https://images.unsplash.com/photo-1591405351990-4726e33df58d?w=600"},
-            {"name":"Câble RJ45 Cat8 Gold","asin":"B08LNWDP6V","price":"14.90","sales":3200,"roi":95,"profit":"5.50","maxCost":"3.20","rank":"#12","imageUrl":"https://images.unsplash.com/photo-1515940175183-6798529cb860?w=600"},
-            {"name":"Souris Gaming MSI Pro","asin":"B096Y43J5T","price":"49.00","sales":560,"roi":58,"profit":"14.20","maxCost":"12.50","rank":"#407","imageUrl":"https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=600"},
-            {"name":"Toner Canon 071 Pro","asin":"B0C6K1TQNC","price":"27.80","sales":1100,"roi":82,"profit":"10.50","maxCost":"8.00","rank":"#944","imageUrl":"https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600"},
-            {"name":"Support Mural Mesh","asin":"B0CN3CV93T","price":"18.50","sales":890,"roi":72,"profit":"6.80","maxCost":"5.50","rank":"#107","imageUrl":"https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=600"},
-            {"name":"Balances Cuisine Inox","asin":"B0D3D3D3D3","price":"22.50","sales":1800,"roi":62,"profit":"8.10","maxCost":"6.00","rank":"#340","imageUrl":"https://images.unsplash.com/photo-1590372875891-3e13d94ca060?w=600"},
-            {"name":"Thermomètre Viande","asin":"B0I8I8I8I8","price":"28.00","sales":1500,"roi":75,"profit":"10.50","maxCost":"7.00","rank":"#150","imageUrl":"https://images.unsplash.com/photo-1585830812416-a6c86bb14576?w=600"},
-            {"name":"Presse Ail Ergo","asin":"B0N3N3N3N3","price":"12.00","sales":4000,"roi":110,"profit":"5.20","maxCost":"2.50","rank":"#3","imageUrl":"https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400"},
-            {"name":"Aspirateur Auto Pro","asin":"B0M2M2M2M2","price":"45.00","sales":1400,"roi":63,"profit":"14.20","maxCost":"11.50","rank":"#280","imageUrl":"https://images.unsplash.com/photo-1563911302283-d2bc129e7570?w=400"},
-            {"name":"Casque Audio Pro ANC","asin":"B0892D9F2G","price":"129.00","sales":850,"roi":72,"profit":"45.10","maxCost":"35.00","rank":"#89","imageUrl":"https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400"},
-            {"name":"Webcam 4K Stream","asin":"B0B1B1B1B1","price":"75.00","sales":540,"roi":64,"profit":"22.10","maxCost":"18.00","rank":"#560","imageUrl":"https://images.unsplash.com/photo-1588508065123-287b28e013da?w=400"},
-            {"name":"Kit GoPro Pro","asin":"B09PQ1DCLK","price":"35.00","sales":620,"roi":70,"profit":"12.00","maxCost":"9.50","rank":"#302","imageUrl":"https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=400"},
-            {"name":"Support Tablette Ergo","asin":"B0CBMNFK84","price":"22.00","sales":560,"roi":68,"profit":"8.20","maxCost":"7.00","rank":"#112","imageUrl":"https://images.unsplash.com/photo-1544244015-0cd4b3ff8f9d?w=400"},
-            {"name":"Sac de Transport SSD","asin":"B0S7S7S7S7","price":"16.50","sales":2200,"roi":88,"profit":"6.80","maxCost":"4.50","rank":"#34","imageUrl":"https://images.unsplash.com/photo-1544244015-0cd4b3ff8f9d?w=400"},
-            {"name":"Hub Multiports 10-in-1","asin":"B0G6G6G6G6","price":"52.00","sales":1100,"roi":68,"profit":"18.40","maxCost":"15.00","rank":"#24","imageUrl":"https://images.unsplash.com/photo-1544244015-0cd4b3ff8f9d?w=400"},
-            {"name":"Organiseur Auto Luxe","asin":"B0H7H7H7H7","price":"38.00","sales":920,"roi":59,"profit":"11.50","maxCost":"9.00","rank":"#670","imageUrl":"https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=400"},
-            {"name":"Protège Réservoir Moto","asin":"B0T8T8T8T8","price":"21.00","sales":560,"roi":76,"profit":"8.50","maxCost":"6.00","rank":"#1100","imageUrl":"https://images.unsplash.com/photo-1558981359-219d6364c9c8?w=400"},
-            {"name":"Câble HDMI 2.1 Or","asin":"B0L1L1L1L1","price":"14.99","sales":3500,"roi":95,"profit":"5.50","maxCost":"3.00","rank":"#5","imageUrl":"https://images.unsplash.com/photo-1515940175183-6798529cb860?w=400"},
-            {"name":"Moulin Poivre Elec","asin":"B0R6R6R6R6","price":"34.00","sales":890,"roi":67,"profit":"11.20","maxCost":"9.00","rank":"#450","imageUrl":"https://images.unsplash.com/photo-1589083548981-9b6574f9d0c6?w=400"},
-            {"name":"Kit Vis SSD M.2","asin":"B0BW2NMM8D","price":"9.99","sales":2500,"roi":110,"profit":"4.50","maxCost":"2.20","rank":"#542","imageUrl":"https://images.unsplash.com/photo-1544244015-0cd4b3ff8f9d?w=600"},
-            {"name":"Tapis Souris XXL RGB","asin":"B0P4P4P4P4","price":"29.90","sales":1200,"roi":74,"profit":"10.50","maxCost":"8.00","rank":"#540","imageUrl":"https://images.unsplash.com/photo-1618366712277-721206c8340d?w=400"},
-            {"name":"Compresseur Pneu Port","asin":"B0C2C2C2C2","price":"49.00","sales":1300,"roi":78,"profit":"18.40","maxCost":"14.50","rank":"#210","imageUrl":"https://images.unsplash.com/photo-1597404294360-fedeca0445fc?w=400"},
-            {"name":"Projecteur LED Auto 12V","asin":"B09X9X9X9X","price":"39.99","sales":1100,"roi":85,"profit":"15.00","maxCost":"12.00","rank":"#234","imageUrl":"https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400"},
-            {"name":"Station Accueil Pro","asin":"B0DLB8ZQG5","price":"49.90","sales":320,"roi":55,"profit":"12.50","maxCost":"11.00","rank":"#890","imageUrl":"https://images.unsplash.com/photo-1544244015-0cd4b3ff8f9d?w=400"},
-            {"name":"Adaptateur MicroSD USB-C","asin":"B0V8V8V8V8","price":"15.50","sales":560,"roi":50,"profit":"4.90","maxCost":"4.50","rank":"#34","imageUrl":"https://images.unsplash.com/photo-1544244015-0cd4b3ff8f9d?w=400"},
-            {"name":"Lumière RGB Gaming Set","asin":"B0K0K0K0K0","price":"35.00","sales":1100,"roi":78,"profit":"12.50","maxCost":"9.50","rank":"#310","imageUrl":"https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400"},
-            {"name":"Hub USB-C Multiports","asin":"B0G6G6G6G6","price":"42.00","sales":2100,"roi":68,"profit":"15.40","maxCost":"12.00","rank":"#24","imageUrl":"https://images.unsplash.com/photo-1544244015-0cd4b3ff8f9d?w=400"},
-            {"name":"Kit Moto Pro Gold","asin":"B0DSHH7X4F","price":"55.00","sales":124,"roi":72,"profit":"25.00","maxCost":"20.00","rank":"#36264","imageUrl":"https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=400"},
-            {"name":"Filtre Air Universel","asin":"B0DSHH7X5G","price":"12.99","sales":890,"roi":60,"profit":"4.20","maxCost":"3.50","rank":"#1245","imageUrl":"https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400"}
-        ];
+  <div id="productModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal"><h2 id="modalTitle">Ajouter une opportunité</h2><p>Les champs peuvent être complétés à partir de ta recherche manuelle Accio.</p><form id="productForm"><div class="form-grid"><div class="field full"><label for="name">Nom du produit *</label><input id="name" name="name" required placeholder="Ex. SSD NVMe 1 To Samsung"></div><div class="field"><label for="asin">ASIN *</label><input id="asin" name="asin" required placeholder="B0XXXXXXX"></div><div class="field"><label for="brand">Marque</label><input id="brand" name="brand" placeholder="Ex. Samsung, DeepCool"></div><div class="field"><label for="category">Catégorie</label><input id="category" name="category" placeholder="Ex. Informatique"></div><div class="field"><label for="marketplace">Marketplace</label><select id="marketplace" name="marketplace"><option>Amazon FR</option><option>Amazon DE</option><option>Amazon IT</option><option>Amazon ES</option><option>Amazon UK</option></select></div><div class="field"><label for="amazonPrice">Prix Amazon (€) *</label><input id="amazonPrice" name="amazonPrice" type="number" min="0" step="0.01" required placeholder="89.90"></div><div class="field"><label for="supplierPrice">Prix fournisseur (€) *</label><input id="supplierPrice" name="supplierPrice" type="number" min="0" step="0.01" required placeholder="54.00"></div><div class="field"><label for="shipping">Transport / unité (€)</label><input id="shipping" name="shipping" type="number" min="0" step="0.01" value="0" placeholder="6.00"></div><div class="field"><label for="amazonFees">Frais Amazon / unité (€)</label><input id="amazonFees" name="amazonFees" type="number" min="0" step="0.01" value="0" placeholder="18.50"></div><div class="field"><label for="sales">Ventes estimées / mois</label><input id="sales" name="sales" type="number" min="0" step="1" value="0" placeholder="420"></div><div class="field"><label for="sellers">Nombre de vendeurs</label><input id="sellers" name="sellers" type="number" min="0" step="1" value="0" placeholder="8"></div><div class="field"><label for="supplierName">Fournisseur européen</label><input id="supplierName" name="supplierName" placeholder="Ex. BigBuy, Darty Pro"></div><div class="field"><label for="supplierUrl">Lien fournisseur</label><input id="supplierUrl" name="supplierUrl" type="url" placeholder="https://..."></div><div class="field"><label for="amazonUrl">Lien Amazon</label><input id="amazonUrl" name="amazonUrl" type="url" placeholder="https://www.amazon.fr/dp/..."></div><div class="field"><label for="imageUrl">Lien image (facultatif)</label><input id="imageUrl" name="imageUrl" type="url" placeholder="https://..."></div><div class="field full"><label for="notes">Notes de vérification</label><textarea id="notes" name="notes" placeholder="Facture disponible, marque à confirmer, garantie UE..."></textarea></div></div><div class="modal-actions"><button type="button" class="btn btn-soft" data-action="close-modal">Annuler</button><button type="submit" class="btn btn-primary">Enregistrer</button></div></form></div>
+  </div>
+  <div id="toast" class="toast" role="status"></div>
 
-        let activeGem = null;
-        function renderGrid(data) {
-            const grid = document.getElementById('gemGrid');
-            grid.innerHTML = '';
-            data.forEach(gem => {
-                grid.innerHTML += `<div class="gem-card animate-reveal" onclick="openDetails('${gem.asin}')">
-                    <div class="img-container"><img src="${gem.imageUrl}" class="product-img" onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400'"></div>
-                    <div class="p-6">
-                        <h3 class="text-[10px] font-black truncate uppercase mb-2 text-slate-800">${gem.name}</h3>
-                        <div class="flex justify-between items-center"><span class="text-emerald-600 font-black text-xl italic">${gem.price}€</span><span class="text-[9px] text-slate-400 font-bold">${gem.sales} V/M</span></div>
-                    </div></div>`;
-            });
-        }
-        function openDetails(asin) {
-            const gem = allGems.find(g => g.asin === asin);
-            if(!gem) return;
-            activeGem = gem;
-            document.getElementById('modalImg').src = gem.imageUrl;
-            document.getElementById('modalName').innerText = gem.name;
-            document.getElementById('modalAsin').innerText = gem.asin;
-            document.getElementById('modalPrice').innerText = gem.price + "€";
-            document.getElementById('modalRank').innerText = gem.rank || "#1,245";
-            document.getElementById('modalSales').innerText = gem.sales + " / mois";
-            document.getElementById('modalROI').innerText = gem.roi + "%";
-            document.getElementById('modalMaxCost').innerText = gem.maxCost + "€";
-            document.getElementById('amazonLink').href = "https://www.amazon.fr/dp/" + gem.asin.trim();
-            document.getElementById('supplierLink').href = "https://www.alibaba.com/showroom/oem-manufacturer-" + gem.asin + ".html";
-            updateSim();
-            document.getElementById('dossierModal').classList.add('modal-active');
-            document.body.style.overflow = 'hidden';
-        }
-        function updateSim() {
-            if(!activeGem) return;
-            const qty = parseFloat(document.getElementById('simQty').value) || 0;
-            const buy = parseFloat(document.getElementById('simBuyPrice').value) || 0;
-            const sell = parseFloat(activeGem.price);
-            document.getElementById('simCA').innerText = (sell * qty).toFixed(2) + "€";
-            document.getElementById('simProfit').innerText = ((sell - buy) * qty).toFixed(2) + "€";
-        }
-        function closeModal() { document.getElementById('dossierModal').classList.remove('modal-active'); document.body.style.overflow = 'auto'; }
-        function filterGems() {
-            const q = document.getElementById('keywordSearch').value.toLowerCase();
-            renderGrid(allGems.filter(g => g.name.toLowerCase().includes(q) || g.asin.toLowerCase().includes(q)));
-        }
-        function prepareDirectEmail() {
-            const amzLink = "https://www.amazon.fr/dp/" + activeGem.asin;
-            const body = `Hello, This is Mr. HOMY from Worldshop. It MUST be identical to this model: Amazon Link: ${amzLink} ... Best regards, Mr. HOMY`;
-            window.location.href = `mailto:mark@feyongusb.com?subject=Inquiry Worldshop Sourcing&body=${encodeURIComponent(body)}`;
-        }
-        document.addEventListener('DOMContentLoaded', () => renderGrid(allGems));
-    </script>
+  <script>
+    const STORAGE_KEY = 'worldshop-manual-sourcing-v1';
+    const MASTER_STORAGE_KEY = 'worldshop-master-dossier-v1';
+    const PLACEHOLDER_IMAGE = 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400';
+    const localCatalog = [
+      { name:'Cartouche HP 305X Pro Compatible', asin:'B0BKFZ626B', price:79.99, sales:450, roi:72, maxCost:28.5, category:'Informatique', imageUrl:'https://m.media-amazon.com/images/I/51vwaFYIOWL._AC_SL1500_.jpg' },
+      { name:'SSD NVMe 1TB High-Speed', asin:'B0C8HHFX3C', price:75, sales:1400, roi:60, maxCost:18.5, category:'Composants', imageUrl:'https://m.media-amazon.com/images/I/71X8kC-iGLL._AC_SL1500_.jpg' },
+      { name:'Répéteur Zigbee 3.0 USB Pro', asin:'B0GCZPVTN1', price:15.49, sales:890, roi:60, maxCost:4.2, category:'Maison Connectée', imageUrl:'https://m.media-amazon.com/images/I/11Osig4KvQL._AC_SL1500_.jpg' },
+      { name:'Toner Canon 067H Pack-4', asin:'B0DD6Y2DRJ', price:88.8, sales:320, roi:65, maxCost:32, category:'Informatique', imageUrl:'https://m.media-amazon.com/images/I/51ECOokyzqL._AC_SL1500_.jpg' },
+      { name:'Kit Powerline TP-Link AV600', asin:'B0CVRKL3T7', price:45, sales:1200, roi:58, maxCost:12.5, category:'Réseau', imageUrl:'https://m.media-amazon.com/images/I/41NcWcyuatL._AC_SL1500_.jpg' },
+      { name:'Hub USB-C 7-in-1 Premium', asin:'B08Q7KDQKP', price:34.99, sales:1250, roi:65, maxCost:10.5, category:'Informatique', imageUrl:'https://m.media-amazon.com/images/I/71u9S+Y6m6L._AC_SL1500_.jpg' },
+      { name:'Câble RJ45 Cat8 Gold Pro', asin:'B08LNWDP6V', price:14.9, sales:3200, roi:95, maxCost:3.2, category:'Informatique', imageUrl:'https://m.media-amazon.com/images/I/71Uo7P7pMGL._AC_SL1500_.jpg' },
+      { name:'Support Mural Mesh Pro', asin:'B0CN3CV93T', price:18.5, sales:890, roi:72, maxCost:5.5, category:'Réseau', imageUrl:'https://m.media-amazon.com/images/I/51uU8Xz5RPL._AC_SL1200_.jpg' },
+      { name:'Souris Gaming MSI Clutch', asin:'B096Y43J5T', price:49, sales:560, roi:58, maxCost:12.5, category:'Gaming', imageUrl:'https://m.media-amazon.com/images/I/61Xm2q5xH+L._AC_SL1500_.jpg' },
+      { name:'Mousseur Lait Pro Elite', asin:'B06K6K6K6K', price:19.99, sales:2500, roi:90, maxCost:4.2, category:'Cuisine', imageUrl:'https://m.media-amazon.com/images/I/61D8YyS8MML._AC_SL1500_.jpg' },
+      { name:'Toner Noir Canon 067H Pro', asin:'B0F3X9VM4Z', price:42.8, sales:670, roi:70, maxCost:14, category:'Informatique', imageUrl:'https://m.media-amazon.com/images/I/41Uz68hufKL._AC_SL1500_.jpg' },
+      { name:'Kit Fixation GoPro Moto', asin:'B09PQ1DCLK', price:35, sales:620, roi:70, maxCost:9.5, category:'Auto', imageUrl:'https://m.media-amazon.com/images/I/51oyXGaccCL._AC_SL1500_.jpg' },
+      { name:'Sac de Transport SSD Pro', asin:'B0S7S7S7S7', price:16.5, sales:2200, roi:88, maxCost:4.5, category:'Informatique', imageUrl:'https://m.media-amazon.com/images/I/51E1E1E1E1L._AC_SL1500_.jpg' },
+      { name:'Support Smartphone Auto', asin:'B09X9X9X9X', price:19.99, sales:890, roi:62, maxCost:6.2, category:'Auto', imageUrl:'https://m.media-amazon.com/images/I/51jN3unCmtL._AC_SL1500_.jpg' },
+      { name:'Balances Cuisine Inox Pro', asin:'B0D3D3D3D3', price:22.5, sales:1800, roi:62, maxCost:6, category:'Cuisine', imageUrl:'https://m.media-amazon.com/images/I/61iNn3Z-9yL._AC_SL1500_.jpg' },
+      { name:'Thermomètre Viande Bluetooth', asin:'B0I8I8I8I8', price:28, sales:1500, roi:75, maxCost:7, category:'Cuisine', imageUrl:'https://m.media-amazon.com/images/I/71R2o5nK5SL._AC_SL1500_.jpg' },
+      { name:'Adaptateur MicroSD USB-C', asin:'B0V8V8V8V8', price:15.5, sales:560, roi:50, maxCost:4.5, category:'Informatique', imageUrl:'https://m.media-amazon.com/images/I/41Uz68hufKL._AC_SL1500_.jpg' },
+      { name:'Kit Moto Pro Gold', asin:'B0DSHH7X4F', price:55, sales:124, roi:72, maxCost:20, category:'Auto', imageUrl:'https://m.media-amazon.com/images/I/51vwaFYIOWL._AC_SL1500_.jpg' },
+      { name:'Webcam 4K Stream Pro', asin:'B0B1B1B1B1', price:75, sales:540, roi:64, maxCost:18, category:'Informatique', imageUrl:'https://m.media-amazon.com/images/I/51FKWdyzfRL._AC_SL1500_.jpg' },
+      { name:'Support Tablette Ergo', asin:'B0CBMNFK84', price:22, sales:560, roi:68, maxCost:7, category:'Accessoires', imageUrl:'https://m.media-amazon.com/images/I/41NcWcyuatL._AC_SL1500_.jpg' }
+    ];
+    let products = loadProducts();
+    let masterRecords = loadMasterRecords();
+    let editingId = null;
+    let selectedId = null;
+    let masterRawText = '';
+
+    function loadMasterRecords() { try { const records = JSON.parse(localStorage.getItem(MASTER_STORAGE_KEY)); return Array.isArray(records) ? records.map(record => ({ ...(record || {}), amazon:record?.amazon || {}, supplier:record?.supplier || { leads:[] }, factory:record?.factory || { leads:[] }, rawContexts:Array.isArray(record?.rawContexts) ? record.rawContexts : [], links:Array.isArray(record?.links) ? record.links : [], status:record?.status || 'À vérifier' })) : []; } catch (error) { return []; } }
+    function saveMasterRecords() { localStorage.setItem(MASTER_STORAGE_KEY, JSON.stringify(masterRecords)); }
+    function stripMarkdown(value) { return String(value || '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').replace(/[`*_>#]/g, '').replace(/\s+/g, ' ').trim(); }
+    function splitTableRow(line) { return line.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map(cell => stripMarkdown(cell.trim())); }
+    function isTableSeparator(cells) { return cells.length && cells.every(cell => /^:?-{2,}:?$/.test(cell)); }
+    function findAsins(value) { return [...new Set(String(value || '').match(/\bB[0-9A-Z]{9}\b/g) || [])]; }
+    function sectionAt(lines, index) { for (let i = index; i >= 0; i -= 1) if (/^#{1,3}\s+/.test(lines[i])) return stripMarkdown(lines[i].replace(/^#{1,3}\s+/, '')); return 'Dossier maître'; }
+    function inferStatus(text) { const normalized = normalizeText(text); if (normalized.includes('exclu')) return 'Exclu'; if (normalized.includes('verifie exact')) return 'Vérifié exact'; if (normalized.includes('distributeur')) return 'Distributeur à confirmer'; if (normalized.includes('lead')) return 'Lead à vérifier'; if (normalized.includes('a confirmer')) return 'À confirmer'; return 'À vérifier'; }
+    function tableHeaderAt(lines, index) { for (let i = index - 1; i >= Math.max(0, index - 8); i -= 1) { if (!lines[i].trim().startsWith('|')) continue; const cells = splitTableRow(lines[i]); if (cells.some(cell => /asin|produit|prix|vendeur|statut/i.test(cell))) return cells; } return []; }
+    function parseMasterMarkdown(text, sourceName) {
+      const lines = text.split(/\r?\n/);
+      const records = new Map();
+      const contextByAsin = new Map();
+      lines.forEach((line, index) => findAsins(line).forEach(asin => { const context = contextByAsin.get(asin) || []; context.push({ text:stripMarkdown(line), section:sectionAt(lines,index), index }); contextByAsin.set(asin, context); }));
+      lines.forEach((line, index) => {
+        if (!line.trim().startsWith('|')) return;
+        const cells = splitTableRow(line);
+        if (!cells.length || isTableSeparator(cells)) return;
+        const header = tableHeaderAt(lines, index);
+        const asin = findAsins(cells.join(' '))[0];
+        if (!asin) return;
+        const data = {};
+        header.forEach((key, cellIndex) => { if (key && cells[cellIndex]) data[normalizeText(key).replace(/[^a-z0-9]+/g, '_')] = cells[cellIndex]; });
+        const context = contextByAsin.get(asin) || [];
+        const mergedText = [...context.map(item => item.text), cells.join(' | ')].join(' · ');
+        const existing = records.get(asin) || { asin, name:'', brand:'', section:sectionAt(lines,index), source:sourceName, rawContexts:[], amazon:{}, supplier:{}, factory:{}, links:[], status:'À vérifier', updatedAt:new Date().toISOString() };
+        existing.name = existing.name || data.produit || data.produit_exact || data['produit_marque'] || data['produit_référence'] || data.title || cells.find(cell => cell && !findAsins(cell).length) || asin;
+        existing.amazon = { ...existing.amazon, ...data };
+        const contextLines = [...context.map(item => `${item.section}: ${item.text}`), mergedText];
+        existing.rawContexts = [...new Set([...existing.rawContexts, ...contextLines])].slice(-30);
+        existing.supplier = { ...(existing.supplier || {}), leads: [...new Set([...(existing.supplier?.leads || []), ...contextLines.filter(value => /fournisseur|distributeur|grossiste|contact|facture|TVA|MOQ/i.test(value))])] };
+        existing.factory = { ...(existing.factory || {}), leads: [...new Set([...(existing.factory?.leads || []), ...contextLines.filter(value => /OEM|usine|fabricant|manufacturer|Alibaba/i.test(value))])] };
+        existing.status = inferStatus(mergedText);
+        existing.links = [...new Set([...existing.links, ...(mergedText.match(/https?:\/\/[^\s)|]+/g) || [])])];
+        records.set(asin, existing);
+      });
+      findAsins(text).forEach(asin => { if (!records.has(asin)) { const context = contextByAsin.get(asin) || []; records.set(asin, { asin, name:context[0]?.text || asin, brand:'', section:context[0]?.section || 'Dossier maître', source:sourceName, rawContexts:context.map(item => `${item.section}: ${item.text}`).slice(-30), amazon:{}, supplier:{ leads:[] }, factory:{ leads:[] }, links:[...(text.match(new RegExp(`https?:\\/\\/[^\\s)|]*${asin}[^\\s)|]*`, 'g')) || [])], status:inferStatus(context.map(item => item.text).join(' ')), updatedAt:new Date().toISOString() }); } });
+      return [...records.values()];
+    }
+
+    function loadProducts() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch (error) { return []; } }
+    function saveProducts() { localStorage.setItem(STORAGE_KEY, JSON.stringify(products)); localStorage.setItem(`${STORAGE_KEY}-updated`, new Date().toISOString()); }
+    function uid() { return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`; }
+    function number(value) { return Number(value || 0); }
+    function euro(value) { return new Intl.NumberFormat('fr-FR', { style:'currency', currency:'EUR' }).format(number(value)); }
+    function normalizeText(value) { return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim(); }
+    function escapeHTML(value) { return String(value || '').replace(/[&<>'\"]/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', "'":'&#039;', '\"':'&quot;' }[char])); }
+    function metrics(product) { const landed = number(product.supplierPrice) + number(product.shipping); const profit = number(product.amazonPrice) - landed - number(product.amazonFees); const roi = landed ? profit / landed * 100 : 0; return { landed, profit, roi }; }
+    function statusOf(product) { if (product.status) return product.status; const m = metrics(product); if (m.roi >= 50 && number(product.sellers) >= 5 && number(product.amazonPrice) >= 30 && product.supplierName) return 'ready'; if (m.profit < 0 || (product.sellers && number(product.sellers) < 3)) return 'avoid'; return 'pending'; }
+    function statusLabel(status) { return { ready:'À vérifier', pending:'En attente', avoid:'À éviter' }[status] || 'En attente'; }
+    function statusClass(status) { return status === 'ready' ? 'good' : status === 'avoid' ? 'warn' : ''; }
+    function productCard(product) { const m = metrics(product); const status = statusOf(product); const image = product.imageUrl || PLACEHOLDER_IMAGE; return `<article class="product-row"><div class="product-thumb"><img src="${escapeHTML(image)}" alt="" onerror="this.src='${PLACEHOLDER_IMAGE}'"></div><div class="product-main"><h3>${escapeHTML(product.name)}</h3><div class="product-meta"><span class="chip">${escapeHTML(product.asin)}</span><span class="chip">${escapeHTML(product.marketplace || 'Amazon FR')}</span><span class="chip ${statusClass(status)}">${statusLabel(status)}</span>${product.supplierName ? `<span class="chip">${escapeHTML(product.supplierName)}</span>` : ''}</div><div class="row-actions"><button class="icon-btn" title="Modifier" data-edit-id="${product.id}">✎</button><button class="icon-btn" title="Favori" data-fav-id="${product.id}">${product.favorite ? '★' : '☆'}</button><button class="icon-btn" title="Supprimer" data-delete-id="${product.id}">×</button></div></div><div class="product-right"><div><strong>${euro(m.profit)}</strong><small>marge / unité · ROI ${m.roi.toFixed(0)}%</small></div><a class="btn btn-soft btn-small" target="_blank" rel="noreferrer" href="${escapeHTML(product.amazonUrl || `https://www.amazon.fr/dp/${encodeURIComponent(product.asin)}`)}">Voir</a></div></article>`; }
+    let latestNicheResults = [];
+    function nicheResultCard(item) { const tracked = products.some(product => product.asin === item.asin); const weight = item.weight == null ? 'Poids n/d' : `${item.weight} ${item.weightUnit || ''}`; return `<article class="niche-result"><div><h3>${escapeHTML(item.name)}</h3><p>${escapeHTML(item.asin)} · ${escapeHTML(item.brand)} · ${item.sales.toLocaleString('fr-FR')} ventes/mois · ${item.sellers} vendeurs · ${weight}</p><p>CA estimé ${euro(item.revenue)} · ${item.reviews.toLocaleString('fr-FR')} avis · risque PL : à vérifier · blocage marque : à vérifier</p></div><div><strong>${euro(item.price)}</strong><button class="btn btn-soft btn-small" data-search-asin="${item.asin}">${tracked ? 'Déjà suivi' : '+ Suivre'}</button><button class="btn btn-primary btn-small" data-supplier-asin="${item.asin}">Demande OEM UE</button></div></article>`; }
+    function supplierPrompt(item) { return `Recherche fournisseur européen officiel pour ce produit exact.\n\nProduit : ${item.name}\nASIN : ${item.asin}\nMarque : ${item.brand}\nMarketplace : Amazon ${item.marketplace || 'FR'}\n\nTrouve un distributeur officiel, importateur ou grossiste autorisé en Europe capable de fournir :\n- produits authentiques ;\n- facture professionnelle ;\n- preuve de distribution ou lettre d'autorisation ;\n- autorisation de revente Amazon à confirmer ;\n- garantie européenne ;\n- nom légal, pays, TVA, contact, MOQ, prix et lien fournisseur.\n\nNe propose pas une usine OEM générique si elle ne peut pas prouver la chaîne de distribution de cette marque.`; }
+    function copyText(text, message) { if (navigator.clipboard?.writeText) { navigator.clipboard.writeText(text).then(() => toast(message)).catch(() => fallbackCopy(text, message)); } else fallbackCopy(text, message); }
+    function fallbackCopy(text, message) { const area = document.createElement('textarea'); area.value = text; area.style.position = 'fixed'; area.style.opacity = '0'; document.body.appendChild(area); area.select(); document.execCommand('copy'); area.remove(); toast(message); }
+    function copyMasterRequest(asin) { const record = masterRecords.find(item => item.asin === asin); if (!record) return; copyText(`Recherche fournisseur officiel européen pour l'ASIN ${record.asin}.\nProduit : ${record.name}\nMarque : ${record.brand || 'à confirmer'}\n\nFournir uniquement le même produit, même référence, même EAN/GTIN, même variante et même pack. Retourner nom légal, pays, TVA, prix B2B, MOQ, facture, garantie UE, preuve de distribution, lien catalogue, e-mail et WhatsApp si disponible. Ne pas proposer de compatible, OEM générique, copie ou produit similaire.`, 'Demande fournisseur copiée'); }
+    function copyContact(value) { copyText(value, 'Contact copié'); }
+    function trackMasterProduct(asin) { const record = masterRecords.find(item => item.asin === asin); if (!record) return; const existing = products.find(product => product.asin === asin); if (existing) { selectedId = existing.id; toast('ASIN déjà présent dans le suivi'); return; } const now = new Date().toISOString(); const amazon = record.amazon || {}; const priceText = Object.values(amazon).find(value => /€|EUR/.test(value)); const product = { id:uid(), name:record.name || asin, asin, brand:record.brand || '', category:record.section || '', marketplace:'Amazon FR', amazonPrice:number(String(priceText || '').replace(',', '.').replace(/[^0-9.]/g, '')), supplierPrice:0, shipping:0, amazonFees:0, sales:0, sellers:0, supplierName:'', supplierUrl:'', amazonUrl:record.links?.find(link => /amazon\./i.test(link)) || `https://www.amazon.fr/dp/${asin}`, notes:`Importé du dossier maître. Statut : ${record.status}. ${record.rawContexts?.slice(-2).join(' ') || ''}`, favorite:false, updatedAt:now }; products.unshift(product); selectedId=product.id; saveProducts(); renderProducts(); toast('ASIN ajouté au suivi'); }
+    function filteredProducts() { const query = document.getElementById('search').value.trim().toLowerCase(); const filter = document.getElementById('statusFilter').value; const sort = document.getElementById('sortBy').value; const result = products.filter(product => { const matchesQuery = !query || [product.name, product.asin, product.brand, product.category, product.supplierName].join(' ').toLowerCase().includes(query); return matchesQuery && (filter === 'all' || statusOf(product) === filter); }); return result.sort((a,b) => { const ma = metrics(a), mb = metrics(b); if (sort === 'roi') return mb.roi - ma.roi; if (sort === 'profit') return mb.profit - ma.profit; if (sort === 'price') return number(b.amazonPrice) - number(a.amazonPrice); return new Date(b.updatedAt || 0) - new Date(a.updatedAt || 0); }); }
+    function renderProducts() { const list = document.getElementById('productList'); const visible = filteredProducts(); list.innerHTML = visible.length ? visible.map(productCard).join('') : '<div class="empty">Aucun produit ne correspond à ces filtres.<br><strong>Ajoute ta première opportunité depuis une recherche Accio.</strong></div>'; updateStats(); bindRows(); }
+    function masterFilteredRecords() { const query = normalizeText(document.getElementById('masterSearch').value); const status = document.getElementById('masterStatus').value; return masterRecords.filter(record => { const haystack = normalizeText([record.asin, record.name, record.brand, record.section, ...(record.rawContexts || [])].join(' ')); const recordStatus = record.status || 'À vérifier'; return (!query || haystack.includes(query)) && (status === 'all' || recordStatus === status || (status === 'Exclu' && recordStatus.startsWith('Exclu'))); }); }
+    function detailLines(entries) { return entries.filter(entry => entry && entry[1]).map(([key,value]) => `<div class="detail-line"><b>${escapeHTML(key)}</b><span>${escapeHTML(String(value).slice(0,220))}</span></div>`).join('') || '<div class="detail-line"><span>Non renseigné dans le dossier</span></div>'; }
+    function contactButtons(record) { const raw = [...(record.rawContexts || []), ...(record.supplier?.leads || []), ...(record.factory?.leads || [])].join(' '); const emails = [...new Set(raw.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi) || [])]; const whatsapps = [...new Set(raw.match(/(?:WhatsApp|wa)\s*[:：]?\s*\+?[0-9][0-9\s()-]{7,}/gi) || [])]; const links = (record.links || []).slice(0,5); return [...emails.map(email => `<a class="btn btn-soft btn-small" href="mailto:${escapeHTML(email)}">E-mail</a>`), ...whatsapps.map(value => `<button class="btn btn-soft btn-small" type="button" data-copy-contact="${escapeHTML(value)}">${escapeHTML(value)}</button>`), ...links.map(link => `<a class="btn btn-soft btn-small" target="_blank" rel="noreferrer" href="${escapeHTML(link)}">Ouvrir le lien</a>`)].join(''); }
+    function masterRow(record) { record = record || {}; const amazon = record?.amazon || {}; const supplierLeads = record?.supplier?.leads || []; const factoryLeads = record?.factory?.leads || []; const amazonUrl = (record.links || []).find(link => /amazon\./i.test(link)); return `<article class="master-row" data-master-asin="${record.asin}"><div><h3>${escapeHTML(record.name || record.asin)}</h3><p><span class="chip">${escapeHTML(record.asin)}</span> <span class="chip">${escapeHTML(record.section || 'Dossier maître')}</span> <span class="chip">${escapeHTML(record.status || 'À vérifier')}</span></p><div class="master-detail"><div class="master-detail-card"><h4>Amazon</h4>${detailLines([['ASIN',record?.asin],['Produit',record?.name],['Prix',amazon?.prix || amazon?.price],['Ventes',amazon?.['ventes_mois'] || amazon?.['ventes_mensuelles'] || amazon?.ventes],['Vendeurs',amazon?.vendeurs],['BSR',amazon?.bsr || amazon?.rang],['Source',record?.section]])}${amazonUrl ? `<div class="detail-actions"><a class="btn btn-primary btn-small" target="_blank" rel="noreferrer" href="${escapeHTML(amazonUrl)}">Voir Amazon</a></div>` : ''}</div><div class="master-detail-card"><h4>Fournisseur / GlobalSeller</h4>${detailLines([['Statut',record.status || 'À vérifier'],['Pistes',supplierLeads.slice(-3).join(' · ')]])}</div><div class="master-detail-card"><h4>Usine / OEM</h4>${detailLines([['Statut',factoryLeads.length ? 'Piste trouvée' : 'À rechercher'],['Pistes',factoryLeads.slice(-3).join(' · ')],['Preuve','À vérifier avant achat']])}</div><div class="master-detail-card"><h4>Contacts & preuves</h4><div class="detail-actions">${contactButtons(record) || '<span>Pas de contact détecté</span>'}</div><div class="detail-actions"><button class="btn btn-primary btn-small" type="button" data-action="copy-master-request" data-master-request="${record.asin}">Copier demande fournisseur</button></div></div></div></div><div class="master-row-actions"><button class="btn btn-primary btn-small" type="button" data-action="toggle-master">Infos globales</button><button class="btn btn-soft btn-small" type="button" data-action="track-master" data-master-track="${record.asin}">Suivre</button></div></article>`; }
+    function renderMasterRecords() { const list = document.getElementById('masterList'); const visible = masterFilteredRecords(); list.innerHTML = visible.length ? visible.map(masterRow).join('') : '<div class="empty">Aucun ASIN ne correspond à cette recherche.</div>'; document.getElementById('masterCount').textContent = `${masterRecords.length} ASIN`; }
+    function updateStats() { const count = products.length; const averageProfit = count ? products.reduce((sum,p) => sum + metrics(p).profit, 0) / count : 0; const averageRoi = count ? products.reduce((sum,p) => sum + metrics(p).roi, 0) / count : 0; const ready = products.filter(p => statusOf(p) === 'ready').length; document.getElementById('statCount').textContent = count; document.getElementById('heroProducts').innerHTML = `${count} <small>produit${count > 1 ? 's' : ''}</small>`; document.getElementById('statProfit').textContent = euro(averageProfit); document.getElementById('statRoi').textContent = `${averageRoi.toFixed(0)} %`; document.getElementById('statReady').textContent = ready; const updated = localStorage.getItem(`${STORAGE_KEY}-updated`); document.getElementById('lastUpdated').textContent = updated ? new Intl.DateTimeFormat('fr-FR', { day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit' }).format(new Date(updated)) : 'Aucune donnée'; updateScore(); }
+    function updateScore() { const p = selectedId ? products.find(item => item.id === selectedId) : products[0]; const labels = ['scoreRoi','scoreSellers','scorePrice','scoreSupplier']; if (!p) { labels.forEach(id => document.getElementById(id).textContent = '—'); document.getElementById('scoreValue').textContent = '0'; document.getElementById('scoreBar').style.width = '0%'; return; } const m = metrics(p); const checks = [m.roi >= 50, number(p.sellers) >= 5, number(p.amazonPrice) >= 30, Boolean(p.supplierName && p.supplierUrl)]; labels.forEach((id,index) => document.getElementById(id).textContent = checks[index] ? 'OK' : 'À faire'); const score = Math.round(checks.filter(Boolean).length / checks.length * 100); document.getElementById('scoreValue').textContent = score; document.getElementById('scoreBar').style.width = `${score}%`; }
+    function bindRows() { document.querySelectorAll('[data-edit-id]').forEach(button => button.addEventListener('click', () => openEdit(button.dataset.editId))); document.querySelectorAll('[data-delete-id]').forEach(button => button.addEventListener('click', () => removeProduct(button.dataset.deleteId))); document.querySelectorAll('[data-fav-id]').forEach(button => button.addEventListener('click', () => toggleFavorite(button.dataset.favId))); document.querySelectorAll('.product-row').forEach(row => row.addEventListener('click', event => { if (!event.target.closest('button,a')) { const id = row.querySelector('[data-edit-id]').dataset.editId; selectedId = id; updateScore(); } })); }
+    function openModal() { document.getElementById('productModal').classList.add('open'); document.getElementById('name').focus(); }
+    function closeModal() { document.getElementById('productModal').classList.remove('open'); editingId = null; document.getElementById('productForm').reset(); document.getElementById('marketplace').value = 'Amazon FR'; document.getElementById('shipping').value = '0'; document.getElementById('amazonFees').value = '0'; document.getElementById('sales').value = '0'; document.getElementById('sellers').value = '0'; document.getElementById('modalTitle').textContent = 'Ajouter une opportunité'; }
+    function openEdit(id) { const product = products.find(item => item.id === id); if (!product) return; editingId = id; document.getElementById('modalTitle').textContent = 'Modifier l’opportunité'; Object.entries(product).forEach(([key,value]) => { const field = document.getElementById(key); if (field) field.value = value ?? ''; }); document.getElementById('productModal').classList.add('open'); }
+    function formProduct() { const data = Object.fromEntries(new FormData(document.getElementById('productForm')).entries()); ['amazonPrice','supplierPrice','shipping','amazonFees','sales','sellers'].forEach(key => data[key] = number(data[key])); return data; }
+    function submitProduct(event) { event.preventDefault(); const data = formProduct(); const now = new Date().toISOString(); if (editingId) { products = products.map(product => product.id === editingId ? { ...product, ...data, updatedAt:now } : product); selectedId = editingId; toast('Produit mis à jour'); } else { const product = { ...data, id:uid(), favorite:false, updatedAt:now }; products.unshift(product); selectedId = product.id; toast('Produit ajouté'); } saveProducts(); closeModal(); renderProducts(); }
+    function removeProduct(id) { const product = products.find(item => item.id === id); if (!product || !confirm(`Supprimer « ${product.name} » ?`)) return; products = products.filter(item => item.id !== id); if (selectedId === id) selectedId = products[0]?.id || null; saveProducts(); renderProducts(); toast('Produit supprimé'); }
+    function toggleFavorite(id) { products = products.map(product => product.id === id ? { ...product, favorite:!product.favorite, updatedAt:new Date().toISOString() } : product); saveProducts(); renderProducts(); }
+    function clearFilters() { document.getElementById('search').value = ''; document.getElementById('statusFilter').value = 'all'; document.getElementById('sortBy').value = 'updated'; renderProducts(); }
+    function exportCSV() { const columns = ['name','asin','brand','category','marketplace','amazonPrice','supplierPrice','shipping','amazonFees','sales','sellers','supplierName','supplierUrl','amazonUrl','notes']; const csv = [columns.join(';'), ...products.map(product => columns.map(column => `"${String(product[column] ?? '').replace(/"/g,'""')}"`).join(';'))].join('\n'); const blob = new Blob([`\ufeff${csv}`], { type:'text/csv;charset=utf-8' }); const url = URL.createObjectURL(blob); const link = document.createElement('a'); link.href = url; link.download = 'worldshop-sourcing-test.csv'; link.click(); URL.revokeObjectURL(url); toast('Export CSV téléchargé'); }
+    function toast(message) { const node = document.getElementById('toast'); node.textContent = message; node.classList.add('show'); clearTimeout(window.toastTimer); window.toastTimer = setTimeout(() => node.classList.remove('show'), 2400); }
+    document.addEventListener('click', event => { const action = event.target.closest('[data-action]')?.dataset.action; const catalogAsin = event.target.closest('[data-catalog-asin]')?.dataset.catalogAsin || event.target.closest('[data-search-asin]')?.dataset.searchAsin; const supplierAsin = event.target.closest('[data-supplier-asin]')?.dataset.supplierAsin; const contact = event.target.closest('[data-copy-contact]')?.dataset.copyContact; const requestAsin = event.target.closest('[data-master-request]')?.dataset.masterRequest; if (catalogAsin) addCatalogProduct(catalogAsin); if (supplierAsin) requestSupplier(supplierAsin); if (contact) copyContact(contact); if (requestAsin) copyMasterRequest(requestAsin); if (action === 'toggle-master') event.target.closest('.master-row')?.classList.toggle('open'); if (action === 'track-master') trackMasterProduct(event.target.closest('[data-master-track]')?.dataset.masterTrack); if (action === 'clear-master') { document.getElementById('masterSearch').value = ''; document.getElementById('masterStatus').value = 'all'; renderMasterRecords(); } if (action === 'open-add') openModal(); if (action === 'close-modal') closeModal(); if (action === 'clear-filters') clearFilters(); if (action === 'export') exportCSV(); });
+    document.querySelectorAll('[data-filter]').forEach(field => field.addEventListener('input', renderProducts));
+    document.querySelectorAll('[data-master-filter]').forEach(field => field.addEventListener('input', renderMasterRecords));
+    document.getElementById('masterFile').addEventListener('change', event => { const file = event.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = () => { masterRawText = String(reader.result || ''); masterRecords = parseMasterMarkdown(masterRawText, file.name); saveMasterRecords(); document.getElementById('masterSource').textContent = `${file.name} · ${masterRawText.split(/\\r?\\n/).length} lignes`; renderMasterRecords(); toast(`${masterRecords.length} ASIN importés`); }; reader.readAsText(file); });
+    document.getElementById('productForm').addEventListener('submit', submitProduct);
+    document.getElementById('productModal').addEventListener('click', event => { if (event.target.id === 'productModal') closeModal(); });
+    renderProducts();
+    renderMasterRecords();
+  </script>
 </body>
 </html>
-<!-- build: Sun Jun 14 12:06:43 CEST 2026 -->
